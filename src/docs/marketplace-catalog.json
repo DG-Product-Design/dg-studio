@@ -1,0 +1,1532 @@
+[
+  {
+    "name": "AccountCard",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/AccountCard/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "AccountCard",
+    "story": "content-accounts--default",
+    "note": "Controlled account/payment selection, point balances, masked card details, default state and caller-owned actions. Payment execution belongs to the host app."
+  },
+  {
+    "name": "AccountInformation",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/AccountInformation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "AccountInformation",
+    "story": "examples-profile-and-billing--default",
+    "note": "Composed account settings, billing methods and notification preferences with explicit callbacks and pending/error states."
+  },
+  {
+    "name": "AccountSelect",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/AccountSelect/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "AccountSelect",
+    "story": "content-accounts--default",
+    "note": "Controlled account/payment selection, point balances, masked card details, default state and caller-owned actions. Payment execution belongs to the host app."
+  },
+  {
+    "name": "ActionBar",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ActionBar/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "BalanceActionBar / AdminToolbar",
+    "story": "content-balance-actions--default",
+    "note": "Balance conversion including zero, caller-owned actions, and role/integration-aware administration commands."
+  },
+  {
+    "name": "Activity",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Activity/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Activity",
+    "story": "content-activity--default",
+    "note": "Accessible status/count feedback using the active palette and text labels."
+  },
+  {
+    "name": "Address",
+    "category": "Forms",
+    "source": "src/component-library/components/Address/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Address",
+    "story": "forms-address--default",
+    "note": "Country-aware address fields with manual entry and optional async suggestion/resolution adapters. No address service is hardcoded."
+  },
+  {
+    "name": "AdminIntegrations",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/AdminIntegrations/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "AdminIntegrations",
+    "story": "examples-directory-integration--default",
+    "note": "Connection status, connect/disconnect/sync actions, progress, errors and history callbacks; service requests are supplied by the host."
+  },
+  {
+    "name": "AdminMetricsBar",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/AdminMetricsBar/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "AdminMetricsBar",
+    "story": "content-admin-metrics--default",
+    "note": "Engagement/utilization metrics with formatted values and a zero-total fallback."
+  },
+  {
+    "name": "AdminToolbar",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/AdminToolbar/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "BalanceActionBar / AdminToolbar",
+    "story": "content-balance-actions--default",
+    "note": "Balance conversion including zero, caller-owned actions, and role/integration-aware administration commands."
+  },
+  {
+    "name": "AppFrame",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/AppFrame/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "AppFrame",
+    "story": "layout-app-frame--default",
+    "note": "Responsive application shell, mobile navigation drawer, nested sidebar links, footer and image/content split layout."
+  },
+  {
+    "name": "Avatar",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Avatar/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Avatar / BeamAvatar",
+    "story": "content-illustrated-avatar--people",
+    "note": "Photo/initial fallback plus deterministic, theme-colored beam illustrations."
+  },
+  {
+    "name": "Badge",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Badge/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CountBadge",
+    "story": "content-count-badge--default",
+    "note": "Accessible status/count feedback using the active palette and text labels."
+  },
+  {
+    "name": "Banner",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Banner/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Banner / TextField error",
+    "story": "feedback-banner--dismissible",
+    "note": "Informational, success, warning, and error notices with actions and dismissal."
+  },
+  {
+    "name": "Button",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Button/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Button / ActionButton",
+    "story": "forms-action-button--interactive",
+    "note": "Native button semantics, icon slots, variants, and stable loading layout."
+  },
+  {
+    "name": "Card",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Card/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Card",
+    "story": "content-card--collapsible",
+    "note": "Header, supporting text, action/footer slots, and collapsible content."
+  },
+  {
+    "name": "CardFooter",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/CardFooter/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CardFooter / CardTagList",
+    "story": "content-vendor-tags--default",
+    "note": "Vendor tag IDs/slugs, selected states, selection callbacks, ten-tag limit and horizontal overflow."
+  },
+  {
+    "name": "CardInformation",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/CardInformation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CardInformation",
+    "story": "forms-payment-fields--default",
+    "note": "Provider-owned secure-field host, completion/errors, verification slot, card nickname/default preference and an async payment-method token callback. No raw card storage or live gateway is included."
+  },
+  {
+    "name": "CardNextButton",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/CardNextButton/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CardNextButton",
+    "story": "navigation-card-next-button--default",
+    "note": "Accessible full-width next-action card with title, supporting copy, disabled state and a callback."
+  },
+  {
+    "name": "CardTagList",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/CardTagList/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CardFooter / CardTagList",
+    "story": "content-vendor-tags--default",
+    "note": "Vendor tag IDs/slugs, selected states, selection callbacks, ten-tag limit and horizontal overflow."
+  },
+  {
+    "name": "CardWithAction",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/CardWithAction/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CardWithAction",
+    "story": "content-card-with-action--default",
+    "note": "Icon, summary, and an independent action; the entire card is not a nested button."
+  },
+  {
+    "name": "Cart",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/Cart/Cart.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Cart",
+    "story": "commerce-cart--default",
+    "note": "Controlled quantities and recurrence, item removal, unavailable-item exclusion, rebate/fee totals, empty cart and checkout/continue callbacks."
+  },
+  {
+    "name": "CartAnimation",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CartAnimation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CartAnimation",
+    "story": "motion-cart-animation--interactive",
+    "note": "Original marketplace vector animation, lazy-loaded with cleanup and a static end frame for reduced motion. Original vector colors are preserved."
+  },
+  {
+    "name": "CartFooter",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CartFooter/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CartFooter",
+    "story": "commerce-cart--default",
+    "note": "Controlled quantities and recurrence, item removal, unavailable-item exclusion, rebate/fee totals, empty cart and checkout/continue callbacks."
+  },
+  {
+    "name": "CartItem",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CartItem/CartItem.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CartItem",
+    "story": "commerce-cart--default",
+    "note": "Controlled quantities and recurrence, item removal, unavailable-item exclusion, rebate/fee totals, empty cart and checkout/continue callbacks."
+  },
+  {
+    "name": "CartSummary",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CartSummary/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CartSummary",
+    "story": "commerce-cart--default",
+    "note": "Controlled quantities and recurrence, item removal, unavailable-item exclusion, rebate/fee totals, empty cart and checkout/continue callbacks."
+  },
+  {
+    "name": "Checkbox",
+    "category": "Forms",
+    "source": "src/component-library/components/Checkbox/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CheckboxField / Checklist",
+    "story": "forms-checklist--default",
+    "note": "Descriptions, controlled values, disabled items, and native checkbox keyboard behavior."
+  },
+  {
+    "name": "Checklist",
+    "category": "Forms",
+    "source": "src/component-library/components/Checklist/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CheckboxField / Checklist",
+    "story": "forms-checklist--default",
+    "note": "Descriptions, controlled values, disabled items, and native checkbox keyboard behavior."
+  },
+  {
+    "name": "Checkout",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/Checkout/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Checkout",
+    "story": "commerce-checkout--default",
+    "note": "Contact/shipping validation, payment selection, optional extra wizard steps, review, async submission errors and caller-provided confirmation. No order or payment is sent by the library."
+  },
+  {
+    "name": "CheckoutConfirmation",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CheckoutConfirmation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CheckoutConfirmation",
+    "story": "commerce-checkout--default",
+    "note": "Contact/shipping validation, payment selection, optional extra wizard steps, review, async submission errors and caller-provided confirmation. No order or payment is sent by the library."
+  },
+  {
+    "name": "CheckoutSuccess",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CheckoutSuccess/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CheckoutSuccess",
+    "story": "commerce-checkout--default",
+    "note": "Contact/shipping validation, payment selection, optional extra wizard steps, review, async submission errors and caller-provided confirmation. No order or payment is sent by the library."
+  },
+  {
+    "name": "CheckoutSummary",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/CheckoutSummary/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CheckoutSummary",
+    "story": "commerce-checkout--default",
+    "note": "Contact/shipping validation, payment selection, optional extra wizard steps, review, async submission errors and caller-provided confirmation. No order or payment is sent by the library."
+  },
+  {
+    "name": "ClickToCopy",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ClickToCopy/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ClickToCopy",
+    "story": "content-click-to-copy--default",
+    "note": "Clipboard feedback, failure handling, and timer cleanup."
+  },
+  {
+    "name": "Coin",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/Coin/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Coin",
+    "story": "content-coin--default",
+    "note": "Themeable points symbol used by account and balance components."
+  },
+  {
+    "name": "Column",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Column/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MarketplaceGrid / Row / Column / GridHelper",
+    "story": "layout-marketplace-grid--default",
+    "note": "Responsive 12/16-column spans, offsets, fill, nested scopes and an optional debug overlay."
+  },
+  {
+    "name": "CreditCardInput",
+    "category": "Forms",
+    "source": "src/component-library/components/CreditCardInput/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "CreditCardInput",
+    "story": "forms-secure-field-host--default",
+    "note": "Provider-owned secure-field host, completion/errors, verification slot, card nickname/default preference and an async payment-method token callback. No raw card storage or live gateway is included."
+  },
+  {
+    "name": "DatePicker",
+    "category": "Forms",
+    "source": "src/component-library/components/DatePicker/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DatePicker",
+    "story": "forms-date-picker--default",
+    "note": "Labeled native/composed input behavior, constraints, descriptions and controlled values; includes character counts, choice groups and point conversion."
+  },
+  {
+    "name": "Drawer",
+    "category": "Overlays",
+    "source": "src/component-library/components/Drawer/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SettingsDrawer / DrawerHeader / DrawerFooter",
+    "story": "overlays-settings-drawer--default",
+    "note": "Nested section navigation with back/focus behavior, persistent caller state, header/footer slots and modal focus management."
+  },
+  {
+    "name": "DrawerFooter",
+    "category": "Overlays",
+    "source": "src/component-library/components/DrawerFooter/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SettingsDrawer / DrawerHeader / DrawerFooter",
+    "story": "overlays-settings-drawer--default",
+    "note": "Nested section navigation with back/focus behavior, persistent caller state, header/footer slots and modal focus management."
+  },
+  {
+    "name": "DrawerHeader",
+    "category": "Overlays",
+    "source": "src/component-library/components/DrawerHeader/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SettingsDrawer / DrawerHeader / DrawerFooter",
+    "story": "overlays-settings-drawer--default",
+    "note": "Nested section navigation with back/focus behavior, persistent caller state, header/footer slots and modal focus management."
+  },
+  {
+    "name": "DropdownButton",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/DropdownButton/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DropdownButton / SearchSelect",
+    "story": "forms-search-select--default",
+    "note": "Expandable loading trigger; searchable single/multiple selection, async cancellation, option renderers and creation callbacks."
+  },
+  {
+    "name": "DynamicRadioInput",
+    "category": "Forms",
+    "source": "src/component-library/components/DynamicRadioInput/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "RadioCards",
+    "story": "forms-radio-cards--default",
+    "note": "Labeled options with descriptions and a shared native radio group."
+  },
+  {
+    "name": "EmptyCart",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/EmptyCart/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "EmptyCart",
+    "story": "commerce-empty-cart--default",
+    "note": "Controlled quantities and recurrence, item removal, unavailable-item exclusion, rebate/fee totals, empty cart and checkout/continue callbacks."
+  },
+  {
+    "name": "ErrorBoundary",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ErrorBoundary/index.jsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "ErrorBoundary",
+    "story": "feedback-error-boundary--default",
+    "note": "React render-error boundary with custom fallback, error reporting callback and reset action."
+  },
+  {
+    "name": "ErrorMessage",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ErrorMessage/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Banner / TextField error",
+    "story": "feedback-banner--dismissible",
+    "note": "Informational, success, warning, and error notices with actions and dismissal."
+  },
+  {
+    "name": "FilterButtonDateRange",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/FilterButtonDateRange/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FilterButtonDateRange",
+    "story": "forms-date-range-filter--default",
+    "note": "Popover filters with date bounds, radio choices and clear/reset behavior."
+  },
+  {
+    "name": "FilterButtonRadio",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/FilterButtonRadio/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FilterButtonRadio",
+    "story": "forms-radio-filter--default",
+    "note": "Popover filters with date bounds, radio choices and clear/reset behavior."
+  },
+  {
+    "name": "Flag",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Flag/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Flag",
+    "story": "feedback-flag--default",
+    "note": "Accessible status/count feedback using the active palette and text labels."
+  },
+  {
+    "name": "Form",
+    "category": "Forms",
+    "source": "src/component-library/components/Form/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Form",
+    "story": "forms-form--default",
+    "note": "Typed field definitions, conditional fields, validation summaries, async submission and composable form copy/actions."
+  },
+  {
+    "name": "FormAddCardInformation",
+    "category": "Forms",
+    "source": "src/component-library/components/FormAddCardInformation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormAddCardInformation",
+    "story": "forms-payment-fields--default",
+    "note": "Provider-owned secure-field host, completion/errors, verification slot, card nickname/default preference and an async payment-method token callback. No raw card storage or live gateway is included."
+  },
+  {
+    "name": "FormAddEmployee",
+    "category": "Forms",
+    "source": "src/component-library/components/FormAddEmployee/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormAddEmployee",
+    "story": "forms-add-employees--default",
+    "note": "Single-employee entry and CSV import with quoted-field parsing, required headers, row/email checks, duplicate detection and a review before submission."
+  },
+  {
+    "name": "FormAddPoints",
+    "category": "Forms",
+    "source": "src/component-library/components/FormAddPoints/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormAddPoints",
+    "story": "forms-recipes-add-points--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormAddToPrograms",
+    "category": "Forms",
+    "source": "src/component-library/components/FormAddToPrograms/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormAddToPrograms",
+    "story": "forms-recipes-add-to-programs--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormAdditionalInformation",
+    "category": "Forms",
+    "source": "src/component-library/components/FormAdditionalInformation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormAdditionalInformation",
+    "story": "forms-additional-information--default",
+    "note": "Grouped product questions with required validation and optional synchronization of answers sharing a key."
+  },
+  {
+    "name": "FormAlternateEmail",
+    "category": "Forms",
+    "source": "src/component-library/components/FormAlternateEmail/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormAlternateEmail",
+    "story": "forms-recipes-alternate-email--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormBasicInfo",
+    "category": "Forms",
+    "source": "src/component-library/components/FormBasicInfo/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormBasicInfo",
+    "story": "forms-recipes-basic-info--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormCheckoutUserInfo",
+    "category": "Forms",
+    "source": "src/component-library/components/FormCheckoutUserInfo/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormCheckoutUserInfo",
+    "story": "forms-checkout-information--default",
+    "note": "Contact/shipping validation, payment selection, optional extra wizard steps, review, async submission errors and caller-provided confirmation. No order or payment is sent by the library."
+  },
+  {
+    "name": "FormCreatePointAccount",
+    "category": "Forms",
+    "source": "src/component-library/components/FormCreatePointAccount/__snapshots__/index.test.jsx.snap",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "FormCreatePointAccount",
+    "story": "forms-recipes-create-point-account--default",
+    "note": "Reconstructed from the retained source snapshot (accountName and assignee); this source directory has no implementation file."
+  },
+  {
+    "name": "FormCreateProgram",
+    "category": "Forms",
+    "source": "src/component-library/components/FormCreateProgram/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormCreateProgram",
+    "story": "forms-recipes-create-program--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormDistributionAccount",
+    "category": "Forms",
+    "source": "src/component-library/components/FormDistributionAccount/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormDistributionAccount",
+    "story": "forms-recipes-distribution-account--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormEmployeeOnboarding",
+    "category": "Forms",
+    "source": "src/component-library/components/FormEmployeeOnboarding/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormEmployeeOnboarding",
+    "story": "forms-recipes-employee-onboarding--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormForgotPassword",
+    "category": "Forms",
+    "source": "src/component-library/components/FormForgotPassword/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormForgotPassword",
+    "story": "forms-recipes-forgot-password--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormHeader",
+    "category": "Forms",
+    "source": "src/component-library/components/FormHeader/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormHeader",
+    "story": "forms-form-header--default",
+    "note": "Typed field definitions, conditional fields, validation summaries, async submission and composable form copy/actions."
+  },
+  {
+    "name": "FormLogin",
+    "category": "Forms",
+    "source": "src/component-library/components/FormLogin/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormLogin",
+    "story": "forms-recipes-login--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormNote",
+    "category": "Forms",
+    "source": "src/component-library/components/FormNote/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormNote",
+    "story": "forms-form-note--default",
+    "note": "Typed field definitions, conditional fields, validation summaries, async submission and composable form copy/actions."
+  },
+  {
+    "name": "FormProgramAddPoints",
+    "category": "Forms",
+    "source": "src/component-library/components/FormProgramAddPoints/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormProgramAddPoints",
+    "story": "forms-recipes-program-add-points--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormRecurringPointDates",
+    "category": "Forms",
+    "source": "src/component-library/components/FormRecurringPointDates/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormRecurringPointDates",
+    "story": "forms-recipes-recurring-point-dates--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormResetPassword",
+    "category": "Forms",
+    "source": "src/component-library/components/FormResetPassword/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormResetPassword",
+    "story": "forms-recipes-reset-password--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormSMS",
+    "category": "Forms",
+    "source": "src/component-library/components/FormSMS/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormSMS",
+    "story": "forms-recipes-s-m-s--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormSendPoints",
+    "category": "Forms",
+    "source": "src/component-library/components/FormSendPoints/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormSendPoints",
+    "story": "forms-recipes-send-points--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormSignUp",
+    "category": "Forms",
+    "source": "src/component-library/components/FormSignUp/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormSignUp",
+    "story": "forms-recipes-sign-up--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormTransferPoints",
+    "category": "Forms",
+    "source": "src/component-library/components/FormTransferPoints/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormTransferPoints",
+    "story": "forms-recipes-transfer-points--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormUpdateAddress",
+    "category": "Forms",
+    "source": "src/component-library/components/FormUpdateAddress/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormUpdateAddress",
+    "story": "forms-update-address--default",
+    "note": "Controlled address composition inside the validated async form; required address checks and cancel/save callbacks."
+  },
+  {
+    "name": "FormUpdatePassword",
+    "category": "Forms",
+    "source": "src/component-library/components/FormUpdatePassword/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormUpdatePassword",
+    "story": "forms-recipes-update-password--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormVendorDiscountsInfo",
+    "category": "Forms",
+    "source": "src/component-library/components/FormVendorDiscountsInfo/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormVendorDiscountsInfo",
+    "story": "forms-recipes-vendor-discounts-info--default",
+    "note": "Typed source-informed form recipe with domain fields, conditional/required validation, option overrides, async submit/cancel callbacks and failure feedback. Business services are supplied by the consuming app."
+  },
+  {
+    "name": "FormWizard",
+    "category": "Forms",
+    "source": "src/component-library/components/FormWizard/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormWizard / useWizardDraft",
+    "story": "forms-draft-wizard--default",
+    "note": "Per-step validation, branching visibility, controlled progress and validated local draft persistence with discard/completion cleanup."
+  },
+  {
+    "name": "FormWizardPanel",
+    "category": "Forms",
+    "source": "src/component-library/components/FormWizardPanel/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "FormWizard / useWizardDraft",
+    "story": "forms-draft-wizard--default",
+    "note": "Per-step validation, branching visibility, controlled progress and validated local draft persistence with discard/completion cleanup."
+  },
+  {
+    "name": "GenericModal",
+    "category": "Overlays",
+    "source": "src/component-library/components/GenericModal/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Modal / ConfirmDialog",
+    "story": "overlays-details-panel--confirmation",
+    "note": "Dialog composition, scrollable content, confirmation actions, focus management, and Escape dismissal."
+  },
+  {
+    "name": "GlowBorder",
+    "category": "Motion & media",
+    "source": "src/utils/glowStyleHelpers.ts",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "GlowGroup / GlowBorder / useGlowStyles",
+    "story": "motion-border-glow--default",
+    "note": "Shared utility outside the component directory: pointer-proximity conic border and halo, keyboard focus, touch orbit and static reduced motion. Showcased on the welcome page."
+  },
+  {
+    "name": "Grid",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Grid/",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MarketplaceGrid / Row / Column / GridHelper",
+    "story": "layout-marketplace-grid--default",
+    "note": "Responsive 12/16-column spans, offsets, fill, nested scopes and an optional debug overlay."
+  },
+  {
+    "name": "GridHelper",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/GridHelper/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MarketplaceGrid / Row / Column / GridHelper",
+    "story": "layout-marketplace-grid--default",
+    "note": "Responsive 12/16-column spans, offsets, fill, nested scopes and an optional debug overlay."
+  },
+  {
+    "name": "Heading",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Heading/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Heading",
+    "story": "foundations-heading--default",
+    "note": "Semantic typography, navigation and list primitives; responsive custom-logo support uses the D.G identity rather than the original app brand."
+  },
+  {
+    "name": "Hero",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Hero/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Hero",
+    "story": "media-marketplace-hero--default",
+    "note": "Feature image/content compositions, previous/next and dot navigation, optional pausable autoplay and reduced-motion handling."
+  },
+  {
+    "name": "HeroDetail",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/HeroDetail/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "HeroDetail",
+    "story": "media-marketplace-hero--default",
+    "note": "Feature image/content compositions, previous/next and dot navigation, optional pausable autoplay and reduced-motion handling."
+  },
+  {
+    "name": "HeroPanel",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/HeroPanel/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "HeroPanel",
+    "story": "media-marketplace-hero--default",
+    "note": "Feature image/content compositions, previous/next and dot navigation, optional pausable autoplay and reduced-motion handling."
+  },
+  {
+    "name": "IconButton",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/IconButton/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Button / ActionButton",
+    "story": "forms-action-button--interactive",
+    "note": "Native button semantics, icon slots, variants, and stable loading layout."
+  },
+  {
+    "name": "InitialsAvatar",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/InitialsAvatar/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Avatar",
+    "story": "content-avatar--initials",
+    "note": "Initials, sizes, and accessible name using theme colors instead of random contrast."
+  },
+  {
+    "name": "Input",
+    "category": "Forms",
+    "source": "src/component-library/components/Input/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "TextField",
+    "story": "forms-text-field--default",
+    "note": "Associated labels, hint/error descriptions, and native input attributes without a nested form."
+  },
+  {
+    "name": "InputLabel",
+    "category": "Forms",
+    "source": "src/component-library/components/InputLabel/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "TextField",
+    "story": "forms-text-field--default",
+    "note": "Associated labels, hint/error descriptions, and native input attributes without a nested form."
+  },
+  {
+    "name": "InputRegion",
+    "category": "Forms",
+    "source": "src/component-library/components/InputRegion/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "InputRegion",
+    "story": "forms-input-group--default",
+    "note": "Labeled native/composed input behavior, constraints, descriptions and controlled values; includes character counts, choice groups and point conversion."
+  },
+  {
+    "name": "Link",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Link/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Link",
+    "story": "navigation-link--default",
+    "note": "Semantic typography, navigation and list primitives; responsive custom-logo support uses the D.G identity rather than the original app brand."
+  },
+  {
+    "name": "List",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/List/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "List",
+    "story": "content-list--default",
+    "note": "Semantic typography, navigation and list primitives; responsive custom-logo support uses the D.G identity rather than the original app brand."
+  },
+  {
+    "name": "ListGroup",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ListGroup/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ListGroup",
+    "story": "forms-list-group--default",
+    "note": "Labeled native/composed input behavior, constraints, descriptions and controlled values; includes character counts, choice groups and point conversion."
+  },
+  {
+    "name": "Loader",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Loader/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Loader / Spinner",
+    "story": "motion-loader--default",
+    "note": "Original purple/white mark, growing mask, delayed fade/3D rotation, and two 582px traveling waves. Verified against ten preserved original frames. Includes optional theme colors, replay, unique SVG IDs and reduced-motion behavior."
+  },
+  {
+    "name": "Logo",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Logo/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Logo",
+    "story": "foundations-logo--default",
+    "note": "Semantic typography, navigation and list primitives; responsive custom-logo support uses the D.G identity rather than the original app brand."
+  },
+  {
+    "name": "LogoMark",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/LogoMark/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Logo",
+    "story": "foundations-logo--default",
+    "note": "Semantic typography, navigation and list primitives; responsive custom-logo support uses the D.G identity rather than the original app brand."
+  },
+  {
+    "name": "MainFooter",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/MainFooter/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MainFooter",
+    "story": "layout-app-frame--default",
+    "note": "Responsive application shell, mobile navigation drawer, nested sidebar links, footer and image/content split layout."
+  },
+  {
+    "name": "MainNavigation",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/MainNavigation/GiftsMenu.tsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "MainNavigation",
+    "story": "layout-app-frame--default",
+    "note": "Responsive primary navigation plus the GiftsMenu found in this source directory: unread state, expiration details and view/redeem callbacks."
+  },
+  {
+    "name": "MetricsFilterBar",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/MetricsFilterBar/index.tsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "MetricsFilterBar",
+    "story": "content-metrics-graph--default",
+    "note": "Composable metrics region with filters, loading/empty/error states and async export callback. Chart data and rendering remain caller-owned."
+  },
+  {
+    "name": "MetricsGraphWrapper",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/MetricsGraphWrapper/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MetricsGraphWrapper",
+    "story": "content-metrics-graph--default",
+    "note": "Composable metrics region with filters, loading/empty/error states and async export callback. Chart data and rendering remain caller-owned."
+  },
+  {
+    "name": "MetricsTile",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/MetricsTile/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MetricTile",
+    "story": "content-metric-tile--overview",
+    "note": "Compact number formatting, loading skeleton, change description, and supporting text."
+  },
+  {
+    "name": "ModalAddEmployeeSuccess",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalAddEmployeeSuccess/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ModalAddEmployeeSuccess",
+    "story": "overlays-success-confirmations--default",
+    "note": "Dedicated employee/program confirmation compositions with result lists and next-action callbacks."
+  },
+  {
+    "name": "ModalConfirmation",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalConfirmation/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Modal / ConfirmDialog",
+    "story": "overlays-details-panel--confirmation",
+    "note": "Dialog composition, scrollable content, confirmation actions, focus management, and Escape dismissal."
+  },
+  {
+    "name": "ModalContainer",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalContainer/index.tsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "Modal / ConfirmDialog",
+    "story": "overlays-details-panel--confirmation",
+    "note": "Dialog composition, scrollable content, confirmation actions, focus management, and Escape dismissal."
+  },
+  {
+    "name": "ModalContent",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalContent/index.tsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "Modal / ConfirmDialog",
+    "story": "overlays-details-panel--confirmation",
+    "note": "Dialog composition, scrollable content, confirmation actions, focus management, and Escape dismissal."
+  },
+  {
+    "name": "ModalFooter",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalFooter/index.tsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "Modal / ConfirmDialog",
+    "story": "overlays-details-panel--confirmation",
+    "note": "Dialog composition, scrollable content, confirmation actions, focus management, and Escape dismissal."
+  },
+  {
+    "name": "ModalHeroImage",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalHeroImage/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ModalHeroImage / ModalIconTextGroup",
+    "story": "overlays-modal-recipes--hero-image",
+    "note": "Dedicated artwork/CTA and icon/text content compositions for the shared modal."
+  },
+  {
+    "name": "ModalIconTextGroup",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalIconTextGroup/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ModalHeroImage / ModalIconTextGroup",
+    "story": "overlays-modal-recipes--hero-image",
+    "note": "Dedicated artwork/CTA and icon/text content compositions for the shared modal."
+  },
+  {
+    "name": "ModalImportReview",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalImportReview/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ModalImportReview",
+    "story": "forms-employee-csv-import--default",
+    "note": "CSV import review with row errors/warnings, paged records, back action and submission disabled until the data is valid."
+  },
+  {
+    "name": "ModalLayout",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalLayout/",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Modal / ConfirmDialog",
+    "story": "overlays-details-panel--confirmation",
+    "note": "Dialog composition, scrollable content, confirmation actions, focus management, and Escape dismissal."
+  },
+  {
+    "name": "ModalProgramConfirmation",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalProgramConfirmation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ModalProgramConfirmation",
+    "story": "overlays-success-confirmations--default",
+    "note": "Dedicated employee/program confirmation compositions with result lists and next-action callbacks."
+  },
+  {
+    "name": "ModalSyncHistory",
+    "category": "Overlays",
+    "source": "src/component-library/components/ModalSyncHistory/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ModalSyncHistory",
+    "story": "overlays-sync-history--default",
+    "note": "Record selection, running/complete/failed states and a table of synchronization changes."
+  },
+  {
+    "name": "NestedMenu",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/NestedMenu/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "NestedMenu",
+    "story": "navigation-nested-menu--default",
+    "note": "Action-menu and popover compositions with nested keyboard navigation, disabled/destructive states and theme-aware portals. PopoverMock maps to the existing example."
+  },
+  {
+    "name": "Pagination",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/Pagination/",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Pagination",
+    "story": "navigation-pagination--default",
+    "note": "Bounded page controls, ellipses, and current-page semantics."
+  },
+  {
+    "name": "PasswordHelper",
+    "category": "Forms",
+    "source": "src/component-library/components/PasswordHelper/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "PasswordHelper",
+    "story": "forms-password--default",
+    "note": "Configurable requirement checks and an explicit show/hide control in PasswordField; authentication remains caller-owned."
+  },
+  {
+    "name": "PasswordToggle",
+    "category": "Forms",
+    "source": "src/component-library/components/PasswordToggle/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "PasswordToggle",
+    "story": "forms-password--default",
+    "note": "Configurable requirement checks and an explicit show/hide control in PasswordField; authentication remains caller-owned."
+  },
+  {
+    "name": "PaymentAccountCard",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/PaymentAccountCard/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "PaymentAccountCard",
+    "story": "content-accounts--default",
+    "note": "Controlled account/payment selection, point balances, masked card details, default state and caller-owned actions. Payment execution belongs to the host app."
+  },
+  {
+    "name": "PaymentSelect",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/PaymentSelect/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "PaymentSelect",
+    "story": "content-accounts--default",
+    "note": "Controlled account/payment selection, point balances, masked card details, default state and caller-owned actions. Payment execution belongs to the host app."
+  },
+  {
+    "name": "Phone",
+    "category": "Forms",
+    "source": "src/component-library/components/Phone/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Phone",
+    "story": "forms-phone--default",
+    "note": "Labeled native/composed input behavior, constraints, descriptions and controlled values; includes character counts, choice groups and point conversion."
+  },
+  {
+    "name": "Picture",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Picture/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Picture / PictureFade",
+    "story": "media-picture-dissolve--default",
+    "note": "Loading/error handling with optional bottom, right or combined edge dissolve masks."
+  },
+  {
+    "name": "PictureFade",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/PictureFade/index.jsx",
+    "stories": 0,
+    "status": "Adapted",
+    "target": "Picture / PictureFade",
+    "story": "media-picture-dissolve--default",
+    "note": "Loading/error handling with optional bottom, right or combined edge dissolve masks."
+  },
+  {
+    "name": "PointConversionInput",
+    "category": "Forms",
+    "source": "src/component-library/components/PointConversionInput/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "PointConversionInput",
+    "story": "forms-point-conversion--default",
+    "note": "Labeled native/composed input behavior, constraints, descriptions and controlled values; includes character counts, choice groups and point conversion."
+  },
+  {
+    "name": "Popover",
+    "category": "Overlays",
+    "source": "src/component-library/components/Popover/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Popover / NestedMenu",
+    "story": "navigation-nested-menu--default",
+    "note": "General popovers and nested action-menu modes with Radix keyboard, dismissal and themed portals."
+  },
+  {
+    "name": "PopoverMock",
+    "category": "Overlays",
+    "source": "src/component-library/components/PopoverMock/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Popover example",
+    "story": "overlays-popover--default",
+    "note": "Action-menu and popover compositions with nested keyboard navigation, disabled/destructive states and theme-aware portals. PopoverMock maps to the existing example."
+  },
+  {
+    "name": "ProfileBilling",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/ProfileBilling/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ProfileBilling",
+    "story": "examples-profile-and-billing--default",
+    "note": "Composed account settings, billing methods and notification preferences with explicit callbacks and pending/error states."
+  },
+  {
+    "name": "Radio",
+    "category": "Forms",
+    "source": "src/component-library/components/Radio/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "RadioCards",
+    "story": "forms-radio-cards--default",
+    "note": "Labeled options with descriptions and a shared native radio group."
+  },
+  {
+    "name": "RangeSlider",
+    "category": "Forms",
+    "source": "src/component-library/components/RangeSlider/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "RangeSlider / RangeField",
+    "story": "forms-dual-range--default",
+    "note": "Single values and dual-thumb bounds, keyboard interaction, disabled state and formatted values."
+  },
+  {
+    "name": "ReviewConfirmation",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ReviewConfirmation/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ReviewConfirmation",
+    "story": "content-review-confirmation--default",
+    "note": "Review rows preserve zero values, with back/confirm callbacks and pending state."
+  },
+  {
+    "name": "Row",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Row/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "MarketplaceGrid / Row / Column / GridHelper",
+    "story": "layout-marketplace-grid--default",
+    "note": "Responsive 12/16-column spans, offsets, fill, nested scopes and an optional debug overlay."
+  },
+  {
+    "name": "SMSCard",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/SMSCard/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SMSCard",
+    "story": "examples-profile-and-billing--default",
+    "note": "Composed account settings, billing methods and notification preferences with explicit callbacks and pending/error states."
+  },
+  {
+    "name": "ScannableCode",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/ScannableCode/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ScannableCode",
+    "story": "media-scannable-code--default",
+    "note": "Accessible image wrapper for a supplied code image; the story uses a locally generated QR linking to the original library."
+  },
+  {
+    "name": "Select",
+    "category": "Forms",
+    "source": "src/component-library/components/Select/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DropdownButton / SearchSelect",
+    "story": "forms-search-select--default",
+    "note": "Expandable loading trigger; searchable single/multiple selection, async cancellation, option renderers and creation callbacks."
+  },
+  {
+    "name": "SettingsTable",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/SettingsTable/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SettingsTable",
+    "story": "content-settings-table--default",
+    "note": "Semantic label/value rows with optional contextual action buttons."
+  },
+  {
+    "name": "SidebarMenu",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/SidebarMenu/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SidebarMenu",
+    "story": "layout-app-frame--default",
+    "note": "Responsive application shell, mobile navigation drawer, nested sidebar links, footer and image/content split layout."
+  },
+  {
+    "name": "SimpleMenu",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/SimpleMenu/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SimpleMenu / NestedMenu",
+    "story": "navigation-nested-menu--default",
+    "note": "Action-menu and popover compositions with nested keyboard navigation, disabled/destructive states and theme-aware portals. PopoverMock maps to the existing example."
+  },
+  {
+    "name": "Slideshow",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Slideshow/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ImageCarousel / SlideshowDots",
+    "story": "media-carousel--looping",
+    "note": "Swipe/drag, optional looping, dot selection, keyboard previous/next and position announcements."
+  },
+  {
+    "name": "SlideshowDots",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/SlideshowDots/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ImageCarousel / SlideshowDots",
+    "story": "media-carousel--looping",
+    "note": "Swipe/drag, optional looping, dot selection, keyboard previous/next and position announcements."
+  },
+  {
+    "name": "Spinner",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Spinner/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Loader / Spinner",
+    "story": "motion-loader--default",
+    "note": "Original marketplace vector paths with unique SVG IDs, theme colors and reduced-motion behavior."
+  },
+  {
+    "name": "SplitScreen",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/SplitScreen/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SplitScreen",
+    "story": "layout-split-screen--default",
+    "note": "Responsive application shell, mobile navigation drawer, nested sidebar links, footer and image/content split layout."
+  },
+  {
+    "name": "Table",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/Table/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DataTable / TableFilters / EditableCell",
+    "story": "examples-asset-operations--default",
+    "note": "Inline save/cancel/error, remote page/sort contracts, row expansion, column visibility, filters, selection and CSV export. Network and persistence are supplied by the consuming app."
+  },
+  {
+    "name": "TableActionsBar",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/TableActionsBar/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DataTable / TableFilters / EditableCell",
+    "story": "examples-asset-operations--default",
+    "note": "Inline save/cancel/error, remote page/sort contracts, row expansion, column visibility, filters, selection and CSV export. Network and persistence are supplied by the consuming app."
+  },
+  {
+    "name": "TableEmptyState",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/TableEmptyState/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DataTable / TableFilters / EditableCell",
+    "story": "examples-asset-operations--default",
+    "note": "Inline save/cancel/error, remote page/sort contracts, row expansion, column visibility, filters, selection and CSV export. Network and persistence are supplied by the consuming app."
+  },
+  {
+    "name": "TableFilterTypes",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/TableFilterTypes/ChecklistFilter/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "DataTable / TableFilters / EditableCell",
+    "story": "examples-asset-operations--default",
+    "note": "Inline save/cancel/error, remote page/sort contracts, row expansion, column visibility, filters, selection and CSV export. Network and persistence are supplied by the consuming app."
+  },
+  {
+    "name": "Tabs",
+    "category": "Data & navigation",
+    "source": "src/component-library/components/Tabs/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Tabs",
+    "story": "navigation-tabs--default",
+    "note": "Linked tabs and panels, arrow-key navigation, and disabled tabs."
+  },
+  {
+    "name": "TagBubble",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/TagBubble/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "TagList",
+    "story": "content-tag-list--removable",
+    "note": "Static or removable tags with accessible remove buttons."
+  },
+  {
+    "name": "TagList",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/TagList/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "TagList",
+    "story": "content-tag-list--removable",
+    "note": "Static or removable tags with accessible remove buttons."
+  },
+  {
+    "name": "Text",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Text/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Text",
+    "story": "foundations-text--default",
+    "note": "Semantic typography, navigation and list primitives; responsive custom-logo support uses the D.G identity rather than the original app brand."
+  },
+  {
+    "name": "Textarea",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Textarea/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Textarea",
+    "story": "forms-textarea-field--default",
+    "note": "Labeled native/composed input behavior, constraints, descriptions and controlled values; includes character counts, choice groups and point conversion."
+  },
+  {
+    "name": "Toaster",
+    "category": "Content & foundations",
+    "source": "src/component-library/components/Toaster/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ToastProvider / Toast",
+    "story": "feedback-toast--default",
+    "note": "Controlled notices with undo, dismissal, and Radix pause-on-focus/hover behavior."
+  },
+  {
+    "name": "Toggle",
+    "category": "Forms",
+    "source": "src/component-library/components/Toggle/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SwitchField",
+    "story": "forms-switch--default",
+    "note": "Themeable binary setting with a linked label."
+  },
+  {
+    "name": "Tooltip",
+    "category": "Overlays",
+    "source": "src/component-library/components/Tooltip/index.tsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "Tooltip",
+    "story": "overlays-tooltip--default",
+    "note": "Hover/focus help with theme propagation through portals."
+  },
+  {
+    "name": "Typeahead",
+    "category": "Forms",
+    "source": "src/component-library/components/Typeahead/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "SearchSelect / Typeahead",
+    "story": "forms-search-select--default",
+    "note": "SearchSelect provides cancellable async loading, single/multiple choice, option renderers, creation, errors and keyboard navigation."
+  },
+  {
+    "name": "ViewEmployee",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/ViewEmployee/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ViewEmployee",
+    "story": "examples-employee-profile--default",
+    "note": "Employee/program detail compositions with editable forms, membership/role controls, points/history tables and caller-owned administrative actions."
+  },
+  {
+    "name": "ViewProgram",
+    "category": "Commerce & accounts",
+    "source": "src/component-library/components/ViewProgram/index.jsx",
+    "stories": 1,
+    "status": "Adapted",
+    "target": "ViewProgram",
+    "story": "examples-program-details--default",
+    "note": "Employee/program detail compositions with editable forms, membership/role controls, points/history tables and caller-owned administrative actions."
+  }
+]
