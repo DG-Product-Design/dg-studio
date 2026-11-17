@@ -2,9 +2,9 @@
 
 A React component library for photo collections, creative tools, and conversations. Built with TypeScript, Tailwind CSS 4, shadcn/ui, and Storybook 10.
 
-- 152 components
-- 242 Storybook stories
-- 16 named motion presets
+- 217+ components
+- 242+ Storybook stories
+- 16+ named motion presets
 - 4 themes
 
 ## Start
