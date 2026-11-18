@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import type { Preview } from "@storybook/react-vite";
 import { ThemeProvider, themes, type Theme } from "../src/components/theme";
 import "../src/styles.css";
+
 function StoryTheme({
   theme,
   canvasBackground,
@@ -28,7 +29,7 @@ function StoryTheme({
   return (
     <ThemeProvider
       theme={theme}
-      className="min-h-40 p-5 sm:p-6"
+      className="min-h-40 h-screen p-5 sm:p-6"
       style={canvasBackground ? { backgroundColor: canvasBackground } : undefined}
     >
       {children}
