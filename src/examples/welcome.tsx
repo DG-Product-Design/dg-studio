@@ -61,7 +61,7 @@ export function Welcome() {
           <h1 className="max-w-md text-3xl leading-[1.1] font-semibold tracking-tight sm:text-4xl shrink-0">
             Beautiful interfaces.
             <br />
-            Amazing abilities.
+            Intuitive experiences.
           </h1>
           <div className="self-end">
             <p className="text-base leading-relaxed text-muted-foreground">
