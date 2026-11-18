@@ -1,6 +1,6 @@
 # D.G Studio UI
 
-A React component library for photo collections, creative tools, and conversations. Built with TypeScript, Tailwind CSS 4, shadcn/ui, and Storybook 10.
+A React component library for photo collections, Ai tools, creative tools, and conversations. Built with TypeScript, Tailwind CSS 4, shadcn/ui, and Storybook 10.
 
 - 217+ components
 - 242+ Storybook stories
