@@ -16,7 +16,7 @@ const meta = {
     },
   },
   args: {
-    src: "/images/welcome.jpg",
+    src: "./images/welcome.jpg",
     alt: "Neon sunset over a wireframe landscape",
     width: 850,
     height: 680,
@@ -26,10 +26,10 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {};
-export const Failed: Story = { args: { src: "/images/does-not-exist.jpg" } };
+export const Failed: Story = { args: { src: "./images/does-not-exist.jpg" } };
 export const BlurredBackground: Story = {
   args: {
-    src: "/images/get-outside-dusk-portrait.webp",
+    src: "./images/get-outside-dusk-portrait.webp",
     alt: "Get Outside lettering over a purple mountain sunset",
     width: 517,
     height: 761,
@@ -73,7 +73,7 @@ export const SourceChange: Story = {
     );
     await expect(next).toHaveAttribute(
       "src",
-      "/images/get-outside-dusk-portrait.webp",
+      "./images/get-outside-dusk-portrait.webp",
     );
     await expect(
       next.parentElement?.querySelector("[data-image-background]"),
@@ -90,8 +90,8 @@ export const SourceChange: Story = {
           {...args}
           src={
             dusk
-              ? "/images/get-outside-dusk-portrait.webp"
-              : "/images/get-outside-v1.webp"
+              ? "./images/get-outside-dusk-portrait.webp"
+              : "./images/get-outside-v1.webp"
           }
           width={1034}
           height={1521}

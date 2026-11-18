@@ -16,7 +16,7 @@ function DetailsExample() {
       footer={<Button onClick={() => setOpen(false)}>Done</Button>}
     >
       <ImageFade
-        src="/images/welcome.jpg"
+        src="./images/welcome.jpg"
         alt="Retrowave sunset"
         width={850}
         height={680}

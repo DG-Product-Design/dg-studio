@@ -208,7 +208,7 @@ export function CreativeStudio() {
               className={`relative w-full max-w-[320px] overflow-hidden rounded-lg shadow-xl ${busy ? "dg-artwork-busy" : ""}`}
             >
               <ImageFade
-                src={`/images/${file}`}
+                src={`./images/${file}`}
                 imageClassName="object-contain"
                 alt={`${scenic ? "Take the Scenic Route" : "Get Outside"} campaign in ${dusk ? "dusk" : "daylight"} colors`}
                 width={w}

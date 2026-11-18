@@ -39,7 +39,7 @@ export function Welcome() {
       </header>
       <div className="relative isolate overflow-hidden rounded-2xl">
         <img
-          src="/images/welcome.jpg"
+          src="./images/welcome.jpg"
           alt="Retrowave sunset above a neon wireframe landscape"
           width={850}
           height={680}

@@ -19,6 +19,14 @@ npm run storybook
 
 Storybook opens at http://localhost:6006. Start at **Welcome / Start Here** and use the **Theme** toolbar to switch between Miami 85, Matrix, Calm, and Blue Hour. The selection applies to stories, documentation previews, and portaled overlays.
 
+## Published Storybook
+
+Browse the component library at [D.G Studio UI](https://dg-product-design.github.io/dg-studio/).
+
+The [Deploy Storybook workflow](.github/workflows/storybook-pages.yml) checks TypeScript, runs unit tests, and builds Storybook. Pushes to `master` publish the resulting `storybook-static` directory to GitHub Pages; pull requests build and check without deploying. The workflow can also be run manually from the Actions tab on `master`.
+
+GitHub Pages uses **GitHub Actions** as its publishing source under **Settings → Pages**. No deployment secret is required. Demo image paths are relative so they work both locally and under the repository's `/dg-studio/` URL.
+
 ## Use in another project
 
 ```sh
