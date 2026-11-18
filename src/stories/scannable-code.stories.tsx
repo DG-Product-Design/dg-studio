@@ -6,7 +6,7 @@ const meta = {
   component: ScannableCode,
   tags: ["autodocs"],
   args: {
-    src: "/images/studio-qr.svg",
+    src: "./images/studio-qr.svg",
     alt: "QR code linking to the original D.G component library",
   },
 } satisfies Meta<typeof ScannableCode>;

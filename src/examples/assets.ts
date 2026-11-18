@@ -2,7 +2,7 @@ import type { ImageAsset } from "../components/media";
 export const assets: ImageAsset[] = [
   {
     id: "retro",
-    src: "/images/welcome.jpg",
+    src: "./images/welcome.jpg",
     alt: "A striped neon sun above a pink and cyan wireframe landscape.",
     title: "After the sunset",
     width: 850,
@@ -12,7 +12,7 @@ export const assets: ImageAsset[] = [
   },
   {
     id: "outside",
-    src: "/images/get-outside-v1.webp",
+    src: "./images/get-outside-v1.webp",
     alt: "Get Outside lettering over a green mountain landscape.",
     title: "Get outside",
     width: 522,
@@ -22,7 +22,7 @@ export const assets: ImageAsset[] = [
   },
   {
     id: "dusk",
-    src: "/images/get-outside-dusk-portrait.webp",
+    src: "./images/get-outside-dusk-portrait.webp",
     alt: "Get Outside lettering over a purple mountain sunset.",
     title: "Dusk study",
     width: 517,
@@ -32,7 +32,7 @@ export const assets: ImageAsset[] = [
   },
   {
     id: "scenic",
-    src: "/images/take-the-scenic-route-dusk-feed.webp",
+    src: "./images/take-the-scenic-route-dusk-feed.webp",
     alt: "Take the Scenic Route lettering over coral and purple mountains.",
     title: "The scenic route",
     width: 644,
@@ -42,7 +42,7 @@ export const assets: ImageAsset[] = [
   },
   {
     id: "story",
-    src: "/images/ad-get-outside-9x16.webp",
+    src: "./images/ad-get-outside-9x16.webp",
     alt: "A vertical Get Outside mountain campaign.",
     title: "A little more sky",
     width: 540,
@@ -52,7 +52,7 @@ export const assets: ImageAsset[] = [
   },
   {
     id: "midnight",
-    src: "/images/midnight-1200.webp",
+    src: "./images/midnight-1200.webp",
     alt: "Midnight project artwork.",
     title: "Midnight",
     width: 1200,

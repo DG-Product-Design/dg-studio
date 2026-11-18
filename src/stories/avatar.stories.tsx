@@ -9,10 +9,10 @@ const meta = {
 export default meta;
 export const Initials: StoryObj<typeof Avatar> = {};
 export const Image: StoryObj<typeof Avatar> = {
-  args: { src: "/images/welcome.jpg" },
+  args: { src: "./images/welcome.jpg" },
 };
 export const FailedImage: StoryObj<typeof Avatar> = {
-  args: { src: "/images/missing-avatar.jpg" },
+  args: { src: "./images/missing-avatar.jpg" },
 };
 export const Sizes: StoryObj<typeof Avatar> = {
   render: () => (
