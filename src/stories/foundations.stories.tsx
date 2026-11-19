@@ -5,6 +5,7 @@ import { Button } from "../components/ui/button";
 import { Badge } from "../components/ui/badge";
 import { Input } from "../components/ui/input";
 import { Textarea } from "../components/ui/textarea";
+import storyExamples1 from "./foundations.stories.tsx?examples";
 function Palettes() {
   return (
     <main className="mx-auto max-w-6xl">
@@ -60,7 +61,13 @@ const meta = {
   component: Palettes,
 } satisfies Meta<typeof Palettes>;
 export default meta;
-export const AllPalettes: StoryObj<typeof meta> = {};
+export const AllPalettes: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Palettes, language: "tsx", type: "code" },
+    },
+  },
+};
 export const Primitives: StoryObj = {
   render: () => {
     const [name, setName] = useState("Trailbound");

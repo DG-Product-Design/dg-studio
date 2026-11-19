@@ -49,7 +49,6 @@ export * from "./components/wizard-steps";
 export * from "./components/dot-menu-button";
 export * from "./components/animated-checkbox";
 export * from "./components/color-flow";
-export * from "./components/holy-albatross";
 
 export * from "./lib/motion-variants";
 

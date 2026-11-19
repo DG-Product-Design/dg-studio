@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, within } from "storybook/test";
 import { ContainerWorkspace } from "../../examples/layout-recipes/container-workspace";
+import storyExamples1 from "../../examples/layout-recipes/container-workspace.tsx?examples";
 const meta = {
   title: "Layout recipes/Container queries",
   component: ContainerWorkspace,
@@ -16,6 +17,15 @@ const meta = {
 } satisfies Meta<typeof ContainerWorkspace>;
 export default meta;
 export const AdaptiveWorkspace: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.ContainerWorkspace,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, userEvent }) => {
     const workspace = canvas.getByRole("region", {
       name: "Collection workspace",

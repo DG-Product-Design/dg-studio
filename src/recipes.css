@@ -346,8 +346,8 @@
   inset: -50%;
   z-index: -2;
   background: linear-gradient(132deg, var(--dg-flow-from), var(--dg-flow-to));
-  animation: dg-color-drift var(--dg-flow-duration, 10000ms) ease-in-out
-    infinite alternate;
+  animation: dg-color-drift var(--dg-flow-duration, 10000ms)
+    var(--dg-flow-timing, ease-in-out) infinite alternate;
 }
 @supports (background: linear-gradient(132deg in oklch, red, blue)) {
   .dg-color-flow[data-space="oklch"] .dg-color-field {
@@ -376,7 +376,7 @@
 .dg-color-content {
   position: relative;
   padding: clamp(1.5rem, 5vw, 3rem);
-  color: #153c35;
+  color: var(--dg-flow-foreground, #153c35);
 }
 @keyframes dg-color-drift {
   from {
@@ -386,13 +386,15 @@
     transform: translate(12%, 8%);
   }
 }
+/* Holy albatross: apply these classes to ordinary container and panel elements. */
 .dg-albatross {
+  --dg-albatross-breakpoint: 40rem;
   display: flex;
   flex-wrap: wrap;
   gap: 1rem;
 }
 .dg-albatross > * {
-  flex-basis: calc((var(--dg-albatross-breakpoint, 60rem) - 100%) * 999);
+  flex-basis: calc((var(--dg-albatross-breakpoint) - 100%) * 999);
   min-width: min(100%, 15rem);
   max-width: 100%;
 }

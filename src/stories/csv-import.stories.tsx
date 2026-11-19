@@ -1,15 +1,35 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CsvImportDemo } from "../examples/marketplace-planned";
+import storyExamples1 from "../examples/marketplace-planned.tsx?examples";
 const meta = {
   title: "Forms/Employee CSV import",
   component: CsvImportDemo,
   tags: ["autodocs"],
 } satisfies Meta<typeof CsvImportDemo>;
 export default meta;
-export const Default: StoryObj<typeof meta> = {};
+export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.CsvImportDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+};
 
 export const ValidateAndImport: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.CsvImportDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, userEvent, step }) => {
     await step("Block duplicate email addresses", async () => {
       await userEvent.upload(

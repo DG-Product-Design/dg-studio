@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SelectField } from "../components/fields";
 import { expect, userEvent, waitFor, within } from "storybook/test";
+import storyExamples1 from "./select-field.stories.tsx?examples";
 const options = [
   {
     value: "campaign",
@@ -35,9 +36,19 @@ const meta = {
 } satisfies Meta<typeof SelectField>;
 export default meta;
 export const Default: StoryObj<typeof SelectField> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
   render: () => <Example />,
 };
 export const KeyboardSelection: StoryObj<typeof SelectField> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
   render: () => <Example />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);

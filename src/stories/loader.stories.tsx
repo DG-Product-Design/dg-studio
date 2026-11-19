@@ -4,6 +4,7 @@ import { expect, waitFor } from "storybook/test";
 import { Loader } from "../components/loaders";
 import { Button } from "../components/ui/button";
 import { useTheme } from "../components/theme";
+import storyExamples1 from "./loader.stories.tsx?examples";
 const meta = {
   title: "Motion/Loader",
   component: Loader,
@@ -92,6 +93,13 @@ function ThemedLoader(args: React.ComponentProps<typeof Loader>) {
 export const Themed: StoryObj<typeof meta> = {
   render: (args) => <ThemedLoader {...args} />,
   parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.ThemedLoader,
+        language: "tsx",
+        type: "code",
+      },
+    },
     canvasBackground: "var(--background)",
   },
   args: {

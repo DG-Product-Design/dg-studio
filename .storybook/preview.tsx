@@ -29,7 +29,7 @@ function StoryTheme({
   return (
     <ThemeProvider
       theme={theme}
-      className="min-h-40 h-screen p-5 sm:p-6"
+      className="min-h-40 h-full p-5 sm:p-6"
       style={canvasBackground ? { backgroundColor: canvasBackground } : undefined}
     >
       {children}

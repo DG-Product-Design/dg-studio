@@ -8,6 +8,7 @@ import {
 } from "../components/marketplace-content";
 import { Button } from "../components/ui/button";
 import { assets } from "../examples/assets";
+import storyExamples1 from "./modal-recipes.stories.tsx?examples";
 function Example({ hero = false }: { hero?: boolean }) {
   const [open, setOpen] = useState(false);
   return (
@@ -46,5 +47,18 @@ const meta = {
   tags: ["autodocs"],
 } satisfies Meta<typeof Example>;
 export default meta;
-export const HeroImage: StoryObj<typeof meta> = { args: { hero: true } };
-export const IconText: StoryObj<typeof meta> = {};
+export const HeroImage: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
+  args: { hero: true },
+};
+export const IconText: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
+};

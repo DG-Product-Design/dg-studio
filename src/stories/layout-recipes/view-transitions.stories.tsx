@@ -1,12 +1,18 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, waitFor, within } from "storybook/test";
 import { TransitionGallery } from "../../examples/layout-recipes/transition-gallery";
+import demoSource from "../../examples/layout-recipes/transition-gallery.tsx?raw";
 const meta = {
   title: "Layout recipes/View transitions",
   component: TransitionGallery,
   tags: ["autodocs"],
   parameters: {
     docs: {
+      source: {
+        code: demoSource,
+        language: "tsx",
+        type: "code",
+      },
       description: {
         component:
           "A shared-element gallery with grid/list layout morphing, keyed reordering and filtering, and an image/title transition into a detail view. Each instance owns unique transition names; only one transition runs at a time. React commits synchronously inside the capture callback, focus follows navigation, and unavailable APIs or reduced-motion preferences use immediate updates.",

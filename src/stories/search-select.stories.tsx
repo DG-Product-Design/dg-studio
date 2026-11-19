@@ -1,15 +1,35 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SearchSelectionDemo } from "../examples/marketplace-partials";
+import storyExamples1 from "../examples/marketplace-partials.tsx?examples";
 const meta = {
   title: "Forms/Search select",
   component: SearchSelectionDemo,
   tags: ["autodocs"],
 } satisfies Meta<typeof SearchSelectionDemo>;
 export default meta;
-export const Default: StoryObj<typeof meta> = {};
+export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.SearchSelectionDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+};
 
 export const SearchSelectAndCreate: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.SearchSelectionDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, userEvent, step }) => {
     const search = canvas.getByRole("combobox", { name: "Accounts" });
     await step("Find and select an account with the keyboard", async () => {

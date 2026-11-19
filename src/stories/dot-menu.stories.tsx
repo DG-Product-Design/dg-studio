@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect, waitFor } from "storybook/test";
 import { DotMenuButton } from "../components/dot-menu-button";
 import { DotMenuDemo } from "../examples/animation-studies";
+import storyExamples1 from "../examples/animation-studies.tsx?examples";
 const meta = {
   title: "Motion/Dot menu",
   component: DotMenuButton,
@@ -19,6 +20,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Click: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.DotMenuDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   args: { trigger: "click" },
   play: async ({ canvas, userEvent }) => {
     const button = canvas.getByRole("button", { name: "Open menu" });
@@ -32,6 +42,15 @@ export const Click: Story = {
   },
 };
 export const Hover: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.DotMenuDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   args: { trigger: "hover" },
   play: async ({ canvas, userEvent }) => {
     const button = canvas.getByRole("button", { name: "Open menu" });

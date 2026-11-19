@@ -13,6 +13,7 @@ import {
 } from "../components/ui/select";
 import { SelectField } from "../components/fields";
 import { Button } from "../components/ui/button";
+import storyExamples1 from "./select.stories.tsx?examples";
 function Example({
   longLabel = false,
   form = false,
@@ -100,6 +101,11 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Default: Story = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
   play: async ({ canvas }) => {
     const trigger = canvas.getByRole("combobox");
     const icon = trigger.querySelector('[data-slot="select-chevron"]')!;
@@ -111,6 +117,11 @@ export const Default: Story = {
   },
 };
 export const KeyboardAndGroups: Story = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
   play: async ({ canvas, canvasElement, userEvent }) => {
     const trigger = canvas.getByRole("combobox");
     await userEvent.click(trigger);
@@ -128,6 +139,11 @@ export const KeyboardAndGroups: Story = {
   },
 };
 export const LongLabel: Story = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
   render: () => <Example longLabel />,
   play: async ({ canvas }) => {
     const trigger = canvas.getByRole("combobox");
@@ -160,6 +176,11 @@ export const FieldStates: Story = {
   ),
 };
 export const NativeForm: Story = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+    },
+  },
   render: () => <Example form />,
   play: async ({ canvas, canvasElement, userEvent }) => {
     await userEvent.click(canvas.getByRole("combobox"));

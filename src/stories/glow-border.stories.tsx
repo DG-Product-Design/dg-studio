@@ -10,6 +10,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { GlowGroup, GlowBorder } from "../components/glow-border";
 import { Button } from "../components/ui/button";
 import { useState } from "react";
+import storyExamples1 from "./glow-border.stories.tsx?examples";
 
 function GlowBorderDocsDescription() {
   return (
@@ -90,8 +91,20 @@ const meta = {
   },
 } satisfies Meta<typeof GlowGroup>;
 export default meta;
-export const Default: StoryObj<typeof meta> = { render: () => <Sample /> };
+export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Sample, language: "tsx", type: "code" },
+    },
+  },
+  render: () => <Sample />,
+};
 export const PointerProximity: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Sample, language: "tsx", type: "code" },
+    },
+  },
   ...Default,
   play: async ({ canvasElement, step }) => {
     if (
@@ -171,6 +184,11 @@ export const Disabled: StoryObj<typeof meta> = {
 };
 
 export const KeyboardInteraction: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Sample, language: "tsx", type: "code" },
+    },
+  },
   ...Default,
   play: async ({ canvas, userEvent }) => {
     await userEvent.tab();
@@ -244,6 +262,11 @@ export const MobileMode: StoryObj<typeof meta> = {
   globals: { viewport: { value: "mobile2", isRotated: false } },
   parameters: {
     docs: {
+      source: {
+        code: storyExamples1.MobileSample,
+        language: "tsx",
+        type: "code",
+      },
       description: {
         story:
           "Phone layout with the touch-device orbit explicitly enabled, so it also animates when viewed with a mouse. Each card completes a 15-second rotation with staggered starting positions. Reduced motion replaces the orbit with a static colored border.",

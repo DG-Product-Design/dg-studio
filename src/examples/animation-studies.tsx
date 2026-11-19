@@ -1,5 +1,12 @@
-import { useId, useState } from "react";
-import { BriefcaseBusiness, Contact, UserRound, Users } from "lucide-react";
+import { useEffect, useId, useState } from "react";
+import {
+  BriefcaseBusiness,
+  Contact,
+  Minus,
+  Plus,
+  UserRound,
+  Users,
+} from "lucide-react";
 import {
   WizardSteps,
   InsetStepper,
@@ -212,7 +219,20 @@ export function CheckboxSelectionDemo() {
     </fieldset>
   );
 }
-export function ColorFlowDemo(args: ColorFlowProps) {
+export function ColorFlowDemo({
+  onTimingChange,
+  ...args
+}: ColorFlowProps & { onTimingChange: (duration: number) => void }) {
+  const [duration, setDuration] = useState(
+    Math.max(1000, args.duration ?? 10000),
+  );
+  useEffect(() => {
+    setDuration(Math.max(1000, args.duration ?? 10000));
+  }, [args.duration]);
+  const changeDuration = (nextDuration: number) => {
+    setDuration(nextDuration);
+    onTimingChange(nextDuration);
+  };
   const [paused, setPaused] = useState(false),
     [dither, setDither] = useState(true);
   return (
@@ -220,9 +240,8 @@ export function ColorFlowDemo(args: ColorFlowProps) {
       <header>
         <h1 className="text-2xl font-semibold">A quieter color field</h1>
         <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
-          The original mint and ice palette, interpolated in OKLCH. A static
-          noise layer breaks up the long runs of identical pixels that make
-          banding visible.
+          Explore the palette, duration, and easing in the Storybook controls. A
+          static noise layer softens visible bands as the gradient drifts.
         </p>
       </header>
       <div className="flex flex-wrap gap-3">
@@ -240,8 +259,43 @@ export function ColorFlowDemo(args: ColorFlowProps) {
         >
           Dithering
         </Button>
+        <div
+          role="group"
+          aria-label="Animation duration"
+          className="flex items-center gap-2"
+        >
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            aria-label="Decrease duration by one second"
+            title="Decrease duration · faster motion"
+            disabled={duration <= 1000}
+            onClick={() => changeDuration(Math.max(1000, duration - 1000))}
+          >
+            <Minus aria-hidden="true" />
+          </Button>
+          <output
+            aria-live="polite"
+            aria-label="Duration per direction"
+            className="min-w-24 text-center text-sm tabular-nums"
+          >
+            {duration / 1000}s each way
+          </output>
+          <Button
+            type="button"
+            variant="outline"
+            size="icon"
+            aria-label="Increase duration by one second"
+            title="Increase duration · slower motion"
+            disabled={duration >= 60000}
+            onClick={() => changeDuration(Math.min(60000, duration + 1000))}
+          >
+            <Plus aria-hidden="true" />
+          </Button>
+        </div>
       </div>
-      <ColorFlow {...args} dither={dither} paused={paused}>
+      <ColorFlow {...args} duration={duration} dither={dither} paused={paused}>
         <div className="flex min-h-64 flex-col justify-end">
           <p className="text-xs font-semibold uppercase tracking-widest">
             Color study / 01
@@ -252,9 +306,10 @@ export function ColorFlowDemo(args: ColorFlowProps) {
         </div>
       </ColorFlow>
       <p className="text-xs text-muted-foreground">
-        The gradient moves as one layer. Reduced motion holds it still.
-        Dithering reduces band visibility; display bit depth and compression
-        still affect the result.
+        {duration / 1000}s each way · {(duration * 2) / 1000}s round trip ·{" "}
+        {args.timingFunction ?? "ease-in-out"}. Reduced motion holds the field
+        still. Dithering softens bands; display bit depth still affects the
+        result.
       </p>
     </section>
   );

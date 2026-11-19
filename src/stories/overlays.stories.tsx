@@ -4,6 +4,7 @@ import type { Meta, StoryObj } from "@storybook/react-vite";
 import { DetailsPanel, ConfirmDialog, Modal } from "../components/overlays";
 import { Button } from "../components/ui/button";
 import { ImageFade } from "../components/image-fade";
+import storyExamples1 from "./overlays.stories.tsx?examples";
 function DetailsExample() {
   const [open, setOpen] = useState(false);
   return (
@@ -41,7 +42,17 @@ const meta = {
   component: DetailsExample,
 } satisfies Meta<typeof DetailsExample>;
 export default meta;
-export const Default: StoryObj<typeof meta> = {};
+export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.DetailsExample,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+};
 export const Confirmation: StoryObj = {
   render: () => {
     const [open, setOpen] = useState(false);
@@ -88,6 +99,15 @@ export const LongContent: StoryObj = {
 };
 
 export const DismissAndRestoreFocus: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.DetailsExample,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, canvasElement, userEvent, step }) => {
     const body = within(canvasElement.ownerDocument.body);
     const trigger = canvas.getByRole("button", { name: "Open details" });

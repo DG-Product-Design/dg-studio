@@ -1,6 +1,7 @@
 import { expect } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { SplitScreenDemo } from "../examples/marketplace-planned";
+import storyExamples1 from "../examples/marketplace-planned.tsx?examples";
 const meta = {
   title: "Layout/Split screen",
   component: SplitScreenDemo,
@@ -8,6 +9,15 @@ const meta = {
 } satisfies Meta<typeof SplitScreenDemo>;
 export default meta;
 export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.SplitScreenDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas }) => {
     const image = canvas.getByRole("img");
     const frame = image.parentElement!;

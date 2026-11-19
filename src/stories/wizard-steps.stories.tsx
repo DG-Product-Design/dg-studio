@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { expect } from "storybook/test";
 import { ArrowWizardDemo } from "../examples/animation-studies";
+import storyExamples1 from "../examples/animation-studies.tsx?examples";
 const meta = {
   title: "Navigation/Wizard steps",
   component: ArrowWizardDemo,
@@ -19,6 +20,15 @@ const meta = {
 export default meta;
 type Story = StoryObj<typeof meta>;
 export const Selectable: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.ArrowWizardDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, userEvent, step }) => {
     await step("Jump forward and mark all earlier steps", async () => {
       await userEvent.click(canvas.getByRole("button", { name: "Dependents" }));

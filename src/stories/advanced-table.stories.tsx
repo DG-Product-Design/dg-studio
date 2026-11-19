@@ -1,15 +1,35 @@
 import { expect, waitFor } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { AdvancedTableDemo } from "../examples/marketplace-partials";
+import storyExamples1 from "../examples/marketplace-partials.tsx?examples";
 const meta = {
   title: "Examples/Asset operations",
   component: AdvancedTableDemo,
   tags: ["autodocs"],
 } satisfies Meta<typeof AdvancedTableDemo>;
 export default meta;
-export const Default: StoryObj<typeof meta> = {};
+export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.AdvancedTableDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+};
 
 export const EditPageAndExpand: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.AdvancedTableDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, userEvent, step }) => {
     await step("Edit a row and save through the adapter", async () => {
       await userEvent.click(

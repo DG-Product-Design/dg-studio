@@ -6,6 +6,7 @@ import {
   ScaleAndFadeStudy,
   StaggerStudy,
 } from "../examples/framer-motion-variants";
+import storyExamples1 from "../examples/framer-motion-variants.tsx?examples";
 const meta = {
   title: "Motion/Framer Motion variants",
   component: StaggerStudy,
@@ -30,7 +31,17 @@ const meta = {
 } satisfies Meta<typeof StaggerStudy>;
 export default meta;
 type Story = StoryObj<typeof meta>;
-export const Stagger: Story = {};
+export const Stagger: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.StaggerStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+};
 const replayStudy: Story = {
   play: async ({ canvas, canvasElement, userEvent, step }) => {
     const ready = () =>
@@ -89,19 +100,68 @@ const replayStudy: Story = {
   },
 };
 export const StudyTiming: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.StaggerStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   args: { initialTiming: "study" },
   play: replayStudy.play,
 };
 export const CenterOut: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.StaggerStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   args: {
     initialTiming: "study",
     initialOrigin: "center",
     initialEffect: "scale",
   },
 };
-export const ItemEntrances: Story = { render: () => <ItemEntranceStudy /> };
-export const PanelReveal: Story = { render: () => <PanelRevealStudy /> };
+export const ItemEntrances: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.ItemEntranceStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+  render: () => <ItemEntranceStudy />,
+};
+export const PanelReveal: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.PanelRevealStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+  render: () => <PanelRevealStudy />,
+};
 export const DelayedPanel: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.PanelRevealStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   render: () => <PanelRevealStudy preset="delayed" />,
   play: async ({ canvas, userEvent }) => {
     await waitFor(
@@ -125,13 +185,51 @@ export const DelayedPanel: Story = {
   },
 };
 export const DetailsPanel: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.PanelRevealStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   render: () => <PanelRevealStudy preset="details" />,
 };
 export const SlideFromRight: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.PanelRevealStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   render: () => <PanelRevealStudy preset="right" />,
 };
-export const ScaleAndFade: Story = { render: () => <ScaleAndFadeStudy /> };
+export const ScaleAndFade: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.ScaleAndFadeStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+  render: () => <ScaleAndFadeStudy />,
+};
 export const ReducedMotion: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.StaggerStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   args: { reduceMotion: true },
   play: async ({ canvas, userEvent }) => {
     const ready = () =>
@@ -154,6 +252,15 @@ export const ReducedMotion: Story = {
 };
 
 export const SwitchingEffects: Story = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.StaggerStudy,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   args: { initialTiming: "original" },
   play: async ({ canvas, canvasElement, userEvent }) => {
     const ready = () =>

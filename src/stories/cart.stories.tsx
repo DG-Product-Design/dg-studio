@@ -1,15 +1,35 @@
 import { expect, within } from "storybook/test";
 import type { Meta, StoryObj } from "@storybook/react-vite";
 import { CommerceDemo } from "../examples/marketplace-planned";
+import storyExamples1 from "../examples/marketplace-planned.tsx?examples";
 const meta = {
   title: "Commerce/Cart",
   component: CommerceDemo,
   tags: ["autodocs"],
 } satisfies Meta<typeof CommerceDemo>;
 export default meta;
-export const Default: StoryObj<typeof meta> = {};
+export const Default: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.CommerceDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
+};
 
 export const CheckoutJourney: StoryObj<typeof meta> = {
+  parameters: {
+    docs: {
+      source: {
+        code: storyExamples1.CommerceDemo,
+        language: "tsx",
+        type: "code",
+      },
+    },
+  },
   play: async ({ canvas, userEvent, step }) => {
     const pacedUser = userEvent.setup({ delay: 50 });
     const pause = () =>

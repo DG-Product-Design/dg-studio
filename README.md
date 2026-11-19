@@ -85,14 +85,14 @@ Props and examples are available in Storybook autodocs. The **Examples / Creativ
 The stories explore D.G’s original animation and layout studies:
 
 - **Motion / Spinner** — drawing circle, with the original 1.2-second stroke/rotation timing and a configurable `color` or `--spinner-color`.
-- **Layout recipes / Holy albatross** — container-sized flex layout, with a resizable collection and preview.
+- **Layout recipes / Holy albatross** — a CSS flex layout recipe applied to ordinary HTML, with a resizable collection and preview.
 - **Navigation / Wizard steps** — arrow steps, selectable with orange tracks under all earlier steps.
 - **Motion / Dot menu** — click and hover variants. The outer dots merge before growing into the cross; closing reverses the sequence.
 - **Forms / Animated checkbox** — orange checkbox, using native inputs and SVG check/minus marks instead of an icon font.
 - **Motion / Color flow** — changing background, with OKLCH interpolation, static noise to reduce visible banding, pause controls, and an sRGB comparison. Display bit depth and compression still influence banding.
 - **Navigation / Inset stepper** — recessed progress track, with sequential unlocking, revisitable steps, and completion marks.
 
-**Layout recipes / Container queries** demonstrates nested named containers, three card layouts, container-relative type, and density style queries. **Layout recipes / View transitions** demonstrates grid/list changes, keyed sorting/filtering, shared image/title navigation, keyboard focus restoration, and immediate updates when the API is unavailable or reduced motion is requested. These compositions stay in `src/examples/layout-recipes`; `HolyAlbatross` and the reusable controls are exported by the library.
+**Layout recipes / Container queries** demonstrates nested named containers, three card layouts, container-relative type, and density style queries. **Layout recipes / View transitions** demonstrates grid/list changes, keyed sorting/filtering, shared image/title navigation, keyboard focus restoration, and immediate updates when the API is unavailable or reduced motion is requested. These compositions stay in `src/examples/layout-recipes`. Holy albatross uses the `.dg-albatross`, `.dg-albatross-main`, and `.dg-albatross-aside` classes from `src/recipes.css`, included in the library stylesheet; it does not require a React component. Override `--dg-albatross-breakpoint` to change its 40rem threshold.
 
 The animation components honor reduced motion. Stories exercise selection, gating, checkboxes, disclosure state, responsive layouts, and navigation; unit tests cover native form behavior and transition failure/cleanup paths.
 
