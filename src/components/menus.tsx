@@ -17,7 +17,7 @@ export interface MenuItem {
 }
 
 const menuClass =
-  'dg-theme z-[90] min-w-48 max-w-[calc(100vw-2rem)] rounded-lg border p-1 shadow-xl';
+  'bg-background text-foreground font-sans z-[90] min-w-48 max-w-[calc(100vw-2rem)] rounded-lg border p-1 shadow-xl';
 
 const itemClass =
   'flex cursor-default items-center justify-between gap-5 rounded px-3 py-2 text-sm outline-none data-[highlighted]:bg-accent data-[disabled]:opacity-40';

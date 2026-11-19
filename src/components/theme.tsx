@@ -20,7 +20,11 @@ export function ThemeProvider({
 }: HTMLAttributes<HTMLDivElement> & { theme?: Theme }) {
   return (
     <ThemeContext.Provider value={theme}>
-      <div {...props} data-theme={theme} className={cn('dg-theme', className)}>
+      <div
+        {...props}
+        data-theme={theme}
+        className={cn('bg-background text-foreground font-sans', className)}
+      >
         {children}
       </div>
     </ThemeContext.Provider>

@@ -98,7 +98,7 @@ export function Toast({
       data-theme={theme}
       open={open}
       onOpenChange={onOpenChange}
-      className="dg-theme relative rounded-xl border p-5 pr-12 shadow-xl data-[state=open]:animate-[dg-appear_180ms_ease-out]"
+      className="bg-background text-foreground font-sans relative rounded-xl border p-5 pr-12 shadow-xl data-[state=open]:animate-[dg-appear_180ms_ease-out]"
     >
       <ToastPrimitive.Title className="text-sm font-semibold">{title}</ToastPrimitive.Title>
       {description && (

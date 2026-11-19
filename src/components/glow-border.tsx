@@ -134,7 +134,10 @@ export function GlowBorder({
     <div
       {...props}
       data-glow-border
-      className={cn('dg-glow-border', className)}
+      className={cn(
+        'dg-glow-border relative isolate rounded-[var(--dg-glow-radius)] border bg-card focus-within:outline-2 focus-within:outline-ring focus-within:outline-offset-3',
+        className,
+      )}
       style={
         {
           '--dg-glow-radius': `${radius}px`,
@@ -143,8 +146,11 @@ export function GlowBorder({
         } as CSSProperties
       }
     >
-      <span aria-hidden className="dg-glow-halo" />
-      <div className="dg-glow-content">{children}</div>
+      <span
+        aria-hidden
+        className="dg-glow-halo pointer-events-none absolute -inset-[3px] z-0 rounded-[inherit]"
+      />
+      <div className="relative z-1 h-full rounded-[inherit]">{children}</div>
     </div>
   );
 }

@@ -51,7 +51,7 @@ export const AdaptiveWorkspace: StoryObj<typeof meta> = {
     await expect(inspector.getBoundingClientRect().top).toBeGreaterThan(
       workspace.getBoundingClientRect().bottom,
     );
-    const first = workspace.querySelector('.dg-query-card-layout')!;
+    const first = workspace.querySelector('[data-asset-layout]')!;
     await expect(getComputedStyle(first).gridTemplateColumns.split(' ')).toHaveLength(1);
     await userEvent.click(canvas.getByRole('button', { name: 'Wide' }));
   },

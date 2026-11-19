@@ -1,3 +1,4 @@
+import './creative-studio.css';
 import { useEffect, useRef, useState } from 'react';
 import { RotateCcw } from 'lucide-react';
 import { ChatPanel, type ChatMessageData } from '../components/chat';

@@ -24,6 +24,7 @@ describe('Storybook example source', () => {
     const filename = fixture(`
 import { useState, useEffect } from 'react';
 import { Button, Modal } from './ui';
+import './demo.css';
 type Choice = { label: string };
 const choices: Choice[] = [{ label: 'First' }];
 function label(choice: Choice) { return choice.label; }
@@ -42,6 +43,7 @@ export const Story = { render: () => <Demo />, play: async () => {} };
     expect(source).toContain('const choices');
     expect(source).toContain('import { useState }');
     expect(source).toContain('import { Button }');
+    expect(source).toContain("import './demo.css';");
     expect(source).not.toMatch(/Unrelated|useEffect|Modal|play:/);
   });
 

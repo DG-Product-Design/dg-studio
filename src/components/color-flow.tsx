@@ -33,7 +33,10 @@ export function ColorFlow({
   return (
     <div
       {...props}
-      className={cn('dg-color-flow', className)}
+      className={cn(
+        'dg-color-flow relative isolate min-h-64 overflow-hidden rounded-2xl bg-(--dg-flow-from)',
+        className,
+      )}
       data-space={interpolation}
       data-dither={dither}
       data-paused={paused}
@@ -48,9 +51,14 @@ export function ColorFlow({
         } as CSSProperties
       }
     >
-      <div aria-hidden className="dg-color-field" />
-      <div aria-hidden className="dg-color-noise" />
-      <div className="dg-color-content">{children}</div>
+      <div aria-hidden className="dg-color-field absolute -inset-1/2 -z-2" />
+      <div
+        aria-hidden
+        className="dg-color-noise pointer-events-none absolute inset-0 -z-1 opacity-[0.08] mix-blend-soft-light"
+      />
+      <div className="relative p-[clamp(1.5rem,5vw,3rem)] text-[color:var(--dg-flow-foreground)]">
+        {children}
+      </div>
     </div>
   );
 }

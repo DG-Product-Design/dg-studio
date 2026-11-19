@@ -134,7 +134,7 @@ export async function verifyMarketplace({ page, story, audit }) {
 
   await story('feedback-toast--default');
   const height = await page
-    .locator('#storybook-root > .dg-theme')
+    .locator('#storybook-root > [data-theme]')
     .evaluate((el) => el.getBoundingClientRect().height);
 
   assert.ok(height < 400, `Compact canvas height ${height}`);

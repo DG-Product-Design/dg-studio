@@ -1,0 +1,8 @@
+@layer components {
+  /* Progressive enhancement: style-query support adds a dense toolbar rhythm. */
+  @container style(--dg-query-pad: .75rem) {
+    [data-asset-copy] {
+      --dg-query-copy-gap: 0.5rem;
+    }
+  }
+}

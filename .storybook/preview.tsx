@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { Preview } from '@storybook/react-vite';
 import { ThemeProvider, themes, type Theme } from '../src/components/theme';
-import '../src/styles.css';
+import './storybook.css';
 
 function StoryTheme({
   theme,

@@ -267,7 +267,7 @@ export function StaggerStudy({
         />
       </div>
       <PlaybackControls playback={playback} />
-      <div className="dg-stagger-stage rounded-xl border bg-muted/20 p-3 sm:p-4">
+      <div className="overflow-hidden rounded-xl border bg-muted/20 p-3 sm:p-4">
         <motion.ol
           aria-label="Animated artwork collection"
           aria-hidden={playback.target === 'closed'}

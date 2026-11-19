@@ -25,6 +25,12 @@ Run `npm run format` to apply ESLint fixes and Prettier, or `npm run format:chec
 
 Prettier handles two-space indentation, single-quoted JavaScript strings, semicolons, trailing commas, and a 100-column target. ESLint adds Airbnb-style separation after imports, around functions and type declarations, after blocks, and before returns, plus one variable declaration per statement. The repository's VS Code settings enable formatting and ESLint fixes on save with the recommended extensions installed.
 
+## Styling
+
+Use Tailwind utilities for layout, spacing, typography, surfaces, and interaction states. Keep custom CSS for effects that benefit from named rules: keyframes, masks, SVG drawing, and coordinated animation sequences. Component effect styles live beside their components and are imported into the components layer so utilities can override them.
+
+`src/styles.css` contains theme tokens, base styles, and the component CSS entry points. Its utility scan covers library components and helpers. Storybook adds example and story utilities through `.storybook/storybook.css`; demo-only CSS is imported by its owning example. The Holy albatross demo keeps its CSS recipe visible for teaching.
+
 ## Story source panels
 
 Stories that use an internal demo should expose that demo's implementation through `parameters.docs.source`. For shared files, import the source catalog with `?examples` and select the demo:
@@ -114,7 +120,7 @@ The stories explore D.G’s original animation and layout studies:
 - **Motion / Color flow** — changing background, with OKLCH interpolation, static noise to reduce visible banding, pause controls, and an sRGB comparison. Display bit depth and compression still influence banding.
 - **Navigation / Inset stepper** — recessed progress track, with sequential unlocking, revisitable steps, and completion marks.
 
-**Layout recipes / Container queries** demonstrates nested named containers, three card layouts, container-relative type, and density style queries. **Layout recipes / View transitions** demonstrates grid/list changes, keyed sorting/filtering, shared image/title navigation, keyboard focus restoration, and immediate updates when the API is unavailable or reduced motion is requested. These compositions stay in `src/examples/layout-recipes`. Holy albatross uses the `.dg-albatross`, `.dg-albatross-main`, and `.dg-albatross-aside` classes from `src/recipes.css`, included in the library stylesheet; it does not require a React component. Override `--dg-albatross-breakpoint` to change its 40rem threshold.
+**Layout recipes / Container queries** demonstrates nested named containers, three card layouts, container-relative type, and density style queries. **Layout recipes / View transitions** demonstrates grid/list changes, keyed sorting/filtering, shared image/title navigation, keyboard focus restoration, and immediate updates when the API is unavailable or reduced motion is requested. These compositions stay in `src/examples/layout-recipes`. Holy albatross uses the `.dg-albatross`, `.dg-albatross-main`, and `.dg-albatross-aside` classes from `src/examples/layout-recipes/holy-albatross.css`, loaded by that demo; it does not require a React component. Override `--dg-albatross-breakpoint` to change its 40rem threshold.
 
 The animation components honor reduced motion. Stories exercise selection, gating, checkboxes, disclosure state, responsive layouts, and navigation; unit tests cover native form behavior and transition failure/cleanup paths.
 

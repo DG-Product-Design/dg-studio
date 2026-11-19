@@ -302,7 +302,7 @@ export function MultiSelectField({
             aria-label={label}
             sideOffset={6}
             align="start"
-            className="dg-theme z-[70] w-80 max-w-[calc(100vw-2rem)] rounded-lg border p-5 shadow-xl"
+            className="bg-background text-foreground font-sans z-[70] w-80 max-w-[calc(100vw-2rem)] rounded-lg border p-5 shadow-xl"
           >
             <Checklist
               label={label}

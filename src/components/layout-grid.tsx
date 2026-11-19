@@ -29,7 +29,10 @@ export function Row({
     <div
       {...props}
       data-debug={debug || undefined}
-      className={cn('dg-row', className)}
+      className={cn(
+        'flex flex-wrap gap-(--dg-grid-gap) [--dg-columns:var(--dg-columns-mobile)] lg:[--dg-columns:var(--dg-columns-desktop)] data-[debug]:outline data-[debug]:outline-dashed data-[debug]:outline-primary data-[debug]:bg-primary/8',
+        className,
+      )}
       style={
         {
           '--dg-columns-mobile': mobile,
@@ -63,7 +66,10 @@ export function Column({
   return (
     <div
       {...props}
-      className={cn('dg-column min-w-0', className)}
+      className={cn(
+        'dg-column min-w-0 [--dg-span:var(--dg-span-mobile)] [--dg-offset:var(--dg-offset-mobile)] lg:[--dg-span:var(--dg-span-desktop)] lg:[--dg-offset:var(--dg-offset-desktop)] data-[fill]:flex-1 data-[debug]:outline data-[debug]:outline-dashed data-[debug]:outline-primary data-[debug]:bg-primary/8',
+        className,
+      )}
       data-fill={fill || undefined}
       data-debug={debug || undefined}
       style={
@@ -111,12 +117,15 @@ export function GridHelper({
         {visible && (
           <div
             aria-hidden
-            className="dg-grid-overlay pointer-events-none absolute inset-0 grid gap-4"
+            className="pointer-events-none absolute inset-0 grid grid-cols-12 gap-4 lg:grid-cols-16"
           >
             {Array.from({ length: 16 }, (_, i) => (
               <span
                 key={i}
-                className="border-x border-primary/40 bg-primary/10 text-center text-xs"
+                className={cn(
+                  'border-x border-primary/40 bg-primary/10 text-center text-xs',
+                  i >= 12 && 'hidden lg:block',
+                )}
               >
                 {i + 1}
               </span>

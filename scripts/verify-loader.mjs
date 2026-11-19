@@ -2,12 +2,14 @@ import assert from 'node:assert/strict';
 import { readFile, mkdir } from 'node:fs/promises';
 import { existsSync } from 'node:fs';
 import { createServer } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 import { chromium } from 'playwright';
 
 const vite = await createServer({
   configFile: false,
+  plugins: [tailwindcss()],
   server: { middlewareMode: true },
   appType: 'custom',
 });
@@ -25,7 +27,7 @@ try {
 
   const reference = await readFile('src/test/fixtures/marketplace-loader.html', 'utf8');
 
-  const css = await readFile('src/styles.css', 'utf8');
+  const { code: css } = await vite.transformRequest('/src/styles.css?direct');
   const chrome =
     process.env.CHROME_PATH || '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
 

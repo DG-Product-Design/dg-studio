@@ -63,6 +63,14 @@ export function extractExampleSources(filename: string): Record<string, string> 
       visit(statement);
       const snippets = source.statements.flatMap((node) => {
         if (selected.has(node)) return [node.getText(source)];
+        if (
+          ts.isImportDeclaration(node) &&
+          !node.importClause &&
+          /\.css$/.test((node.moduleSpecifier as ts.StringLiteral).text)
+        ) {
+          return [node.getText(source)];
+        }
+
         const names = ts.isImportDeclaration(node) ? imports.get(node) : undefined;
 
         if (!names || !ts.isImportDeclaration(node) || !node.importClause) return [];

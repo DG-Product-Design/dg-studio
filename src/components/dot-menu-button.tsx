@@ -40,7 +40,10 @@ export function DotMenuButton({
       {...props}
       type={props.type ?? 'button'}
       disabled={disabled}
-      className={cn('dg-dot-menu', className)}
+      className={cn(
+        'dg-dot-menu relative inline-grid size-12 shrink-0 cursor-pointer place-items-center rounded-lg border bg-card text-primary disabled:cursor-not-allowed disabled:opacity-50',
+        className,
+      )}
       data-open={expanded}
       aria-label={props['aria-label'] ?? (expanded ? 'Close menu' : 'Open menu')}
       aria-expanded={expanded}
@@ -64,8 +67,12 @@ export function DotMenuButton({
       }}
     >
       {[0, 1, 2].map((i) => (
-        <span key={i} aria-hidden className={`dg-menu-dot dg-menu-dot-${i}`}>
-          <span />
+        <span
+          key={i}
+          aria-hidden
+          className={`dg-menu-dot dg-menu-dot-${i} absolute top-1/2 left-1/2 -mt-0.5 -ml-3.5 flex h-1 w-7 justify-center`}
+        >
+          <span className="block size-1 rounded-full bg-current" />
         </span>
       ))}
     </button>

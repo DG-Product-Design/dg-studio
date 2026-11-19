@@ -74,7 +74,7 @@ try {
     await page.goto(
       `http://127.0.0.1:6007/iframe.html?id=${id}&viewMode=story&globals=theme:${theme};a11y.manual:!true`,
     );
-    await page.locator('#storybook-root .dg-theme').first().waitFor();
+    await page.locator('#storybook-root [data-theme]').first().waitFor();
     await page.waitForFunction(() => document.fonts.status === 'loaded');
   }
 
@@ -85,7 +85,7 @@ try {
 
   async function audit(label) {
     const scan = await new AxeBuilder({ page })
-      .include('.dg-theme')
+      .include('[data-theme]')
       .withTags(['wcag2a', 'wcag2aa', 'wcag21aa'])
       .analyze();
 
@@ -260,7 +260,7 @@ try {
     await story('ai-generation-status--updating-creative');
     assert.equal(
       await page
-        .locator('.dg-loader > span')
+        .locator('[data-generation-indicator] > span')
         .first()
         .evaluate((e) => getComputedStyle(e).animationName),
       'none',

@@ -1,3 +1,4 @@
+import './holy-albatross.css';
 import { useState } from 'react';
 import { ImageFade } from '../../components/image-fade';
 import { Button } from '../../components/ui/button';

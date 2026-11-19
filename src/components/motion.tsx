@@ -28,13 +28,18 @@ export function TotalOdometer({
       <span aria-hidden="true">
         {Array.from(formatted).map((char, i) =>
           /\d/.test(char) ? (
-            <span className="dg-digit" key={`${formatted.length - i}-digit`}>
+            <span
+              className="inline-block h-[1.15em] w-[0.64em] overflow-hidden align-bottom"
+              key={`${formatted.length - i}-digit`}
+            >
               <span
-                className="dg-digit-strip"
+                className="flex flex-col transition-transform duration-[650ms] ease-[cubic-bezier(0.16,1,0.3,1)]"
                 style={{ transform: `translateY(-${Number(char) * 10}%)` }}
               >
                 {Array.from({ length: 10 }, (_, n) => (
-                  <span key={n}>{n}</span>
+                  <span key={n} className="h-[1.15em] text-center leading-[1.15em]">
+                    {n}
+                  </span>
                 ))}
               </span>
             </span>
@@ -58,9 +63,17 @@ export function GenerationStatus({
       role="status"
       className={cn('flex items-center gap-3 text-sm text-muted-foreground', className)}
     >
-      <span aria-hidden="true" className="dg-loader grid size-5 shrink-0 grid-cols-3 gap-1">
+      <span
+        aria-hidden="true"
+        data-generation-indicator
+        className="grid size-5 shrink-0 grid-cols-3 gap-1"
+      >
         {Array.from({ length: 9 }, (_, i) => (
-          <span key={i} className="rounded-[2px] bg-primary" />
+          <span
+            key={i}
+            className="rounded-[2px] bg-primary animate-[dg-cube_1200ms_ease-in-out_infinite_alternate]"
+            style={{ animationDelay: `${-400 * ((i + 1) % 3)}ms` }}
+          />
         ))}
       </span>
       {label}

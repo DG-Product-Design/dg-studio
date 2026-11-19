@@ -24,16 +24,27 @@ export function AnimatedCheckbox({
   }, [indeterminate]);
 
   return (
-    <label htmlFor={providedId ?? generated} className={cn('dg-animated-checkbox', className)}>
+    <label
+      htmlFor={providedId ?? generated}
+      className={cn(
+        'dg-animated-checkbox relative flex cursor-pointer items-start gap-3 leading-normal [--dg-checkbox-accent:#f47c28] has-disabled:cursor-not-allowed has-disabled:opacity-50',
+        className,
+      )}
+    >
       <input
         {...props}
         ref={ref}
         id={providedId ?? generated}
         type="checkbox"
+        className="absolute top-0.5 left-0 size-5 opacity-0"
         aria-checked={indeterminate ? 'mixed' : props['aria-checked']}
       />
-      <span aria-hidden className="dg-checkbox-box">
+      <span
+        aria-hidden
+        className="dg-checkbox-box relative mt-0.5 size-5 basis-5 shrink-0 rounded-[4px] border-2 text-[#241d39] transition-colors duration-200"
+      >
         <svg
+          className="relative size-full"
           viewBox="0 0 20 20"
           fill="none"
           stroke="currentColor"
@@ -45,7 +56,7 @@ export function AnimatedCheckbox({
           <path className="dg-checkbox-mixed" d="M4 10h12" />
         </svg>
       </span>
-      <span className="dg-checkbox-label">{label}</span>
+      <span>{label}</span>
     </label>
   );
 }

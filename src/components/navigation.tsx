@@ -125,7 +125,7 @@ export function Tooltip({ children, content }: { children: ReactElement; content
           <TooltipPrimitive.Content
             data-theme={theme}
             sideOffset={6}
-            className="dg-theme z-[90] max-w-xs rounded-md border px-3 py-2 text-xs shadow-lg"
+            className="bg-background text-foreground font-sans z-[90] max-w-xs rounded-md border px-3 py-2 text-xs shadow-lg"
           >
             {content}
             <TooltipPrimitive.Arrow className="fill-border" />
@@ -156,7 +156,7 @@ export function Popover({
           data-theme={theme}
           aria-labelledby={id}
           sideOffset={8}
-          className="dg-theme z-[70] w-80 max-w-[calc(100vw-2rem)] rounded-xl border p-5 shadow-xl"
+          className="bg-background text-foreground font-sans z-[70] w-80 max-w-[calc(100vw-2rem)] rounded-xl border p-5 shadow-xl"
         >
           <h2 id={id} className="mb-3 pr-7 font-semibold">
             {title}

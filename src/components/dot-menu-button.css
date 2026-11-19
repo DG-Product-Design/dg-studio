@@ -1,0 +1,34 @@
+.dg-menu-dot {
+  transform: translateY(var(--dg-dot-offset, 0px));
+  transition: transform 240ms ease 240ms;
+}
+.dg-menu-dot-0 {
+  --dg-dot-offset: -10px;
+  --dg-dot-rotation: 45deg;
+}
+.dg-menu-dot-2 {
+  --dg-dot-offset: 10px;
+  --dg-dot-rotation: -45deg;
+}
+.dg-menu-dot > span {
+  rotate: 0deg;
+  transition:
+    width 240ms ease,
+    rotate 240ms ease;
+}
+.dg-dot-menu[data-open='true'] .dg-menu-dot {
+  transform: translateY(0);
+  transition-delay: 0ms;
+}
+.dg-dot-menu[data-open='true'] .dg-menu-dot:not(.dg-menu-dot-1) > span {
+  width: 28px;
+  rotate: var(--dg-dot-rotation);
+  transition-delay: 240ms;
+}
+.dg-menu-dot-1 {
+  transition: opacity 100ms ease 240ms;
+}
+.dg-dot-menu[data-open='true'] .dg-menu-dot-1 {
+  opacity: 0;
+  transition-delay: 240ms;
+}

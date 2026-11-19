@@ -1,3 +1,4 @@
+import './transition-gallery.css';
 import { useEffect, useId, useRef, useState, type CSSProperties } from 'react';
 import { flushSync } from 'react-dom';
 import { Button } from '../../components/ui/button';
@@ -99,7 +100,7 @@ export function TransitionGallery({ forceFallback = false }: { forceFallback?: b
   const shown = reverse ? [...filtered].reverse() : filtered;
 
   return (
-    <main className="dg-view-gallery mx-auto max-w-5xl space-y-6" aria-busy={busy}>
+    <main data-view-gallery className="mx-auto max-w-5xl space-y-6" aria-busy={busy}>
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold">Artwork in motion</h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
@@ -108,7 +109,7 @@ export function TransitionGallery({ forceFallback = false }: { forceFallback?: b
         </p>
       </header>
       {selected ? (
-        <section className="dg-gallery-detail">
+        <section className="grid justify-items-start gap-6">
           <Button
             variant="outline"
             disabled={busy}
@@ -122,8 +123,9 @@ export function TransitionGallery({ forceFallback = false }: { forceFallback?: b
           >
             Back to collection
           </Button>
-          <div className="dg-gallery-detail-layout">
+          <div className="grid w-full items-center gap-8 sm:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
             <img
+              className="w-full max-h-120 rounded-lg bg-muted object-contain"
               src={selected.src}
               alt={selected.alt}
               width={selected.width}
@@ -203,7 +205,14 @@ export function TransitionGallery({ forceFallback = false }: { forceFallback?: b
               )}
             />
           </div>
-          <div className={cn('dg-gallery-items', layout === 'list' && 'dg-gallery-list')}>
+          <div
+            className={cn(
+              'grid gap-4',
+              layout === 'list'
+                ? 'grid-cols-1'
+                : 'grid-cols-[repeat(auto-fit,minmax(min(100%,15rem),1fr))]',
+            )}
+          >
             {shown.map((asset) => (
               <button
                 key={asset.id}
@@ -213,7 +222,10 @@ export function TransitionGallery({ forceFallback = false }: { forceFallback?: b
                 }}
                 disabled={busy}
                 type="button"
-                className="dg-gallery-item"
+                className={cn(
+                  'overflow-hidden rounded-lg border bg-card text-left',
+                  layout === 'list' && 'grid grid-cols-[7rem_minmax(0,1fr)] items-center',
+                )}
                 onClick={() =>
                   change(
                     () => setSelected(asset),
@@ -222,13 +234,17 @@ export function TransitionGallery({ forceFallback = false }: { forceFallback?: b
                 }
               >
                 <img
+                  className={cn(
+                    'block w-full bg-muted object-contain',
+                    layout === 'list' ? 'h-24' : 'h-56',
+                  )}
                   src={asset.src}
                   alt=""
                   width={asset.width}
                   height={asset.height}
                   style={shared(asset, 'image')}
                 />
-                <span className="dg-gallery-caption">
+                <span className="flex flex-col gap-2 p-4">
                   <span className="sr-only">Open </span>
                   <span className="font-semibold" style={shared(asset, 'title')}>
                     {asset.title}

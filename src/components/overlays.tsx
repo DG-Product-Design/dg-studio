@@ -55,10 +55,10 @@ export function Modal({
             }
           }}
           className={cn(
-            'dg-theme fixed z-50 flex flex-col border border-border bg-card shadow-2xl',
+            'bg-background text-foreground font-sans fixed z-50 flex flex-col border border-border bg-card shadow-2xl',
             side
-              ? 'dg-panel inset-y-0 right-0 w-full max-w-md'
-              : 'dg-modal top-1/2 left-1/2 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl',
+              ? 'inset-y-0 right-0 w-full max-w-md data-[state=open]:animate-[dg-slide_240ms_cubic-bezier(0.16,1,0.3,1)]'
+              : 'data-[state=open]:animate-[dg-appear_180ms_ease-out] top-1/2 left-1/2 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl',
             className,
           )}
         >

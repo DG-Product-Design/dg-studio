@@ -250,7 +250,7 @@ export async function verifyPlanned({ page, context, story, audit }) {
   await page.goto('http://127.0.0.1:6007/?path=/docs/feedback-toast--docs');
   const docs = page
     .frameLocator('#storybook-preview-iframe')
-    .locator('.docs-story .dg-theme')
+    .locator('.docs-story [data-theme]')
     .first();
 
   await docs.waitFor();

@@ -1,0 +1,87 @@
+@property --dg-glow-angle {
+  syntax: '<angle>';
+  inherits: true;
+  initial-value: 230deg;
+}
+.dg-glow-border {
+  --dg-glow-angle: 230deg;
+  --dg-glow-opacity: var(--dg-glow-idle, 0);
+}
+.dg-glow-border::after,
+.dg-glow-halo::before {
+  content: '';
+  position: absolute;
+  pointer-events: none;
+  inset: -1px;
+  z-index: 2;
+  border-radius: inherit;
+  padding: var(--dg-glow-width, 1.5px);
+  background: conic-gradient(
+    from var(--dg-glow-angle),
+    transparent 0deg,
+    var(--primary) calc(var(--dg-glow-spread) * 0.3),
+    var(--secondary) calc(var(--dg-glow-spread) * 0.65),
+    transparent var(--dg-glow-spread)
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  opacity: var(--dg-glow-opacity);
+  transition: opacity 1s ease;
+}
+.dg-glow-halo {
+  filter: blur(var(--dg-glow-blur, 10px));
+}
+.dg-glow-halo::before {
+  inset: 0;
+  padding: 4px;
+}
+.dg-glow-border:focus-within::after,
+.dg-glow-border:focus-within > .dg-glow-halo::before {
+  opacity: 1;
+}
+.dg-glow-group[data-glow-disabled] .dg-glow-border::after,
+.dg-glow-group[data-glow-disabled] .dg-glow-halo {
+  display: none;
+}
+@keyframes dg-glow-orbit {
+  to {
+    --dg-glow-angle: 590deg;
+  }
+}
+@media (hover: none) and (prefers-reduced-motion: no-preference) {
+  .dg-glow-border {
+    animation: dg-glow-orbit 15s linear infinite;
+    --dg-glow-opacity: 0.85;
+  }
+  .dg-glow-border:nth-child(2n) {
+    animation-delay: -5s;
+  }
+}
+/* The explicit orbit mode uses the same motion as a touch device. */
+@media (prefers-reduced-motion: no-preference) {
+  .dg-glow-group[data-glow-mode='orbit'] .dg-glow-border {
+    animation: dg-glow-orbit 15s linear infinite;
+    --dg-glow-opacity: 0.85;
+  }
+  .dg-glow-group[data-glow-mode='orbit'] .dg-glow-border:nth-child(2n) {
+    animation-delay: -5s;
+  }
+}
+.dg-glow-group[data-glow-disabled] .dg-glow-border {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .dg-glow-border {
+    animation: none;
+  }
+  .dg-glow-halo {
+    display: none;
+  }
+  .dg-glow-border::after {
+    background: linear-gradient(125deg, var(--primary), var(--secondary), var(--primary));
+    opacity: 0.75;
+    transition: none;
+  }
+}
