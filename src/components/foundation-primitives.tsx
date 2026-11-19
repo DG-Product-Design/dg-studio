@@ -5,55 +5,49 @@ import {
   type ErrorInfo,
   type HTMLAttributes,
   type ReactNode,
-} from "react";
-import { ArrowRight } from "lucide-react";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
-import { Banner, type FeedbackTone } from "./feedback";
-import { cn } from "../lib/utils";
+} from 'react';
+import { ArrowRight } from 'lucide-react';
+import { Button } from './ui/button';
+import { Badge } from './ui/badge';
+import { Banner, type FeedbackTone } from './feedback';
+import { cn } from '../lib/utils';
+
 export function Heading({
   level = 2,
   className,
   ...props
 }: HTMLAttributes<HTMLHeadingElement> & { level?: 1 | 2 | 3 | 4 | 5 | 6 }) {
-  const Tag = `h${level}` as "h1";
+  const Tag = `h${level}` as 'h1';
+
   return (
     <Tag
       {...props}
       className={cn(
-        "font-semibold tracking-tight",
-        level === 1
-          ? "text-3xl"
-          : level === 2
-            ? "text-2xl"
-            : level === 3
-              ? "text-xl"
-              : "text-base",
+        'font-semibold tracking-tight',
+        level === 1 ? 'text-3xl' : level === 2 ? 'text-2xl' : level === 3 ? 'text-xl' : 'text-base',
         className,
       )}
     />
   );
 }
+
 export function Text({
-  as: Tag = "p",
+  as: Tag = 'p',
   muted = false,
   className,
   ...props
 }: HTMLAttributes<HTMLElement> & {
-  as?: "p" | "span" | "strong" | "em";
+  as?: 'p' | 'span' | 'strong' | 'em';
   muted?: boolean;
 }) {
   return (
     <Tag
       {...props}
-      className={cn(
-        "text-sm leading-relaxed",
-        muted && "text-muted-foreground",
-        className,
-      )}
+      className={cn('text-sm leading-relaxed', muted && 'text-muted-foreground', className)}
     />
   );
 }
+
 export function Link({
   className,
   target,
@@ -64,101 +58,77 @@ export function Link({
     <a
       {...props}
       target={target}
-      rel={rel ?? (target === "_blank" ? "noopener noreferrer" : undefined)}
-      className={cn(
-        "rounded text-primary underline underline-offset-4",
-        className,
-      )}
+      rel={rel ?? (target === '_blank' ? 'noopener noreferrer' : undefined)}
+      className={cn('rounded text-primary underline underline-offset-4', className)}
     />
   );
 }
+
 export function List({
   ordered = false,
   children,
   className,
   ...props
 }: HTMLAttributes<HTMLOListElement> & { ordered?: boolean }) {
-  const Tag = ordered ? "ol" : "ul";
+  const Tag = ordered ? 'ol' : 'ul';
+
   return (
     <Tag
       {...props}
-      className={cn(
-        "space-y-2 pl-6 text-sm",
-        ordered ? "list-decimal" : "list-disc",
-        className,
-      )}
+      className={cn('space-y-2 pl-6 text-sm', ordered ? 'list-decimal' : 'list-disc', className)}
     >
       {children}
     </Tag>
   );
 }
-export function CountBadge({
-  count,
-  tone = "info",
-}: {
-  count: number;
-  tone?: FeedbackTone;
-}) {
+
+export function CountBadge({ count, tone = 'info' }: { count: number; tone?: FeedbackTone }) {
   return (
     <Badge
       variant="outline"
       className={cn(
-        "tabular-nums",
-        tone === "danger"
-          ? "text-destructive"
-          : tone === "success"
-            ? "text-success"
-            : tone === "warning"
-              ? "text-warning"
-              : "text-primary",
+        'tabular-nums',
+        tone === 'danger'
+          ? 'text-destructive'
+          : tone === 'success'
+            ? 'text-success'
+            : tone === 'warning'
+              ? 'text-warning'
+              : 'text-primary',
       )}
     >
       {new Intl.NumberFormat().format(count)}
     </Badge>
   );
 }
-export function Activity({
-  status = "inactive",
-}: {
-  status?: "active" | "inactive" | "pending";
-}) {
+
+export function Activity({ status = 'inactive' }: { status?: 'active' | 'inactive' | 'pending' }) {
   return (
     <span className="inline-flex items-center gap-2 text-xs">
       <span
         aria-hidden
         className={cn(
-          "size-2 rounded-full",
-          status === "active"
-            ? "bg-success"
-            : status === "pending"
-              ? "bg-warning"
-              : "bg-muted-foreground",
+          'size-2 rounded-full',
+          status === 'active'
+            ? 'bg-success'
+            : status === 'pending'
+              ? 'bg-warning'
+              : 'bg-muted-foreground',
         )}
       />
-      {status === "active"
-        ? "Active"
-        : status === "pending"
-          ? "Pending"
-          : "Inactive"}
+      {status === 'active' ? 'Active' : status === 'pending' ? 'Pending' : 'Inactive'}
     </span>
   );
 }
-export function Flag({
-  children,
-  tone = "danger",
-}: {
-  children: ReactNode;
-  tone?: FeedbackTone;
-}) {
+
+export function Flag({ children, tone = 'danger' }: { children: ReactNode; tone?: FeedbackTone }) {
   return (
-    <Banner
-      title={typeof children === "string" ? children : "Notice"}
-      tone={tone}
-    >
-      {typeof children === "string" ? undefined : children}
+    <Banner title={typeof children === 'string' ? children : 'Notice'} tone={tone}>
+      {typeof children === 'string' ? undefined : children}
     </Banner>
   );
 }
+
 export function LogoMark({ size = 40 }: { size?: number }) {
   return (
     <svg aria-hidden viewBox="0 0 64 64" width={size} height={size}>
@@ -176,11 +146,12 @@ export function LogoMark({ size = 40 }: { size?: number }) {
     </svg>
   );
 }
+
 export function Logo({
-  href = "/",
+  href = '/',
   collapsed = false,
   src,
-  alt = "D.G Studio home",
+  alt = 'D.G Studio home',
 }: {
   href?: string;
   collapsed?: boolean;
@@ -193,15 +164,12 @@ export function Logo({
       aria-label={collapsed ? alt : undefined}
       className="inline-flex items-center gap-3 rounded"
     >
-      {src ? (
-        <img src={src} alt="" className="size-10 object-contain" />
-      ) : (
-        <LogoMark />
-      )}
+      {src ? <img src={src} alt="" className="size-10 object-contain" /> : <LogoMark />}
       {!collapsed && <span className="font-semibold">D.G Studio</span>}
     </a>
   );
 }
+
 export function CardNextButton({
   title,
   description,
@@ -232,6 +200,7 @@ export function CardNextButton({
     </button>
   );
 }
+
 export function InputRegion({
   label,
   children,
@@ -244,6 +213,7 @@ export function InputRegion({
   error?: string;
 }) {
   const id = useId();
+
   return (
     <fieldset
       disabled={disabled}
@@ -260,29 +230,22 @@ export function InputRegion({
     </fieldset>
   );
 }
-export function FormHeader({
-  title,
-  description,
-}: {
-  title: string;
-  description?: string;
-}) {
+
+export function FormHeader({ title, description }: { title: string; description?: string }) {
   return (
     <div className="space-y-2">
       <h2 className="text-xl font-semibold">{title}</h2>
       {description && (
-        <p className="text-sm leading-relaxed text-muted-foreground">
-          {description}
-        </p>
+        <p className="text-sm leading-relaxed text-muted-foreground">{description}</p>
       )}
     </div>
   );
 }
+
 export function FormNote({ children }: { children: ReactNode }) {
-  return (
-    <p className="text-xs leading-relaxed text-muted-foreground">{children}</p>
-  );
+  return <p className="text-xs leading-relaxed text-muted-foreground">{children}</p>;
 }
+
 export class ErrorBoundary extends Component<
   {
     children: ReactNode;
@@ -295,9 +258,11 @@ export class ErrorBoundary extends Component<
   static getDerivedStateFromError(error: Error) {
     return { error };
   }
+
   componentDidCatch(error: Error, info: ErrorInfo) {
     this.props.onError?.(error, info);
   }
+
   render() {
     return this.state.error
       ? (this.props.fallback ?? (
@@ -305,10 +270,7 @@ export class ErrorBoundary extends Component<
             title="This view couldn’t load"
             tone="danger"
             action={
-              <Button
-                type="button"
-                onClick={() => this.setState({ error: null })}
-              >
+              <Button type="button" onClick={() => this.setState({ error: null })}>
                 Try again
               </Button>
             }
@@ -319,6 +281,7 @@ export class ErrorBoundary extends Component<
       : this.props.children;
   }
 }
+
 export function ScannableCode({
   src,
   alt,

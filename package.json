@@ -24,14 +24,16 @@
     "build-storybook": "storybook build",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "format": "prettier --write src .storybook .github scripts docs *.md *.json *.ts",
-    "format:check": "prettier --check src .storybook .github scripts docs *.md *.json *.ts",
+    "format": "npm run lint:fix && prettier --write .",
+    "format:check": "prettier --check . && npm run lint",
     "test:unit": "vitest run --project=unit",
     "test:stories": "vitest run --project=storybook",
     "test:watch": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:e2e": "node scripts/verify.mjs",
-    "test:loader": "node scripts/verify-loader.mjs"
+    "test:loader": "node scripts/verify-loader.mjs",
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix --max-warnings 0"
   },
   "peerDependencies": {
     "react": "^19.0.0",
@@ -53,6 +55,7 @@
     "@storybook/addon-docs": "10.6.7",
     "@storybook/addon-vitest": "10.6.7",
     "@storybook/react-vite": "10.6.7",
+    "@stylistic/eslint-plugin": "^6.0.1",
     "@tailwindcss/vite": "^4.1.5",
     "@testing-library/jest-dom": "6.9.1",
     "@testing-library/react": "16.3.0",
@@ -60,9 +63,12 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
+    "@typescript-eslint/parser": "^8.73.0",
     "@vitejs/plugin-react": "^5.0.0",
     "@vitest/browser-playwright": "4.1.12",
     "@vitest/coverage-v8": "4.1.12",
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
     "jsdom": "26.1.0",
     "playwright": "^1.56.0",
     "prettier": "^3.10.1",
@@ -75,6 +81,6 @@
     "vitest": "4.1.12"
   },
   "engines": {
-    "node": ">=22.12.0"
+    "node": ">=22.13.0"
   }
 }

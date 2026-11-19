@@ -1,33 +1,37 @@
-import { useEffect, useId, useRef, useState, type CSSProperties } from "react";
-import { flushSync } from "react-dom";
-import { Button } from "../../components/ui/button";
-import { SelectField } from "../../components/fields";
-import { assets } from "../assets";
-import { cn } from "../../lib/utils";
+import './transition-gallery.css';
+import { useEffect, useId, useRef, useState, type CSSProperties } from 'react';
+import { flushSync } from 'react-dom';
+import { Button } from '../../components/ui/button';
+import { SelectField } from '../../components/fields';
+import { assets } from '../assets';
+import { cn } from '../../lib/utils';
+
 type Asset = (typeof assets)[number];
-export function TransitionGallery({
-  forceFallback = false,
-}: {
-  forceFallback?: boolean;
-}) {
-  const [selected, setSelected] = useState<Asset | null>(null),
-    [layout, setLayout] = useState<"grid" | "list">("grid"),
-    [reverse, setReverse] = useState(false),
-    [collection, setCollection] = useState("All"),
-    [busy, setBusy] = useState(false);
-  const active = useRef<ViewTransition | null>(null),
-    locked = useRef(false),
-    mounted = useRef(true);
-  const heading = useRef<HTMLHeadingElement>(null),
-    buttons = useRef(new Map<string, HTMLButtonElement>());
-  const prefix = `gallery-${useId().replace(/[^a-zA-Z0-9]/g, "")}`;
+
+export function TransitionGallery({ forceFallback = false }: { forceFallback?: boolean }) {
+  const [selected, setSelected] = useState<Asset | null>(null);
+  const [layout, setLayout] = useState<'grid' | 'list'>('grid');
+  const [reverse, setReverse] = useState(false);
+  const [collection, setCollection] = useState('All');
+  const [busy, setBusy] = useState(false);
+
+  const active = useRef<ViewTransition | null>(null);
+  const locked = useRef(false);
+  const mounted = useRef(true);
+
+  const heading = useRef<HTMLHeadingElement>(null);
+  const buttons = useRef(new Map<string, HTMLButtonElement>());
+
+  const prefix = `gallery-${useId().replace(/[^a-zA-Z0-9]/g, '')}`;
   useEffect(() => {
     mounted.current = true;
+
     return () => {
       mounted.current = false;
       active.current?.skipTransition();
     };
   }, []);
+
   function change(update: () => void, focus?: () => void) {
     if (locked.current) return;
     const previousFocus = document.activeElement;
@@ -37,18 +41,22 @@ export function TransitionGallery({
         if (previousFocus instanceof HTMLElement && previousFocus.isConnected)
           previousFocus.focus({ preventScroll: true });
       });
+
     const commit = () => {
       flushSync(update);
     };
+
     if (
       forceFallback ||
       !document.startViewTransition ||
-      window.matchMedia("(prefers-reduced-motion: reduce)").matches
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches
     ) {
       commit();
       restoreFocus();
+
       return;
     }
+
     locked.current = true;
     setBusy(true);
     let committed = false;
@@ -59,6 +67,7 @@ export function TransitionGallery({
           commit();
         }
       });
+
       active.current = transition;
       void transition.ready.catch(() => {});
       void transition.finished
@@ -78,30 +87,29 @@ export function TransitionGallery({
       restoreFocus();
     }
   }
+
   function shared(asset: Asset, kind: string): CSSProperties {
     return {
       viewTransitionName: `${prefix}-${kind}-${asset.id}`,
       viewTransitionClass: `dg-gallery-${kind}`,
     } as CSSProperties;
   }
-  const filtered = assets.filter(
-    (a) => collection === "All" || a.collection === collection,
-  );
+
+  const filtered = assets.filter((a) => collection === 'All' || a.collection === collection);
+
   const shown = reverse ? [...filtered].reverse() : filtered;
+
   return (
-    <main
-      className="dg-view-gallery mx-auto max-w-5xl space-y-6"
-      aria-busy={busy}
-    >
+    <main data-view-gallery className="mx-auto max-w-5xl space-y-6" aria-busy={busy}>
       <header className="space-y-2">
         <h1 className="text-2xl font-semibold">Artwork in motion</h1>
         <p className="max-w-2xl text-sm text-muted-foreground">
-          Change the layout, reorder the collection, or open an artwork. Images
-          and titles keep their identity as they move into a new view.
+          Change the layout, reorder the collection, or open an artwork. Images and titles keep
+          their identity as they move into a new view.
         </p>
       </header>
       {selected ? (
-        <section className="dg-gallery-detail">
+        <section className="grid justify-items-start gap-6">
           <Button
             variant="outline"
             disabled={busy}
@@ -115,20 +123,21 @@ export function TransitionGallery({
           >
             Back to collection
           </Button>
-          <div className="dg-gallery-detail-layout">
+          <div className="grid w-full items-center gap-8 sm:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)]">
             <img
+              className="w-full max-h-120 rounded-lg bg-muted object-contain"
               src={selected.src}
               alt={selected.alt}
               width={selected.width}
               height={selected.height}
-              style={shared(selected, "image")}
+              style={shared(selected, 'image')}
             />
             <div className="space-y-5">
               <h2
                 ref={heading}
                 tabIndex={-1}
                 className="text-3xl font-semibold"
-                style={shared(selected, "title")}
+                style={shared(selected, 'title')}
               >
                 {selected.title}
               </h2>
@@ -147,10 +156,7 @@ export function TransitionGallery({
               </dl>
               <div className="flex flex-wrap gap-2">
                 {selected.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="rounded-full bg-muted px-3 py-1 text-xs"
-                  >
+                  <span key={tag} className="rounded-full bg-muted px-3 py-1 text-xs">
                     {tag}
                   </span>
                 ))}
@@ -161,20 +167,16 @@ export function TransitionGallery({
       ) : (
         <>
           <div className="flex flex-wrap items-center gap-3">
-            <div
-              aria-label="Gallery layout"
-              role="group"
-              className="flex gap-2"
-            >
-              {(["grid", "list"] as const).map((mode) => (
+            <div aria-label="Gallery layout" role="group" className="flex gap-2">
+              {(['grid', 'list'] as const).map((mode) => (
                 <Button
                   key={mode}
                   disabled={busy}
-                  variant={mode === layout ? "secondary" : "outline"}
+                  variant={mode === layout ? 'secondary' : 'outline'}
                   aria-pressed={mode === layout}
                   onClick={() => change(() => setLayout(mode))}
                 >
-                  {mode === "grid" ? "Grid" : "List"}
+                  {mode === 'grid' ? 'Grid' : 'List'}
                 </Button>
               ))}
             </div>
@@ -195,21 +197,20 @@ export function TransitionGallery({
                 change(
                   () => setCollection(value),
                   () =>
-                    document
-                      .getElementById(`${prefix}-collection`)
-                      ?.focus({ preventScroll: true }),
+                    document.getElementById(`${prefix}-collection`)?.focus({ preventScroll: true }),
                 )
               }
-              options={[
-                "All",
-                ...new Set(assets.map((asset) => asset.collection)),
-              ].map((value) => ({ value, label: value }))}
+              options={['All', ...new Set(assets.map((asset) => asset.collection))].map(
+                (value) => ({ value, label: value }),
+              )}
             />
           </div>
           <div
             className={cn(
-              "dg-gallery-items",
-              layout === "list" && "dg-gallery-list",
+              'grid gap-4',
+              layout === 'list'
+                ? 'grid-cols-1'
+                : 'grid-cols-[repeat(auto-fit,minmax(min(100%,15rem),1fr))]',
             )}
           >
             {shown.map((asset) => (
@@ -221,7 +222,10 @@ export function TransitionGallery({
                 }}
                 disabled={busy}
                 type="button"
-                className="dg-gallery-item"
+                className={cn(
+                  'overflow-hidden rounded-lg border bg-card text-left',
+                  layout === 'list' && 'grid grid-cols-[7rem_minmax(0,1fr)] items-center',
+                )}
                 onClick={() =>
                   change(
                     () => setSelected(asset),
@@ -230,30 +234,27 @@ export function TransitionGallery({
                 }
               >
                 <img
+                  className={cn(
+                    'block w-full bg-muted object-contain',
+                    layout === 'list' ? 'h-24' : 'h-56',
+                  )}
                   src={asset.src}
                   alt=""
                   width={asset.width}
                   height={asset.height}
-                  style={shared(asset, "image")}
+                  style={shared(asset, 'image')}
                 />
-                <span className="dg-gallery-caption">
+                <span className="flex flex-col gap-2 p-4">
                   <span className="sr-only">Open </span>
-                  <span
-                    className="font-semibold"
-                    style={shared(asset, "title")}
-                  >
+                  <span className="font-semibold" style={shared(asset, 'title')}>
                     {asset.title}
                   </span>
-                  <span className="text-sm text-muted-foreground">
-                    {asset.collection}
-                  </span>
+                  <span className="text-sm text-muted-foreground">{asset.collection}</span>
                 </span>
               </button>
             ))}
           </div>
-          <p className="text-xs text-muted-foreground">
-            {shown.length} artworks
-          </p>
+          <p className="text-xs text-muted-foreground">{shown.length} artworks</p>
         </>
       )}
     </main>

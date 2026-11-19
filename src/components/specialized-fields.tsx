@@ -1,28 +1,25 @@
-import { useId, useState, type ComponentProps, type ReactNode } from "react";
-import { Check, Minus } from "lucide-react";
-import {
-  TextField,
-  SelectField,
-  RadioCards,
-  Checklist,
-  type SelectOption,
-} from "./fields";
-import { SearchSelect } from "./advanced-fields";
-import { Textarea } from "./ui/textarea";
-import { Button } from "./ui/button";
-import { Banner } from "./feedback";
+import { useId, useState, type ComponentProps, type ReactNode } from 'react';
+import { Check, Minus } from 'lucide-react';
+import { TextField, SelectField, RadioCards, Checklist, type SelectOption } from './fields';
+import { SearchSelect } from './advanced-fields';
+import { Textarea } from './ui/textarea';
+import { Button } from './ui/button';
+import { Banner } from './feedback';
+
 export interface PasswordRule {
   label: string;
   test: (value: string) => boolean;
 }
+
 export const defaultPasswordRules: PasswordRule[] = [
-  { label: "At least 12 characters", test: (v) => v.length >= 12 },
+  { label: 'At least 12 characters', test: (v) => v.length >= 12 },
   {
-    label: "An uppercase and lowercase letter",
+    label: 'An uppercase and lowercase letter',
     test: (v) => /[A-Z]/.test(v) && /[a-z]/.test(v),
   },
-  { label: "A number", test: (v) => /\d/.test(v) },
+  { label: 'A number', test: (v) => /\d/.test(v) },
 ];
+
 export function PasswordHelper({
   value,
   rules = defaultPasswordRules,
@@ -35,12 +32,13 @@ export function PasswordHelper({
       {rules.map((rule) => {
         const met = rule.test(value);
         const Icon = met ? Check : Minus;
+
         return (
           <li key={rule.label} className="flex gap-2">
             <Icon aria-hidden className="size-4 shrink-0" />
             <span>
               {rule.label}
-              <span className="sr-only">{met ? " — met" : " — not met"}</span>
+              <span className="sr-only">{met ? ' — met' : ' — not met'}</span>
             </span>
           </li>
         );
@@ -48,6 +46,7 @@ export function PasswordHelper({
     </ul>
   );
 }
+
 export function PasswordToggle({
   visible,
   onToggle,
@@ -61,37 +60,36 @@ export function PasswordToggle({
       variant="ghost"
       size="sm"
       aria-pressed={visible}
-      aria-label={visible ? "Hide password" : "Show password"}
+      aria-label={visible ? 'Hide password' : 'Show password'}
       onClick={() => onToggle(!visible)}
     >
-      {visible ? "Hide" : "Show"}
+      {visible ? 'Hide' : 'Show'}
     </Button>
   );
 }
+
 export function PasswordField({
   rules,
   showRequirements = false,
   ...props
-}: Omit<ComponentProps<typeof TextField>, "type" | "trailingAction"> & {
+}: Omit<ComponentProps<typeof TextField>, 'type' | 'trailingAction'> & {
   rules?: PasswordRule[];
   showRequirements?: boolean;
 }) {
   const [visible, setVisible] = useState(false);
+
   return (
     <div className="space-y-3">
       <TextField
         {...props}
-        type={visible ? "text" : "password"}
-        trailingAction={
-          <PasswordToggle visible={visible} onToggle={setVisible} />
-        }
+        type={visible ? 'text' : 'password'}
+        trailingAction={<PasswordToggle visible={visible} onToggle={setVisible} />}
       />
-      {showRequirements && (
-        <PasswordHelper value={String(props.value ?? "")} rules={rules} />
-      )}
+      {showRequirements && <PasswordHelper value={String(props.value ?? '')} rules={rules} />}
     </div>
   );
 }
+
 export function TextareaField({
   label,
   hint,
@@ -100,7 +98,7 @@ export function TextareaField({
   onChange,
   maxLength = 500,
   ...props
-}: Omit<ComponentProps<typeof Textarea>, "value" | "onChange"> & {
+}: Omit<ComponentProps<typeof Textarea>, 'value' | 'onChange'> & {
   label: string;
   hint?: string;
   error?: string;
@@ -108,6 +106,7 @@ export function TextareaField({
   onChange: (value: string) => void;
 }) {
   const id = useId();
+
   return (
     <div className="space-y-2">
       <label htmlFor={props.id ?? id} className="text-sm font-medium">
@@ -122,13 +121,8 @@ export function TextareaField({
         aria-invalid={!!error}
         aria-describedby={`${id}-note`}
       />
-      <div
-        id={`${id}-note`}
-        className="flex justify-between gap-3 text-xs text-muted-foreground"
-      >
-        <span className={error ? "text-destructive" : undefined}>
-          {error ?? hint}
-        </span>
+      <div id={`${id}-note`} className="flex justify-between gap-3 text-xs text-muted-foreground">
+        <span className={error ? 'text-destructive' : undefined}>{error ?? hint}</span>
         <span>
           {value.length}/{maxLength}
         </span>
@@ -136,21 +130,22 @@ export function TextareaField({
     </div>
   );
 }
-export function DatePicker(
-  props: Omit<ComponentProps<typeof TextField>, "type">,
-) {
+
+export function DatePicker(props: Omit<ComponentProps<typeof TextField>, 'type'>) {
   return <TextField {...props} type="date" />;
 }
-export function Phone(props: Omit<ComponentProps<typeof TextField>, "type">) {
+
+export function Phone(props: Omit<ComponentProps<typeof TextField>, 'type'>) {
   return (
     <TextField
       {...props}
       type="tel"
       autoComplete="tel"
-      placeholder={props.placeholder ?? "+1 602 555 0123"}
+      placeholder={props.placeholder ?? '+1 602 555 0123'}
     />
   );
 }
+
 export interface AddressValue {
   street: string;
   street2: string;
@@ -159,14 +154,16 @@ export interface AddressValue {
   postalCode: string;
   country: string;
 }
+
 export const emptyAddress: AddressValue = {
-  street: "",
-  street2: "",
-  city: "",
-  region: "",
-  postalCode: "",
-  country: "US",
+  street: '',
+  street2: '',
+  city: '',
+  region: '',
+  postalCode: '',
+  country: 'US',
 };
+
 export function Address({
   value,
   onValueChange,
@@ -174,35 +171,34 @@ export function Address({
   loadSuggestions,
   resolveSuggestion,
   countries = [
-    { value: "US", label: "United States" },
-    { value: "CA", label: "Canada" },
-    { value: "GB", label: "United Kingdom" },
+    { value: 'US', label: 'United States' },
+    { value: 'CA', label: 'Canada' },
+    { value: 'GB', label: 'United Kingdom' },
   ],
 }: {
   value: AddressValue;
   onValueChange: (value: AddressValue) => void;
   disabled?: boolean;
   countries?: SelectOption[];
-  loadSuggestions?: (
-    query: string,
-    signal: AbortSignal,
-  ) => Promise<SelectOption[]>;
+  loadSuggestions?: (query: string, signal: AbortSignal) => Promise<SelectOption[]>;
   resolveSuggestion?: (id: string) => Promise<AddressValue>;
 }) {
-  const [lookupError, setLookupError] = useState(""),
-    [lookingUp, setLookingUp] = useState(false);
+  const [lookupError, setLookupError] = useState('');
+  const [lookingUp, setLookingUp] = useState(false);
+
   async function select(id: string) {
     if (!resolveSuggestion) return;
     setLookingUp(true);
-    setLookupError("");
+    setLookupError('');
     try {
       onValueChange(await resolveSuggestion(id));
     } catch {
-      setLookupError("Address lookup failed. Enter the address below.");
+      setLookupError('Address lookup failed. Enter the address below.');
     } finally {
       setLookingUp(false);
     }
   }
+
   return (
     <fieldset disabled={disabled || lookingUp} className="space-y-4">
       <legend className="mb-4 text-sm font-semibold">Address</legend>
@@ -216,7 +212,7 @@ export function Address({
           loadOptions={loadSuggestions}
           disabled={disabled || lookingUp}
         />
-      )}{" "}
+      )}{' '}
       {lookingUp && <p role="status">Loading address…</p>}
       {lookupError && (
         <p role="alert" className="text-sm text-destructive">
@@ -232,11 +228,11 @@ export function Address({
       />
       {(
         [
-          ["street", "Street address", "address-line1"],
-          ["street2", "Apartment, unit, suite", "address-line2"],
-          ["city", "City", "address-level2"],
-          ["region", "State / Province", "address-level1"],
-          ["postalCode", "ZIP / Postal code", "postal-code"],
+          ['street', 'Street address', 'address-line1'],
+          ['street2', 'Apartment, unit, suite', 'address-line2'],
+          ['city', 'City', 'address-level2'],
+          ['region', 'State / Province', 'address-level1'],
+          ['postalCode', 'ZIP / Postal code', 'postal-code'],
         ] as const
       ).map(([key, label, autoComplete]) => (
         <TextField
@@ -244,15 +240,16 @@ export function Address({
           label={label}
           value={value[key]}
           autoComplete={autoComplete}
-          required={key !== "street2"}
+          required={key !== 'street2'}
           onChange={(e) => onValueChange({ ...value, [key]: e.target.value })}
         />
       ))}
     </fieldset>
   );
 }
+
 export function PointConversionInput({
-  label = "Amount",
+  label = 'Amount',
   value,
   onValueChange,
   pointsPerUnit = 5,
@@ -280,12 +277,13 @@ export function PointConversionInput({
       onChange={(e) => onValueChange(e.target.valueAsNumber || 0)}
       hint={
         pointsPerUnit > 0
-          ? `${new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(value / pointsPerUnit)} equivalent`
-          : "Conversion unavailable"
+          ? `${new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value / pointsPerUnit)} equivalent`
+          : 'Conversion unavailable'
       }
     />
   );
 }
+
 export function ListGroup({
   label,
   options,
@@ -309,15 +307,11 @@ export function ListGroup({
     />
   ) : (
     <fieldset disabled={disabled}>
-      <RadioCards
-        label={label}
-        options={options}
-        value={value}
-        onValueChange={onValueChange}
-      />
+      <RadioCards label={label} options={options} value={value} onValueChange={onValueChange} />
     </fieldset>
   );
 }
+
 /** A host for provider-owned secure fields. Card details never enter this component's state. */
 export function CreditCardInput({
   children,
@@ -332,9 +326,7 @@ export function CreditCardInput({
 }) {
   return (
     <fieldset className="space-y-3">
-      <legend className="mb-3 text-sm font-semibold">
-        Credit card details
-      </legend>
+      <legend className="mb-3 text-sm font-semibold">Credit card details</legend>
       <div className="rounded-lg border bg-card p-4">{children}</div>
       {verification}
       {error ? (
@@ -343,9 +335,7 @@ export function CreditCardInput({
         </Banner>
       ) : (
         <p role="status" className="text-xs text-muted-foreground">
-          {complete
-            ? "Payment details complete"
-            : "Complete the secure payment fields."}
+          {complete ? 'Payment details complete' : 'Complete the secure payment fields.'}
         </p>
       )}
     </fieldset>

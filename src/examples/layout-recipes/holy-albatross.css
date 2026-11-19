@@ -1,0 +1,20 @@
+@layer components {
+  /* Holy albatross: apply these classes to ordinary container and panel elements. */
+  .dg-albatross {
+    --dg-albatross-breakpoint: 40rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .dg-albatross > * {
+    flex-basis: calc((var(--dg-albatross-breakpoint) - 100%) * 999);
+    min-width: min(100%, 15rem);
+    max-width: 100%;
+  }
+  .dg-albatross-main {
+    flex-grow: 1;
+  }
+  .dg-albatross-aside {
+    flex-grow: 0.5;
+  }
+}

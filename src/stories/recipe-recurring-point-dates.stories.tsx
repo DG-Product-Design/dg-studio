@@ -1,10 +1,11 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { FormRecurringPointDates } from "../components/form-recipes";
-import { savePreview } from "../examples/marketplace-planned";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { FormRecurringPointDates } from '../components/form-recipes';
+import { savePreview } from '../examples/marketplace-planned';
+
 const meta = {
-  title: "Forms/Recipes/Recurring Point Dates",
+  title: 'Forms/Recipes/Recurring Point Dates',
   component: FormRecurringPointDates,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   args: { onSubmit: savePreview },
   decorators: [
     (Story) => (
@@ -14,12 +15,14 @@ const meta = {
     ),
   ],
 } satisfies Meta<typeof FormRecurringPointDates>;
+
 export default meta;
 export const Default: StoryObj<typeof meta> = {};
+
 export const SaveFailure: StoryObj<typeof meta> = {
   args: {
     onSubmit: async () => {
-      throw new Error("Unable to save. Please try again.");
+      throw new Error('Unable to save. Please try again.');
     },
   },
 };

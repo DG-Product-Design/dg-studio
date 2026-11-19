@@ -1,0 +1,10 @@
+.dg-column {
+  flex: 0 0
+    calc(
+      (100% + var(--dg-grid-gap, 16px)) * var(--dg-span) / var(--dg-columns, 12) -
+        var(--dg-grid-gap, 16px)
+    );
+  margin-inline-start: calc(
+    (100% + var(--dg-grid-gap, 16px)) * var(--dg-offset) / var(--dg-columns, 12)
+  );
+}

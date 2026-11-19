@@ -1,15 +1,19 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { CheckboxField } from "../components/fields";
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { CheckboxField } from '../components/fields';
+
 const meta = {
-  title: "Forms/Checkbox",
+  title: 'Forms/Checkbox',
   component: CheckboxField,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof CheckboxField>;
+
 export default meta;
+
 export const Default: StoryObj<typeof CheckboxField> = {
   render: () => {
     const [checked, setChecked] = useState(false);
+
     return (
       <CheckboxField
         label="Keep original images"

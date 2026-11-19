@@ -1,40 +1,39 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect } from "storybook/test";
-import { Spinner } from "../components/loaders";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect } from 'storybook/test';
+import { Spinner } from '../components/loaders';
+
 const meta = {
-  title: "Motion/Spinner",
+  title: 'Motion/Spinner',
   component: Spinner,
-  tags: ["autodocs"],
-  args: { label: "Loading", size: 48 },
+  tags: ['autodocs'],
+  args: { label: 'Loading', size: 48 },
   argTypes: {
-    color: { control: "color" },
-    size: { control: { type: "range", min: 16, max: 96, step: 8 } },
+    color: { control: 'color' },
+    size: { control: { type: 'range', min: 16, max: 96, step: 8 } },
   },
   parameters: {
     docs: {
       description: {
         component:
-          "A drawing-circle spinner with 1.2-second rotation and an independently drawing stroke. Color uses the color prop, --spinner-color, or the active theme’s primary token. Reduced motion leaves a static arc.",
+          'A drawing-circle spinner with 1.2-second rotation and an independently drawing stroke. Color uses the color prop, --spinner-color, or the active theme’s primary token. Reduced motion leaves a static arc.',
       },
     },
   },
 } satisfies Meta<typeof Spinner>;
+
 export default meta;
+
 export const Default: StoryObj<typeof meta> = {
   play: async ({ canvas }) => {
-    const svg = canvas.getByRole("status").querySelector("svg")!;
-    const reduced = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-    await expect(getComputedStyle(svg).animationName).toBe(
-      reduced ? "none" : "dg-spinner-rotate",
-    );
+    const svg = canvas.getByRole('status').querySelector('svg')!;
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    await expect(getComputedStyle(svg).animationName).toBe(reduced ? 'none' : 'dg-spinner-rotate');
     if (!reduced)
-      await expect(
-        getComputedStyle(svg.querySelector("circle")!).animationDuration,
-      ).toBe("1.2s");
+      await expect(getComputedStyle(svg.querySelector('circle')!).animationDuration).toBe('1.2s');
   },
 };
+
 export const Sizes: StoryObj<typeof meta> = {
   render: () => (
     <div className="flex items-center gap-8">
@@ -47,7 +46,8 @@ export const Sizes: StoryObj<typeof meta> = {
     </div>
   ),
 };
+
 export const OriginalMint: StoryObj<typeof meta> = {
-  args: { color: "#16df92", size: 80 },
-  parameters: { canvasBackground: "#1e2432" },
+  args: { color: '#16df92', size: 80 },
+  parameters: { canvasBackground: '#1e2432' },
 };

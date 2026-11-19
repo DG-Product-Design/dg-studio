@@ -1,22 +1,26 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { SelectField } from "../components/fields";
-import { expect, userEvent, waitFor, within } from "storybook/test";
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { SelectField } from '../components/fields';
+import { expect, userEvent, waitFor, within } from 'storybook/test';
+import storyExamples1 from './select-field.stories.tsx?examples';
+
 const options = [
   {
-    value: "campaign",
-    label: "Campaign",
-    description: "Creative for one launch.",
+    value: 'campaign',
+    label: 'Campaign',
+    description: 'Creative for one launch.',
   },
   {
-    value: "moodboard",
-    label: "Moodboard",
-    description: "Visual references and inspiration.",
+    value: 'moodboard',
+    label: 'Moodboard',
+    description: 'Visual references and inspiration.',
   },
-  { value: "archive", label: "Archive", disabled: true },
+  { value: 'archive', label: 'Archive', disabled: true },
 ];
+
 function Example() {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
+
   return (
     <SelectField
       label="Collection type"
@@ -28,37 +32,52 @@ function Example() {
     />
   );
 }
+
 const meta = {
-  title: "Forms/Select field",
+  title: 'Forms/Select field',
   component: SelectField,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof SelectField>;
+
 export default meta;
+
 export const Default: StoryObj<typeof SelectField> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: 'tsx', type: 'code' },
+    },
+  },
   render: () => <Example />,
 };
+
 export const KeyboardSelection: StoryObj<typeof SelectField> = {
+  parameters: {
+    docs: {
+      source: { code: storyExamples1.Example, language: 'tsx', type: 'code' },
+    },
+  },
   render: () => <Example />,
   play: async ({ canvasElement }) => {
     const canvas = within(canvasElement);
-    await userEvent.click(canvas.getByRole("combobox"));
-    await userEvent.keyboard("{Home}");
+    await userEvent.click(canvas.getByRole('combobox'));
+    await userEvent.keyboard('{Home}');
     await waitFor(() =>
       expect(
-        within(canvasElement.ownerDocument.body).getByRole("option", {
+        within(canvasElement.ownerDocument.body).getByRole('option', {
           name: /Campaign/,
         }),
       ).toHaveFocus(),
     );
-    await userEvent.keyboard("{Enter}");
-    await expect(canvas.getByRole("combobox")).toHaveTextContent("Campaign");
+    await userEvent.keyboard('{Enter}');
+    await expect(canvas.getByRole('combobox')).toHaveTextContent('Campaign');
   },
 };
+
 export const Disabled: StoryObj<typeof SelectField> = {
   args: {
-    label: "Collection type",
+    label: 'Collection type',
     options,
-    value: "campaign",
+    value: 'campaign',
     onValueChange: () => {},
     disabled: true,
   },

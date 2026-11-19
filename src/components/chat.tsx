@@ -1,31 +1,29 @@
-import { useId, useRef, useState, type ReactNode } from "react";
-import { MessageScroller } from "@shadcn/react/message-scroller";
-import { ArrowDown, ArrowUp, Paperclip, Square, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { Textarea } from "./ui/textarea";
-import { GenerationStatus } from "./motion";
-import { cn } from "../lib/utils";
-import { Message, MessageContent, MessageHeader } from "./ui/message";
-import { Bubble, BubbleContent } from "./ui/bubble";
-import {
-  Attachment,
-  AttachmentMedia,
-  AttachmentContent,
-  AttachmentTitle,
-} from "./ui/attachment";
-import { Marker, MarkerContent } from "./ui/marker";
+import { useId, useRef, useState, type ReactNode } from 'react';
+import { MessageScroller } from '@shadcn/react/message-scroller';
+import { ArrowDown, ArrowUp, Paperclip, Square, X } from 'lucide-react';
+import { Button } from './ui/button';
+import { Textarea } from './ui/textarea';
+import { GenerationStatus } from './motion';
+import { cn } from '../lib/utils';
+import { Message, MessageContent, MessageHeader } from './ui/message';
+import { Bubble, BubbleContent } from './ui/bubble';
+import { Attachment, AttachmentMedia, AttachmentContent, AttachmentTitle } from './ui/attachment';
+import { Marker, MarkerContent } from './ui/marker';
+
 export interface ChatAttachment {
   id: string;
   name: string;
   url?: string;
 }
+
 export interface ChatMessageData {
   id: string;
-  role: "user" | "assistant";
+  role: 'user' | 'assistant';
   content: string;
   attachments?: ChatAttachment[];
   detail?: { title: string; content: string };
 }
+
 export function ChatMessage({
   message,
   streaming = false,
@@ -36,31 +34,22 @@ export function ChatMessage({
   return (
     <Message
       role="article"
-      aria-label={message.role === "user" ? "You" : "Assistant"}
-      align={message.role === "user" ? "end" : "start"}
+      aria-label={message.role === 'user' ? 'You' : 'Assistant'}
+      align={message.role === 'user' ? 'end' : 'start'}
     >
       <MessageContent>
-        <MessageHeader>
-          {message.role === "user" ? "You" : "Studio"}
-        </MessageHeader>
+        <MessageHeader>{message.role === 'user' ? 'You' : 'Studio'}</MessageHeader>
         {message.detail && (
           <details className="w-full border-l-2 border-secondary pl-3 text-sm">
-            <summary className="cursor-pointer py-2 text-primary">
-              {message.detail.title}
-            </summary>
-            <p className="pb-3 text-muted-foreground">
-              {message.detail.content}
-            </p>
+            <summary className="cursor-pointer py-2 text-primary">{message.detail.title}</summary>
+            <p className="pb-3 text-muted-foreground">{message.detail.content}</p>
           </details>
         )}
         <Bubble
-          variant={message.role === "user" ? "muted" : "ghost"}
-          align={message.role === "user" ? "end" : "start"}
+          variant={message.role === 'user' ? 'muted' : 'ghost'}
+          align={message.role === 'user' ? 'end' : 'start'}
         >
-          <BubbleContent
-            className="whitespace-pre-wrap"
-            aria-hidden={streaming || undefined}
-          >
+          <BubbleContent className="whitespace-pre-wrap" aria-hidden={streaming || undefined}>
             {message.content || (streaming ? <GenerationStatus /> : null)}
           </BubbleContent>
         </Bubble>
@@ -86,6 +75,7 @@ export function ChatMessage({
     </Message>
   );
 }
+
 export interface ChatComposerProps {
   onSend: (text: string, files: File[]) => void;
   busy?: boolean;
@@ -94,24 +84,27 @@ export interface ChatComposerProps {
   placeholder?: string;
   defaultValue?: string;
 }
+
 export function ChatComposer({
   onSend,
   busy = false,
   onStop,
   disabled = false,
-  placeholder = "Describe your next idea…",
-  defaultValue = "",
+  placeholder = 'Describe your next idea…',
+  defaultValue = '',
 }: ChatComposerProps) {
   const [text, setText] = useState(defaultValue);
   const [files, setFiles] = useState<File[]>([]);
   const fileInput = useRef<HTMLInputElement>(null);
   const hint = useId();
+
   function submit() {
     if (busy || disabled || (!text.trim() && !files.length)) return;
     onSend(text.trim(), files);
-    setText("");
+    setText('');
     setFiles([]);
   }
+
   return (
     <form
       aria-label="Message composer"
@@ -129,7 +122,7 @@ export function ChatComposer({
         placeholder={placeholder}
         onChange={(e) => setText(e.target.value)}
         onKeyDown={(e) => {
-          if (e.key === "Enter" && !e.shiftKey && !e.nativeEvent.isComposing) {
+          if (e.key === 'Enter' && !e.shiftKey && !e.nativeEvent.isComposing) {
             e.preventDefault();
             submit();
           }
@@ -149,9 +142,7 @@ export function ChatComposer({
                 size="icon-sm"
                 variant="ghost"
                 aria-label={`Remove ${file.name}`}
-                onClick={() =>
-                  setFiles((current) => current.filter((_, j) => i !== j))
-                }
+                onClick={() => setFiles((current) => current.filter((_, j) => i !== j))}
               >
                 <X aria-hidden />
               </Button>
@@ -169,7 +160,7 @@ export function ChatComposer({
           onChange={(e) => {
             const selectedFiles = Array.from(e.target.files ?? []);
             setFiles((current) => [...current, ...selectedFiles]);
-            e.target.value = "";
+            e.target.value = '';
           }}
         />
         <Button
@@ -186,12 +177,7 @@ export function ChatComposer({
           Shift + Enter for a new line
         </p>
         {busy && onStop ? (
-          <Button
-            type="button"
-            size="icon"
-            aria-label="Stop response"
-            onClick={onStop}
-          >
+          <Button type="button" size="icon" aria-label="Stop response" onClick={onStop}>
             <Square aria-hidden className="size-3" />
           </Button>
         ) : (
@@ -208,20 +194,22 @@ export function ChatComposer({
     </form>
   );
 }
+
 export interface ChatPanelProps {
   messages: ChatMessageData[];
   title?: string;
   busy?: boolean;
-  onSend: ChatComposerProps["onSend"];
+  onSend: ChatComposerProps['onSend'];
   onStop?: () => void;
   headerAction?: ReactNode;
   footer?: ReactNode;
   announcement?: string;
   className?: string;
 }
+
 export function ChatPanel({
   messages,
-  title = "Creative assistant",
+  title = 'Creative assistant',
   busy = false,
   onSend,
   onStop,
@@ -234,7 +222,7 @@ export function ChatPanel({
     <section
       aria-label={title}
       className={cn(
-        "flex h-[620px] min-h-0 flex-col overflow-hidden rounded-xl border bg-card",
+        'flex h-[620px] min-h-0 flex-col overflow-hidden rounded-xl border bg-card',
         className,
       )}
     >
@@ -248,10 +236,7 @@ export function ChatPanel({
             aria-label="Conversation"
             className="size-full overflow-y-auto overscroll-contain"
           >
-            <MessageScroller.Content
-              aria-live="off"
-              className="flex min-h-full flex-col gap-5 p-5"
-            >
+            <MessageScroller.Content aria-live="off" className="flex min-h-full flex-col gap-5 p-5">
               <MessageScroller.Item messageId="conversation-start">
                 <Marker variant="separator">
                   <MarkerContent>Creative session</MarkerContent>
@@ -261,14 +246,12 @@ export function ChatPanel({
                 <MessageScroller.Item
                   key={message.id}
                   messageId={message.id}
-                  scrollAnchor={message.role === "user"}
+                  scrollAnchor={message.role === 'user'}
                 >
                   <ChatMessage
                     message={message}
                     streaming={
-                      busy &&
-                      index === messages.length - 1 &&
-                      message.role === "assistant"
+                      busy && index === messages.length - 1 && message.role === 'assistant'
                     }
                   />
                 </MessageScroller.Item>
@@ -284,7 +267,7 @@ export function ChatPanel({
         </MessageScroller.Root>
       </MessageScroller.Provider>
       <div role="status" className="sr-only">
-        {announcement ?? (busy ? "Assistant is responding." : "")}
+        {announcement ?? (busy ? 'Assistant is responding.' : '')}
       </div>
       <div className="space-y-3 p-4">
         {footer}

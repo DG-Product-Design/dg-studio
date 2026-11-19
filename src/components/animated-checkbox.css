@@ -1,0 +1,44 @@
+.dg-checkbox-box::before {
+  content: '';
+  position: absolute;
+  inset: -10px;
+  border-radius: 50%;
+  background: var(--dg-checkbox-accent);
+  opacity: 0;
+  transition:
+    opacity 200ms,
+    transform 200ms;
+  pointer-events: none;
+}
+.dg-animated-checkbox:hover input:not(:disabled) + .dg-checkbox-box::before {
+  opacity: 0.12;
+}
+.dg-animated-checkbox input:focus-visible + .dg-checkbox-box {
+  outline: 2px solid var(--ring);
+  outline-offset: 4px;
+}
+.dg-animated-checkbox input:active + .dg-checkbox-box::before {
+  opacity: 0.25;
+  transform: scale(0.8);
+}
+.dg-animated-checkbox input:is(:checked, :indeterminate) + .dg-checkbox-box {
+  background: var(--dg-checkbox-accent);
+  border-color: var(--dg-checkbox-accent);
+}
+.dg-checkbox-check {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  transition: stroke-dashoffset 200ms ease;
+}
+.dg-checkbox-mixed {
+  opacity: 0;
+}
+.dg-animated-checkbox input:checked + .dg-checkbox-box .dg-checkbox-check {
+  stroke-dashoffset: 0;
+}
+.dg-animated-checkbox input:indeterminate + .dg-checkbox-box .dg-checkbox-check {
+  stroke-dashoffset: 1;
+}
+.dg-animated-checkbox input:indeterminate + .dg-checkbox-box .dg-checkbox-mixed {
+  opacity: 1;
+}

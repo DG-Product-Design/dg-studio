@@ -1,10 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { List } from "../components/foundation-primitives";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { List } from '../components/foundation-primitives';
 
 const meta = {
-  title: "Content/List",
+  title: 'Content/List',
   component: List,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   args: {
     children: (
       <>
@@ -16,5 +16,6 @@ const meta = {
     ordered: true,
   },
 } satisfies Meta<typeof List>;
+
 export default meta;
 export const Default: StoryObj<typeof meta> = {};

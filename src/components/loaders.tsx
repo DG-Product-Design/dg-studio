@@ -1,28 +1,24 @@
-import { useId, type CSSProperties } from "react";
+import { useId, type CSSProperties } from 'react';
+
 /** D.G’s rotating, drawing-circle spinner. */
 export function Spinner({
-  label = "Loading",
+  label = 'Loading',
   size = 32,
-  color = "var(--spinner-color, var(--primary))",
+  color = 'var(--spinner-color, var(--primary))',
 }: {
   label?: string;
   size?: number;
-  color?: CSSProperties["color"];
+  color?: CSSProperties['color'];
 }) {
   return (
-    <span
-      role="status"
-      aria-label={label}
-      className="inline-flex shrink-0"
-      style={{ color }}
-    >
+    <span role="status" aria-label={label} className="inline-flex shrink-0" style={{ color }}>
       <svg
         aria-hidden
         width={size}
         height={size}
         viewBox="57 57 146 146"
         fill="none"
-        className="dg-drawing-spinner"
+        className="dg-drawing-spinner block"
       >
         <circle
           cx="130"
@@ -36,6 +32,7 @@ export function Spinner({
     </span>
   );
 }
+
 /** The original marketplace reveal: a rotating F, growing mask, and two traveling waves. */
 export interface LoaderProps {
   label?: string;
@@ -48,17 +45,19 @@ export interface LoaderProps {
   /** @deprecated Use waveDuration. Retained for existing library consumers. */
   duration?: number;
 }
+
 export function Loader({
-  label = "Loading",
+  label = 'Loading',
   size = 150,
-  backgroundColor = "var(--purple-700, #461276)",
-  foregroundColor = "white",
+  backgroundColor = 'var(--purple-700, #461276)',
+  foregroundColor = 'white',
   scaleDuration = 1000,
   startScale = 0.2,
   waveDuration,
   duration,
 }: LoaderProps) {
   const maskId = useId();
+
   return (
     <span role="status" aria-label={label}>
       <svg
@@ -67,19 +66,19 @@ export function Loader({
         height={(size * 178) / 150}
         viewBox="0 0 150 178"
         fill="currentColor"
-        className="dg-fringe-loader"
+        className="dg-fringe-loader overflow-hidden"
         style={
           {
             color: backgroundColor,
-            "--dg-loader-scale-duration": `${scaleDuration}ms`,
-            "--dg-loader-start-scale": startScale,
-            "--dg-wave-duration": `${waveDuration ?? duration ?? 6000}ms`,
+            '--dg-loader-scale-duration': `${scaleDuration}ms`,
+            '--dg-loader-start-scale': startScale,
+            '--dg-wave-duration': `${waveDuration ?? duration ?? 6000}ms`,
           } as CSSProperties
         }
       >
         <mask id={maskId}>
           <rect
-            className="dg-loader-mask"
+            className="dg-loader-mask origin-center fill-white backface-hidden will-change-transform"
             width="150"
             height="178"
             x="0"
@@ -88,13 +87,7 @@ export function Loader({
         </mask>
         <polygon points="112.4,48.3 112.4,30.3 45.5,30.3 45.5,120.1 65.2,120.1 65.2,84.5 95.4,84.5 95.4,66.4 65.2,66.4 65.2,48.3" />
         <g mask={`url(#${maskId})`}>
-          <rect
-            className="dg-loader-background"
-            width="150"
-            height="120"
-            x="0"
-            y="0"
-          />
+          <rect className="fill-current" width="150" height="120" x="0" y="0" />
           <polygon
             fill={foregroundColor}
             points="112.4,48.3 112.4,30.3 45.5,30.3 45.5,120.1 65.2,120.1 65.2,84.5 95.4,84.5 95.4,66.4 65.2,66.4 65.2,48.3"

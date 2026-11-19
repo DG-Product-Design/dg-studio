@@ -1,4 +1,4 @@
-import { useId, useRef, useState, type ReactNode } from "react";
+import { useId, useRef, useState, type ReactNode } from 'react';
 import {
   TextField,
   SelectField,
@@ -6,34 +6,32 @@ import {
   CheckboxField,
   RadioCards,
   type SelectOption,
-} from "./fields";
-import {
-  PasswordField,
-  TextareaField,
-  defaultPasswordRules,
-} from "./specialized-fields";
-import { ActionButton } from "./action-button";
-import { Button } from "./ui/button";
-import { Banner } from "./feedback";
-import { FormHeader } from "./foundation-primitives";
+} from './fields';
+import { PasswordField, TextareaField, defaultPasswordRules } from './specialized-fields';
+import { ActionButton } from './action-button';
+import { Button } from './ui/button';
+import { Banner } from './feedback';
+import { FormHeader } from './foundation-primitives';
+
 export type FormValue = string | number | boolean | string[];
 export type FormValues = Record<string, FormValue>;
+
 export interface RecipeField {
   name: string;
   label: string;
   type?:
-    | "text"
-    | "email"
-    | "password"
-    | "number"
-    | "date"
-    | "time"
-    | "tel"
-    | "textarea"
-    | "select"
-    | "multi"
-    | "checkbox"
-    | "radio";
+    | 'text'
+    | 'email'
+    | 'password'
+    | 'number'
+    | 'date'
+    | 'time'
+    | 'tel'
+    | 'textarea'
+    | 'select'
+    | 'multi'
+    | 'checkbox'
+    | 'radio';
   required?: boolean;
   hint?: string;
   min?: number;
@@ -43,6 +41,7 @@ export interface RecipeField {
   when?: (values: FormValues) => boolean;
   validate?: (value: FormValue, values: FormValues) => string | undefined;
 }
+
 export interface FormProps {
   title: string;
   description?: string;
@@ -55,12 +54,13 @@ export interface FormProps {
   footer?: ReactNode;
   validate?: (values: FormValues) => Record<string, string>;
 }
+
 export function Form({
   title,
   description,
   fields,
   defaultValues = {},
-  submitLabel = "Save changes",
+  submitLabel = 'Save changes',
   onSubmit,
   onCancel,
   children,
@@ -68,31 +68,36 @@ export function Form({
   validate,
 }: FormProps) {
   const [values, setValues] = useState<FormValues>(() =>
-      Object.fromEntries(
-        fields.map((f) => [
-          f.name,
-          defaultValues[f.name] ??
-            (f.type === "multi" ? [] : f.type === "checkbox" ? false : ""),
-        ]),
-      ),
+    Object.fromEntries(
+      fields.map((f) => [
+        f.name,
+        defaultValues[f.name] ?? (f.type === 'multi' ? [] : f.type === 'checkbox' ? false : ''),
+      ]),
     ),
-    [errors, setErrors] = useState<Record<string, string>>({}),
-    [busy, setBusy] = useState(false),
-    [failure, setFailure] = useState(""),
-    [submitted, setSubmitted] = useState(false);
-  const submitting = useRef(false),
-    form = useRef<HTMLFormElement>(null),
-    id = useId();
+  );
+
+  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [busy, setBusy] = useState(false);
+  const [failure, setFailure] = useState('');
+  const [submitted, setSubmitted] = useState(false);
+
+  const submitting = useRef(false);
+  const form = useRef<HTMLFormElement>(null);
+  const id = useId();
+
   const visible = fields.filter((f) => !f.when || f.when(values));
+
   function change(name: string, value: FormValue) {
     setValues((v) => ({ ...v, [name]: value }));
     setErrors((e) => {
       const next = { ...e };
       delete next[name];
+
       return next;
     });
     setSubmitted(false);
   }
+
   async function submit() {
     if (submitting.current) return;
     const next: Record<string, string> = {};
@@ -102,58 +107,55 @@ export function Form({
         f.required &&
         (value === undefined ||
           value === false ||
-          (typeof value === "string" && !value.trim()) ||
+          (typeof value === 'string' && !value.trim()) ||
           (Array.isArray(value) && !value.length))
       )
         next[f.name] = `${f.label} is required.`;
-      else if (value !== "" && value !== undefined) {
+      else if (value !== '' && value !== undefined) {
+        if (f.type === 'email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value)))
+          next[f.name] = 'Enter a valid email address.';
         if (
-          f.type === "email" &&
-          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(value))
-        )
-          next[f.name] = "Enter a valid email address.";
-        if (
-          f.type === "number" &&
+          f.type === 'number' &&
           (!Number.isFinite(Number(value)) ||
             (f.min !== undefined && Number(value) < f.min) ||
             (f.max !== undefined && Number(value) > f.max))
         )
           next[f.name] =
-            `Enter a number${f.min !== undefined ? ` of at least ${f.min}` : ""}${f.max !== undefined ? ` and at most ${f.max}` : ""}.`;
+            `Enter a number${f.min !== undefined ? ` of at least ${f.min}` : ''}${f.max !== undefined ? ` and at most ${f.max}` : ''}.`;
         const custom = f.validate?.(value, values);
         if (custom) next[f.name] = custom;
       }
     }
+
     Object.assign(next, validate?.(values));
     setErrors(next);
-    setFailure("");
+    setFailure('');
     setSubmitted(false);
     if (Object.keys(next).length) {
       requestAnimationFrame(() =>
-        form.current
-          ?.querySelector<HTMLElement>(`[id="${id}-${Object.keys(next)[0]}"]`)
-          ?.focus(),
+        form.current?.querySelector<HTMLElement>(`[id="${id}-${Object.keys(next)[0]}"]`)?.focus(),
       );
+
       return;
     }
+
     submitting.current = true;
     setBusy(true);
     try {
       const payload = Object.fromEntries(
-        visible.map((f) => [
-          f.name,
-          f.type === "number" ? Number(values[f.name]) : values[f.name],
-        ]),
+        visible.map((f) => [f.name, f.type === 'number' ? Number(values[f.name]) : values[f.name]]),
       );
+
       await onSubmit(payload);
       setSubmitted(true);
     } catch (e) {
-      setFailure(e instanceof Error ? e.message : "Unable to save. Try again.");
+      setFailure(e instanceof Error ? e.message : 'Unable to save. Try again.');
     } finally {
       setBusy(false);
       submitting.current = false;
     }
   }
+
   return (
     <form
       ref={form}
@@ -167,25 +169,27 @@ export function Form({
       <FormHeader title={title} description={description} />
       <fieldset disabled={busy} className="min-w-0 space-y-5">
         {visible.map((f) => {
-          const value = values[f.name],
-            error = errors[f.name],
-            fieldId = `${id}-${f.name}`;
+          const value = values[f.name];
+          const error = errors[f.name];
+          const fieldId = `${id}-${f.name}`;
+
           const options = f.options ?? [];
+
           return (
             <div key={f.name}>
-              {f.type === "select" ? (
+              {f.type === 'select' ? (
                 <SelectField
                   id={fieldId}
                   name={f.name}
                   label={f.label}
-                  value={String(value ?? "")}
+                  value={String(value ?? '')}
                   onValueChange={(v) => change(f.name, v)}
                   options={options}
                   hint={f.hint}
                   error={error}
                   disabled={busy}
                 />
-              ) : f.type === "multi" ? (
+              ) : f.type === 'multi' ? (
                 <MultiSelectField
                   id={fieldId}
                   name={f.name}
@@ -197,7 +201,7 @@ export function Form({
                   error={error}
                   disabled={busy}
                 />
-              ) : f.type === "checkbox" ? (
+              ) : f.type === 'checkbox' ? (
                 <>
                   <CheckboxField
                     id={fieldId}
@@ -213,11 +217,11 @@ export function Form({
                     </p>
                   )}
                 </>
-              ) : f.type === "radio" ? (
+              ) : f.type === 'radio' ? (
                 <>
                   <RadioCards
                     label={f.label}
-                    value={String(value ?? "")}
+                    value={String(value ?? '')}
                     options={options}
                     onValueChange={(v) => change(f.name, v)}
                   />
@@ -227,38 +231,35 @@ export function Form({
                     </p>
                   )}
                 </>
-              ) : f.type === "textarea" ? (
+              ) : f.type === 'textarea' ? (
                 <TextareaField
                   id={fieldId}
                   name={f.name}
                   label={f.label}
-                  value={String(value ?? "")}
+                  value={String(value ?? '')}
                   onChange={(v) => change(f.name, v)}
                   error={error}
                   hint={f.hint}
                 />
-              ) : f.type === "password" ? (
+              ) : f.type === 'password' ? (
                 <PasswordField
                   id={fieldId}
                   name={f.name}
                   label={f.label}
-                  value={String(value ?? "")}
+                  value={String(value ?? '')}
                   onChange={(e) => change(f.name, e.target.value)}
                   autoComplete={f.autoComplete}
                   hint={f.hint}
                   error={error}
-                  showRequirements={
-                    f.autoComplete === "new-password" &&
-                    f.name !== "confirmation"
-                  }
+                  showRequirements={f.autoComplete === 'new-password' && f.name !== 'confirmation'}
                 />
               ) : (
                 <TextField
                   id={fieldId}
                   name={f.name}
                   label={f.label}
-                  type={f.type ?? "text"}
-                  value={String(value ?? "")}
+                  type={f.type ?? 'text'}
+                  value={String(value ?? '')}
                   onChange={(e) => change(f.name, e.target.value)}
                   required={f.required}
                   autoComplete={f.autoComplete}
@@ -294,20 +295,11 @@ export function Form({
       )}
       <footer className="flex flex-wrap justify-end gap-3">
         {onCancel && (
-          <Button
-            type="button"
-            variant="outline"
-            disabled={busy}
-            onClick={onCancel}
-          >
+          <Button type="button" variant="outline" disabled={busy} onClick={onCancel}>
             Cancel
           </Button>
         )}
-        <ActionButton
-          type="submit"
-          loading={busy}
-          loadingLabel="Saving changes"
-        >
+        <ActionButton type="submit" loading={busy} loadingLabel="Saving changes">
           {submitLabel}
         </ActionButton>
       </footer>
@@ -315,7 +307,8 @@ export function Form({
     </form>
   );
 }
+
 export const passwordValidation = (value: FormValue) =>
   defaultPasswordRules.every((rule) => rule.test(String(value)))
     ? undefined
-    : "Complete the password requirements.";
+    : 'Complete the password requirements.';

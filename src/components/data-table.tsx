@@ -1,19 +1,22 @@
-import { Fragment, useState, type ReactNode } from "react";
-import { ArrowDown, ArrowUp, ArrowUpDown, ChevronDown } from "lucide-react";
-import { Button } from "./ui/button";
-import { Banner, Skeleton } from "./feedback";
-import { EmptyState } from "./media";
-import { Pagination } from "./navigation";
+import { Fragment, useState, type ReactNode } from 'react';
+import { ArrowDown, ArrowUp, ArrowUpDown, ChevronDown } from 'lucide-react';
+import { Button } from './ui/button';
+import { Banner, Skeleton } from './feedback';
+import { EmptyState } from './media';
+import { Pagination } from './navigation';
+
 export interface DataColumn<T> {
   id: string;
   header: string;
   cell: (row: T) => ReactNode;
   sortValue?: (row: T) => string | number;
 }
+
 export interface TableSort {
   id: string;
-  direction: "asc" | "desc";
+  direction: 'asc' | 'desc';
 }
+
 export interface RemoteTableState {
   page: number;
   totalRows: number;
@@ -21,6 +24,7 @@ export interface RemoteTableState {
   onPageChange: (page: number) => void;
   onSortChange: (sort: TableSort) => void;
 }
+
 export interface DataTableProps<T> {
   rows: T[];
   columns: DataColumn<T>[];
@@ -38,6 +42,7 @@ export interface DataTableProps<T> {
   renderExpanded?: (row: T) => ReactNode;
   emptyState?: ReactNode;
 }
+
 function LoadingCell({
   loading,
   children,
@@ -49,15 +54,12 @@ function LoadingCell({
 }) {
   return (
     <div className="relative" data-loading-cell={loading || undefined}>
-      <div
-        className={loading ? "invisible" : undefined}
-        inert={loading || undefined}
-      >
+      <div className={loading ? 'invisible' : undefined} inert={loading || undefined}>
         {children}
       </div>
       {loading && (
         <Skeleton
-          className={`absolute top-1/2 left-0 h-4 -translate-y-1/2 ${compact ? "w-4" : "w-3/4 max-w-40"}`}
+          className={`absolute top-1/2 left-0 h-4 -translate-y-1/2 ${compact ? 'w-4' : 'w-3/4 max-w-40'}`}
         />
       )}
     </div>
@@ -87,34 +89,34 @@ export function DataTable<T>({
   const columns = allColumns.filter((c) => !hiddenColumns.includes(c.id));
   const [expanded, setExpanded] = useState<string[]>([]);
   const [page, setPage] = useState(1);
-  const size = Number.isFinite(pageSize)
-    ? Math.max(1, Math.floor(pageSize))
-    : 5;
+  const size = Number.isFinite(pageSize) ? Math.max(1, Math.floor(pageSize)) : 5;
+
   const sortColumn = columns.find((c) => c.id === sort?.id);
   const sorted =
     !remote && sortColumn?.sortValue
       ? [...rows].sort((a, b) => {
-          const left = sortColumn.sortValue!(a),
-            right = sortColumn.sortValue!(b);
+          const left = sortColumn.sortValue!(a);
+          const right = sortColumn.sortValue!(b);
+
           const order =
-            typeof left === "number" && typeof right === "number"
+            typeof left === 'number' && typeof right === 'number'
               ? left - right
               : String(left).localeCompare(String(right));
-          return sort?.direction === "desc" ? -order : order;
+
+          return sort?.direction === 'desc' ? -order : order;
         })
       : rows;
-  const pageCount = Math.max(
-    1,
-    Math.ceil((remote?.totalRows ?? rows.length) / size),
-  );
+
+  const pageCount = Math.max(1, Math.ceil((remote?.totalRows ?? rows.length) / size));
+
   const currentPage = Math.max(1, Math.min(remote?.page ?? page, pageCount));
-  const visible = remote
-    ? rows
-    : sorted.slice((currentPage - 1) * size, currentPage * size);
+  const visible = remote ? rows : sorted.slice((currentPage - 1) * size, currentPage * size);
+
   const visibleIds = visible.map(getRowId);
-  const all =
-    visibleIds.length > 0 && visibleIds.every((id) => selectedIds.includes(id));
+  const all = visibleIds.length > 0 && visibleIds.every((id) => selectedIds.includes(id));
+
   const some = visibleIds.some((id) => selectedIds.includes(id));
+
   return (
     <div className="space-y-4">
       {error && (
@@ -139,7 +141,7 @@ export function DataTable<T>({
         className="overflow-x-auto rounded-xl border"
       >
         <span role="status" className="sr-only">
-          {loading ? "Loading rows…" : ""}
+          {loading ? 'Loading rows…' : ''}
         </span>
         <table
           aria-busy={loading}
@@ -161,9 +163,7 @@ export function DataTable<T>({
                       onSelectionChange(
                         e.target.checked
                           ? [...new Set([...selectedIds, ...visibleIds])]
-                          : selectedIds.filter(
-                              (id) => !visibleIds.includes(id),
-                            ),
+                          : selectedIds.filter((id) => !visibleIds.includes(id)),
                       )
                     }
                     disabled={loading || !visible.length}
@@ -178,10 +178,10 @@ export function DataTable<T>({
                   aria-sort={
                     column.sortValue
                       ? sort?.id === column.id
-                        ? sort.direction === "asc"
-                          ? "ascending"
-                          : "descending"
-                        : "none"
+                        ? sort.direction === 'asc'
+                          ? 'ascending'
+                          : 'descending'
+                        : 'none'
                       : undefined
                   }
                   className="px-4 py-3 font-semibold"
@@ -195,10 +195,9 @@ export function DataTable<T>({
                         const nextSort: TableSort = {
                           id: column.id,
                           direction:
-                            sort?.id === column.id && sort.direction === "asc"
-                              ? "desc"
-                              : "asc",
+                            sort?.id === column.id && sort.direction === 'asc' ? 'desc' : 'asc',
                         };
+
                         if (remote) {
                           remote.onSortChange(nextSort);
                           remote.onPageChange(1);
@@ -210,7 +209,7 @@ export function DataTable<T>({
                     >
                       {column.header}
                       {sort?.id === column.id ? (
-                        sort.direction === "asc" ? (
+                        sort.direction === 'asc' ? (
                           <ArrowUp aria-hidden className="size-3" />
                         ) : (
                           <ArrowDown aria-hidden className="size-3" />
@@ -231,10 +230,7 @@ export function DataTable<T>({
               )}
             </tr>
           </thead>
-          <tbody
-            aria-hidden={loading || undefined}
-            inert={loading || undefined}
-          >
+          <tbody aria-hidden={loading || undefined} inert={loading || undefined}>
             {loading &&
               !visible.length &&
               Array.from({ length: size }, (_, index) => (
@@ -258,6 +254,7 @@ export function DataTable<T>({
               ))}
             {visible.map((row) => {
               const id = getRowId(row);
+
               return (
                 <Fragment key={id}>
                   <tr className="border-t bg-card">
@@ -282,9 +279,7 @@ export function DataTable<T>({
                     )}
                     {columns.map((column) => (
                       <td key={column.id} className="px-4 py-4">
-                        <LoadingCell loading={loading}>
-                          {column.cell(row)}
-                        </LoadingCell>
+                        <LoadingCell loading={loading}>{column.cell(row)}</LoadingCell>
                       </td>
                     ))}
                     {renderExpanded && (
@@ -295,7 +290,7 @@ export function DataTable<T>({
                             size="icon-sm"
                             variant="ghost"
                             aria-expanded={expanded.includes(id)}
-                            aria-label={`${expanded.includes(id) ? "Hide" : "Show"} details for ${getRowLabel(row)}`}
+                            aria-label={`${expanded.includes(id) ? 'Hide' : 'Show'} details for ${getRowLabel(row)}`}
                             onClick={() =>
                               setExpanded((current) =>
                                 current.includes(id)
@@ -306,7 +301,7 @@ export function DataTable<T>({
                           >
                             <ChevronDown
                               aria-hidden
-                              className={`size-4 motion-safe:transition-transform motion-safe:duration-200 ${expanded.includes(id) ? "rotate-180" : "rotate-0"}`}
+                              className={`size-4 motion-safe:transition-transform motion-safe:duration-200 ${expanded.includes(id) ? 'rotate-180' : 'rotate-0'}`}
                             />
                           </Button>
                         </LoadingCell>
@@ -316,14 +311,10 @@ export function DataTable<T>({
                   {renderExpanded && expanded.includes(id) && (
                     <tr className="border-t bg-muted/30">
                       <td
-                        colSpan={
-                          columns.length + (onSelectionChange ? 1 : 0) + 1
-                        }
+                        colSpan={columns.length + (onSelectionChange ? 1 : 0) + 1}
                         className="p-5"
                       >
-                        <LoadingCell loading={loading}>
-                          {renderExpanded(row)}
-                        </LoadingCell>
+                        <LoadingCell loading={loading}>{renderExpanded(row)}</LoadingCell>
                       </td>
                     </tr>
                   )}
@@ -333,11 +324,7 @@ export function DataTable<T>({
             {!visible.length && !loading && !error && (
               <tr>
                 <td
-                  colSpan={
-                    columns.length +
-                    (onSelectionChange ? 1 : 0) +
-                    (renderExpanded ? 1 : 0)
-                  }
+                  colSpan={columns.length + (onSelectionChange ? 1 : 0) + (renderExpanded ? 1 : 0)}
                   className="p-4"
                 >
                   {emptyState ?? (

@@ -1,0 +1,27 @@
+.dg-color-field {
+  background: linear-gradient(132deg, var(--dg-flow-from), var(--dg-flow-to));
+  animation: dg-color-drift var(--dg-flow-duration, 10000ms) var(--dg-flow-timing, ease-in-out)
+    infinite alternate;
+}
+@supports (background: linear-gradient(132deg in oklch, red, blue)) {
+  .dg-color-flow[data-space='oklch'] .dg-color-field {
+    background: linear-gradient(132deg in oklch, var(--dg-flow-from), var(--dg-flow-to));
+  }
+}
+.dg-color-noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch' seed='7'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Cpath filter='url(%23n)' d='M0 0h180v180H0z'/%3E%3C/svg%3E");
+}
+.dg-color-flow[data-dither='false'] .dg-color-noise {
+  display: none;
+}
+.dg-color-flow[data-paused='true'] .dg-color-field {
+  animation-play-state: paused;
+}
+@keyframes dg-color-drift {
+  from {
+    transform: translate(-12%, -8%);
+  }
+  to {
+    transform: translate(12%, 8%);
+  }
+}

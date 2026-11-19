@@ -1,9 +1,9 @@
-import type { ReactNode, RefObject } from "react";
-import { Dialog as Primitive } from "radix-ui";
-import { X } from "lucide-react";
-import { Button } from "./ui/button";
-import { useTheme } from "./theme";
-import { cn } from "../lib/utils";
+import type { ReactNode, RefObject } from 'react';
+import { Dialog as Primitive } from 'radix-ui';
+import { X } from 'lucide-react';
+import { Button } from './ui/button';
+import { useTheme } from './theme';
+import { cn } from '../lib/utils';
 import {
   Dialog,
   DialogTrigger,
@@ -12,7 +12,8 @@ import {
   DialogTitle,
   DialogDescription,
   DialogClose,
-} from "./ui/dialog";
+} from './ui/dialog';
+
 export interface ModalProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
@@ -24,6 +25,7 @@ export interface ModalProps {
   className?: string;
   returnFocusRef?: RefObject<HTMLElement | null>;
 }
+
 /** Uses shadcn's Radix foundation; tokens travel into the portal through context. */
 export function Modal({
   open,
@@ -38,6 +40,7 @@ export function Modal({
   side = false,
 }: ModalProps & { side?: boolean }) {
   const theme = useTheme();
+
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       {trigger && <DialogTrigger asChild>{trigger}</DialogTrigger>}
@@ -52,10 +55,10 @@ export function Modal({
             }
           }}
           className={cn(
-            "dg-theme fixed z-50 flex flex-col border border-border bg-card shadow-2xl",
+            'bg-background text-foreground font-sans fixed z-50 flex flex-col border border-border bg-card shadow-2xl',
             side
-              ? "dg-panel inset-y-0 right-0 w-full max-w-md"
-              : "dg-modal top-1/2 left-1/2 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl",
+              ? 'inset-y-0 right-0 w-full max-w-md data-[state=open]:animate-[dg-slide_240ms_cubic-bezier(0.16,1,0.3,1)]'
+              : 'data-[state=open]:animate-[dg-appear_180ms_ease-out] top-1/2 left-1/2 max-h-[90dvh] w-[calc(100%-2rem)] max-w-lg -translate-x-1/2 -translate-y-1/2 rounded-xl',
             className,
           )}
         >
@@ -67,9 +70,7 @@ export function Modal({
           </header>
           <div className="min-h-0 flex-1 overflow-y-auto p-6">{children}</div>
           {footer && (
-            <footer className="flex flex-wrap justify-end gap-2 border-t p-5">
-              {footer}
-            </footer>
+            <footer className="flex flex-wrap justify-end gap-2 border-t p-5">{footer}</footer>
           )}
           <DialogClose asChild>
             <Button
@@ -86,14 +87,16 @@ export function Modal({
     </Dialog>
   );
 }
+
 export function DetailsPanel(props: ModalProps) {
   return <Modal {...props} side />;
 }
+
 export function ConfirmDialog({
   onConfirm,
-  confirmLabel = "Confirm",
+  confirmLabel = 'Confirm',
   ...props
-}: Omit<ModalProps, "footer"> & {
+}: Omit<ModalProps, 'footer'> & {
   onConfirm: () => void;
   confirmLabel?: string;
 }) {

@@ -1,9 +1,10 @@
-import { useId, type HTMLAttributes, type ReactNode } from "react";
-import { Avatar as AvatarPrimitive, Collapsible } from "radix-ui";
-import { ChevronDown, TrendingUp, TrendingDown, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { Skeleton } from "./feedback";
-import { cn } from "../lib/utils";
+import { useId, type HTMLAttributes, type ReactNode } from 'react';
+import { Avatar as AvatarPrimitive, Collapsible } from 'radix-ui';
+import { ChevronDown, TrendingUp, TrendingDown, X } from 'lucide-react';
+import { Button } from './ui/button';
+import { Skeleton } from './feedback';
+import { cn } from '../lib/utils';
+
 export interface CardProps {
   title: string;
   description?: string;
@@ -14,6 +15,7 @@ export interface CardProps {
   defaultOpen?: boolean;
   className?: string;
 }
+
 export function Card({
   title,
   description,
@@ -28,29 +30,22 @@ export function Card({
   const body = (
     <>
       <div className="p-5">{children}</div>
-      {footer && (
-        <div className="flex flex-wrap items-center gap-3 border-t p-5">
-          {footer}
-        </div>
-      )}
+      {footer && <div className="flex flex-wrap items-center gap-3 border-t p-5">{footer}</div>}
     </>
   );
+
   return (
     <Collapsible.Root defaultOpen={defaultOpen} asChild>
       <section
         aria-labelledby={id}
-        className={cn("overflow-hidden rounded-xl border bg-card", className)}
+        className={cn('overflow-hidden rounded-xl border bg-card', className)}
       >
         <header className="flex items-start justify-between gap-3 border-b p-5">
           <div>
             <h2 id={id} className="font-semibold">
               {title}
             </h2>
-            {description && (
-              <p className="mt-1 text-sm text-muted-foreground">
-                {description}
-              </p>
-            )}
+            {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
           </div>
           <div className="flex items-center gap-2">
             {action}
@@ -76,6 +71,7 @@ export function Card({
     </Collapsible.Root>
   );
 }
+
 export function CardWithAction({
   title,
   description,
@@ -96,30 +92,30 @@ export function CardWithAction({
       )}
       <div className="min-w-40 flex-1">
         <h3 className="font-semibold">{title}</h3>
-        {description && (
-          <p className="mt-1 text-sm text-muted-foreground">{description}</p>
-        )}
+        {description && <p className="mt-1 text-sm text-muted-foreground">{description}</p>}
       </div>
       {action}
     </div>
   );
 }
+
 export function MetricTile({
   label,
   value,
   description,
   change,
   loading = false,
-  locale = "en-US",
+  locale = 'en-US',
 }: {
   label: string;
   value: number;
   description?: string;
-  change?: { label: string; direction: "up" | "down" };
+  change?: { label: string; direction: 'up' | 'down' };
   loading?: boolean;
   locale?: string;
 }) {
-  const Icon = change?.direction === "down" ? TrendingDown : TrendingUp;
+  const Icon = change?.direction === 'down' ? TrendingDown : TrendingUp;
+
   return (
     <section
       aria-label={label}
@@ -138,7 +134,7 @@ export function MetricTile({
           title={new Intl.NumberFormat(locale).format(value)}
         >
           {new Intl.NumberFormat(locale, {
-            notation: "compact",
+            notation: 'compact',
             maximumFractionDigits: 1,
           }).format(value)}
         </p>
@@ -149,54 +145,47 @@ export function MetricTile({
           {change.label}
         </p>
       )}
-      {description && (
-        <p className="mt-2 text-xs text-muted-foreground">{description}</p>
-      )}
+      {description && <p className="mt-2 text-xs text-muted-foreground">{description}</p>}
     </section>
   );
 }
+
 export function Avatar({
   name,
   src,
-  size = "md",
+  size = 'md',
 }: {
   name: string;
   src?: string;
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg';
 }) {
   const names = name.trim().split(/\s+/);
   const initials =
     names
       .filter((_, i) => i === 0 || i === names.length - 1)
-      .map((n) => Array.from(n)[0] ?? "")
-      .join("")
-      .toUpperCase() || "?";
+      .map((n) => Array.from(n)[0] ?? '')
+      .join('')
+      .toUpperCase() || '?';
+
   return (
     <AvatarPrimitive.Root
       role="img"
-      aria-label={name || "Unnamed person"}
+      aria-label={name || 'Unnamed person'}
       className={cn(
-        "inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-secondary font-semibold text-secondary-foreground",
-        size === "sm"
-          ? "size-8 text-xs"
-          : size === "lg"
-            ? "size-14 text-lg"
-            : "size-10 text-sm",
+        'inline-flex shrink-0 items-center justify-center overflow-hidden rounded-full bg-secondary font-semibold text-secondary-foreground',
+        size === 'sm' ? 'size-8 text-xs' : size === 'lg' ? 'size-14 text-lg' : 'size-10 text-sm',
       )}
     >
-      <AvatarPrimitive.Image
-        src={src}
-        alt=""
-        className="size-full object-cover"
-      />
+      <AvatarPrimitive.Image src={src} alt="" className="size-full object-cover" />
       <AvatarPrimitive.Fallback>{initials}</AvatarPrimitive.Fallback>
     </AvatarPrimitive.Root>
   );
 }
+
 export function TagList({
   tags,
   onRemove,
-  label = "Tags",
+  label = 'Tags',
 }: {
   tags: string[];
   onRemove?: (tag: string) => void;
@@ -225,6 +214,7 @@ export function TagList({
     </ul>
   );
 }
+
 export function ActionBar({
   children,
   summary,
@@ -237,7 +227,7 @@ export function ActionBar({
   return (
     <div
       className={cn(
-        "flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-4",
+        'flex flex-wrap items-center justify-between gap-3 rounded-xl border bg-card p-4',
         className,
       )}
     >
@@ -248,27 +238,29 @@ export function ActionBar({
     </div>
   );
 }
+
 export function Stack({
-  direction = "vertical",
-  gap = "md",
+  direction = 'vertical',
+  gap = 'md',
   className,
   ...props
 }: HTMLAttributes<HTMLDivElement> & {
-  direction?: "vertical" | "horizontal";
-  gap?: "sm" | "md" | "lg";
+  direction?: 'vertical' | 'horizontal';
+  gap?: 'sm' | 'md' | 'lg';
 }) {
   return (
     <div
       {...props}
       className={cn(
-        "flex",
-        direction === "vertical" ? "flex-col" : "flex-wrap items-center",
-        gap === "sm" ? "gap-2" : gap === "lg" ? "gap-6" : "gap-4",
+        'flex',
+        direction === 'vertical' ? 'flex-col' : 'flex-wrap items-center',
+        gap === 'sm' ? 'gap-2' : gap === 'lg' ? 'gap-6' : 'gap-4',
         className,
       )}
     />
   );
 }
+
 export function Grid({
   columns = 3,
   className,
@@ -278,9 +270,9 @@ export function Grid({
     <div
       {...props}
       className={cn(
-        "grid grid-cols-1 gap-5 sm:grid-cols-2",
-        columns === 3 && "lg:grid-cols-3",
-        columns === 4 && "lg:grid-cols-4",
+        'grid grid-cols-1 gap-5 sm:grid-cols-2',
+        columns === 3 && 'lg:grid-cols-3',
+        columns === 4 && 'lg:grid-cols-4',
         className,
       )}
     />

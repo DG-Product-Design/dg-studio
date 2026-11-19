@@ -1,0 +1,23 @@
+@layer components {
+  html:has([data-view-gallery])::view-transition-old(root),
+  html:has([data-view-gallery])::view-transition-new(root) {
+    animation: none;
+  }
+  ::view-transition-group(.dg-gallery-image),
+  ::view-transition-group(.dg-gallery-title) {
+    animation-duration: 450ms;
+    animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  ::view-transition-old(.dg-gallery-image),
+  ::view-transition-new(.dg-gallery-image) {
+    height: 100%;
+    object-fit: cover;
+    overflow: clip;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    ::view-transition-group(.dg-gallery-image),
+    ::view-transition-group(.dg-gallery-title) {
+      animation-duration: 0s;
+    }
+  }
+}

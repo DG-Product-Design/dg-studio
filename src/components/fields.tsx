@@ -1,17 +1,11 @@
-import { useId, type ComponentProps, type ReactNode } from "react";
-import { Popover, Switch as SwitchPrimitive } from "radix-ui";
-import { ChevronDown } from "lucide-react";
-import { Input } from "./ui/input";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from "./ui/select";
-import { Button } from "./ui/button";
-import { useTheme } from "./theme";
-import { cn } from "../lib/utils";
+import { useId, type ComponentProps, type ReactNode } from 'react';
+import { Popover, Switch as SwitchPrimitive } from 'radix-ui';
+import { ChevronDown } from 'lucide-react';
+import { Input } from './ui/input';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from './ui/select';
+import { Button } from './ui/button';
+import { useTheme } from './theme';
+import { cn } from '../lib/utils';
 
 export interface FieldPresentation {
   label: string;
@@ -21,6 +15,7 @@ export interface FieldPresentation {
   className?: string;
   id?: string;
 }
+
 function FieldFrame({
   label,
   hint,
@@ -31,19 +26,13 @@ function FieldFrame({
   children,
 }: FieldPresentation & { id: string; children: ReactNode }) {
   return (
-    <div className={cn("grid min-w-0 gap-2", className)}>
-      <label
-        htmlFor={id}
-        className={cn("text-sm font-semibold", hideLabel && "sr-only")}
-      >
+    <div className={cn('grid min-w-0 gap-2', className)}>
+      <label htmlFor={id} className={cn('text-sm font-semibold', hideLabel && 'sr-only')}>
         {label}
       </label>
       {children}
       {hint && (
-        <p
-          id={`${id}-hint`}
-          className="text-xs leading-relaxed text-muted-foreground"
-        >
+        <p id={`${id}-hint`} className="text-xs leading-relaxed text-muted-foreground">
           {hint}
         </p>
       )}
@@ -55,24 +44,20 @@ function FieldFrame({
     </div>
   );
 }
-function description(
-  id: string,
-  hint?: string,
-  error?: string,
-  existing?: string,
-) {
+
+function description(id: string, hint?: string, error?: string, existing?: string) {
   return (
-    [existing, hint && `${id}-hint`, error && `${id}-error`]
-      .filter(Boolean)
-      .join(" ") || undefined
+    [existing, hint && `${id}-hint`, error && `${id}-error`].filter(Boolean).join(' ') || undefined
   );
 }
+
 export type TextFieldProps = ComponentProps<typeof Input> &
   FieldPresentation & {
     inputClassName?: string;
     leadingIcon?: ReactNode;
     trailingAction?: ReactNode;
   };
+
 export function TextField({
   label,
   hint,
@@ -83,11 +68,12 @@ export function TextField({
   leadingIcon,
   trailingAction,
   id: providedId,
-  "aria-describedby": describedBy,
+  'aria-describedby': describedBy,
   ...props
 }: TextFieldProps) {
   const generatedId = useId();
   const id = providedId ?? generatedId;
+
   return (
     <FieldFrame {...{ label, hint, error, hideLabel, className, id }}>
       <div className="relative">
@@ -102,29 +88,25 @@ export function TextField({
         <Input
           {...props}
           id={id}
-          aria-invalid={error ? true : props["aria-invalid"]}
+          aria-invalid={error ? true : props['aria-invalid']}
           aria-describedby={description(id, hint, error, describedBy)}
-          className={cn(
-            leadingIcon && "pl-10",
-            trailingAction && "pr-20",
-            inputClassName,
-          )}
+          className={cn(leadingIcon && 'pl-10', trailingAction && 'pr-20', inputClassName)}
         />
         {trailingAction && (
-          <span className="absolute inset-y-0 right-1 flex items-center">
-            {trailingAction}
-          </span>
+          <span className="absolute inset-y-0 right-1 flex items-center">{trailingAction}</span>
         )}
       </div>
     </FieldFrame>
   );
 }
+
 export interface SelectOption {
   value: string;
   label: string;
   description?: string;
   disabled?: boolean;
 }
+
 export interface SelectFieldProps extends FieldPresentation {
   options: SelectOption[];
   value: string;
@@ -134,6 +116,7 @@ export interface SelectFieldProps extends FieldPresentation {
   disabled?: boolean;
   required?: boolean;
 }
+
 export function SelectField({
   label,
   hint,
@@ -144,13 +127,14 @@ export function SelectField({
   options,
   value,
   onValueChange,
-  placeholder = "Choose an option",
+  placeholder = 'Choose an option',
   name,
   disabled,
   required,
 }: SelectFieldProps) {
   const generatedId = useId();
   const id = providedId ?? generatedId;
+
   return (
     <FieldFrame {...{ label, hint, error, hideLabel, className, id }}>
       <Select
@@ -184,13 +168,12 @@ export function SelectField({
     </FieldFrame>
   );
 }
-export interface CheckboxFieldProps extends Omit<
-  ComponentProps<"input">,
-  "type"
-> {
+
+export interface CheckboxFieldProps extends Omit<ComponentProps<'input'>, 'type'> {
   label: string;
   description?: string;
 }
+
 export function CheckboxField({
   label,
   description: hint,
@@ -200,11 +183,12 @@ export function CheckboxField({
 }: CheckboxFieldProps) {
   const generatedId = useId();
   const id = providedId ?? generatedId;
+
   return (
     <label
       htmlFor={id}
       className={cn(
-        "flex cursor-pointer items-start gap-3 text-sm has-disabled:cursor-not-allowed has-disabled:opacity-50",
+        'flex cursor-pointer items-start gap-3 text-sm has-disabled:cursor-not-allowed has-disabled:opacity-50',
         className,
       )}
     >
@@ -212,12 +196,7 @@ export function CheckboxField({
         {...props}
         id={id}
         type="checkbox"
-        aria-describedby={description(
-          id,
-          hint,
-          undefined,
-          props["aria-describedby"],
-        )}
+        aria-describedby={description(id, hint, undefined, props['aria-describedby'])}
         className="mt-0.5 size-4 shrink-0 accent-primary"
       />
       <span>
@@ -234,6 +213,7 @@ export function CheckboxField({
     </label>
   );
 }
+
 export function Checklist({
   label,
   options,
@@ -263,9 +243,7 @@ export function Checklist({
           checked={value.includes(option.value)}
           onChange={(e) =>
             onValueChange(
-              e.target.checked
-                ? [...value, option.value]
-                : value.filter((v) => v !== option.value),
+              e.target.checked ? [...value, option.value] : value.filter((v) => v !== option.value),
             )
           }
         />
@@ -273,6 +251,7 @@ export function Checklist({
     </fieldset>
   );
 }
+
 export function MultiSelectField({
   label,
   hint,
@@ -295,18 +274,11 @@ export function MultiSelectField({
   const id = providedId ?? generatedId;
   const theme = useTheme();
   const selected = options.filter((o) => value.includes(o.value));
+
   return (
     <FieldFrame {...{ label, hint, error, className, id }}>
       {name &&
-        value.map((v) => (
-          <input
-            key={v}
-            type="hidden"
-            name={name}
-            value={v}
-            disabled={disabled}
-          />
-        ))}
+        value.map((v) => <input key={v} type="hidden" name={name} value={v} disabled={disabled} />)}
       <Popover.Root>
         <Popover.Trigger asChild>
           <Button
@@ -319,9 +291,7 @@ export function MultiSelectField({
             className="h-auto min-h-9 justify-between whitespace-normal text-left"
           >
             <span>
-              {selected.length
-                ? selected.map((o) => o.label).join(", ")
-                : "Choose options"}
+              {selected.length ? selected.map((o) => o.label).join(', ') : 'Choose options'}
             </span>
             <ChevronDown aria-hidden className="size-4 shrink-0" />
           </Button>
@@ -332,7 +302,7 @@ export function MultiSelectField({
             aria-label={label}
             sideOffset={6}
             align="start"
-            className="dg-theme z-[70] w-80 max-w-[calc(100vw-2rem)] rounded-lg border p-5 shadow-xl"
+            className="bg-background text-foreground font-sans z-[70] w-80 max-w-[calc(100vw-2rem)] rounded-lg border p-5 shadow-xl"
           >
             <Checklist
               label={label}
@@ -351,6 +321,7 @@ export function MultiSelectField({
     </FieldFrame>
   );
 }
+
 export function SwitchField({
   label,
   description: hint,
@@ -362,15 +333,13 @@ export function SwitchField({
 }) {
   const generatedId = useId();
   const id = providedId ?? generatedId;
+
   return (
     <div className="flex items-center justify-between gap-5">
       <label htmlFor={id} className="text-sm font-medium">
         {label}
         {hint && (
-          <span
-            id={`${id}-hint`}
-            className="mt-1 block font-normal text-muted-foreground"
-          >
+          <span id={`${id}-hint`} className="mt-1 block font-normal text-muted-foreground">
             {hint}
           </span>
         )}
@@ -386,6 +355,7 @@ export function SwitchField({
     </div>
   );
 }
+
 export function RadioCards({
   label,
   options,
@@ -402,6 +372,7 @@ export function RadioCards({
   disabled?: boolean;
 }) {
   const group = useId();
+
   return (
     <fieldset disabled={disabled}>
       <legend className="mb-3 text-sm font-semibold">{label}</legend>
@@ -423,9 +394,7 @@ export function RadioCards({
             <span className="text-sm">
               <span className="font-semibold">{option.label}</span>
               {option.description && (
-                <span className="mt-1 block text-muted-foreground">
-                  {option.description}
-                </span>
+                <span className="mt-1 block text-muted-foreground">{option.description}</span>
               )}
             </span>
           </label>
@@ -434,6 +403,7 @@ export function RadioCards({
     </fieldset>
   );
 }
+
 export function RangeField({
   label,
   id: providedId,
@@ -457,6 +427,7 @@ export function RangeField({
 }) {
   const generatedId = useId();
   const id = providedId ?? generatedId;
+
   return (
     <div className="grid gap-3">
       <div className="flex justify-between gap-3 text-sm">

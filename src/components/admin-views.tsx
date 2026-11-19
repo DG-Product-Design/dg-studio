@@ -1,22 +1,20 @@
-import { useState, type ReactNode } from "react";
-import { Card } from "./content";
-import { Button } from "./ui/button";
-import { ActionButton } from "./action-button";
-import { Banner, Skeleton } from "./feedback";
-import { DataTable } from "./data-table";
-import {
-  TableFilters,
-  type TableFilter,
-  type TableFilterValue,
-} from "./table-tools";
-import { Modal, type ModalProps } from "./overlays";
-import { SelectField, SwitchField } from "./fields";
-import { CardNextButton } from "./foundation-primitives";
-import { Form, type FormValues } from "./recipe-form";
-import { SettingsTable, AdminMetricsBar } from "./account-components";
+import { useState, type ReactNode } from 'react';
+import { Card } from './content';
+import { Button } from './ui/button';
+import { ActionButton } from './action-button';
+import { Banner, Skeleton } from './feedback';
+import { DataTable } from './data-table';
+import { TableFilters, type TableFilter, type TableFilterValue } from './table-tools';
+import { Modal, type ModalProps } from './overlays';
+import { SelectField, SwitchField } from './fields';
+import { CardNextButton } from './foundation-primitives';
+import { Form, type FormValues } from './recipe-form';
+import { SettingsTable, AdminMetricsBar } from './account-components';
+
 export function MetricsFilterBar(props: Parameters<typeof TableFilters>[0]) {
   return <TableFilters {...props} />;
 }
+
 export function MetricsGraphWrapper({
   title,
   children,
@@ -38,30 +36,28 @@ export function MetricsGraphWrapper({
   onFilterChange?: (value: Record<string, TableFilterValue>) => void;
   onDownload?: () => void | Promise<void>;
 }) {
-  const [downloading, setDownloading] = useState(false),
-    [failure, setFailure] = useState("");
+  const [downloading, setDownloading] = useState(false);
+  const [failure, setFailure] = useState('');
+
   async function download() {
     if (!onDownload || downloading) return;
     setDownloading(true);
-    setFailure("");
+    setFailure('');
     try {
       await onDownload();
     } catch (e) {
-      setFailure(e instanceof Error ? e.message : "Export failed.");
+      setFailure(e instanceof Error ? e.message : 'Export failed.');
     } finally {
       setDownloading(false);
     }
   }
+
   return (
     <Card
       title={title}
       action={
         onDownload && (
-          <ActionButton
-            loading={downloading}
-            variant="outline"
-            onClick={() => void download()}
-          >
+          <ActionButton loading={downloading} variant="outline" onClick={() => void download()}>
             Export chart
           </ActionButton>
         )
@@ -69,12 +65,8 @@ export function MetricsGraphWrapper({
     >
       <div className="space-y-5">
         {onFilterChange && (
-          <MetricsFilterBar
-            filters={filters}
-            value={filterValues}
-            onValueChange={onFilterChange}
-          />
-        )}{" "}
+          <MetricsFilterBar filters={filters} value={filterValues} onValueChange={onFilterChange} />
+        )}{' '}
         {(error || failure) && (
           <Banner title="Metrics need attention" tone="danger">
             {error || failure}
@@ -95,12 +87,13 @@ export function MetricsGraphWrapper({
     </Card>
   );
 }
+
 export function ModalAddEmployeeSuccess({
   employees,
   onAddAnother,
   onAddToProgram,
   ...props
-}: Omit<ModalProps, "title" | "description" | "children"> & {
+}: Omit<ModalProps, 'title' | 'description' | 'children'> & {
   employees: { id: string; name: string }[];
   onAddAnother: () => void;
   onAddToProgram?: () => void;
@@ -124,16 +117,15 @@ export function ModalAddEmployeeSuccess({
           <li key={e.id}>{e.name}</li>
         ))}
       </ul>
-      {onAddToProgram && (
-        <Button onClick={onAddToProgram}>Add to programs</Button>
-      )}
+      {onAddToProgram && <Button onClick={onAddToProgram}>Add to programs</Button>}
     </Modal>
   );
 }
+
 export function ModalProgramConfirmation({
   programs,
   ...props
-}: Omit<ModalProps, "title" | "description" | "children"> & {
+}: Omit<ModalProps, 'title' | 'description' | 'children'> & {
   programs: {
     id: string;
     name: string;
@@ -161,24 +153,27 @@ export function ModalProgramConfirmation({
     </Modal>
   );
 }
+
 export interface SyncRecord {
   id: string;
   label: string;
-  status: "complete" | "running" | "failed";
+  status: 'complete' | 'running' | 'failed';
   message?: string;
   rows: { id: string; name: string; change: string }[];
 }
+
 export function ModalSyncHistory({
   records,
   selected,
   onSelect,
   ...props
-}: Omit<ModalProps, "title" | "description" | "children"> & {
+}: Omit<ModalProps, 'title' | 'description' | 'children'> & {
   records: SyncRecord[];
   selected: string;
   onSelect: (id: string) => void;
 }) {
   const record = records.find((r) => r.id === selected);
+
   return (
     <Modal
       {...props}
@@ -197,18 +192,18 @@ export function ModalSyncHistory({
           <>
             <Banner
               title={
-                record.status === "running"
-                  ? "Sync in progress"
-                  : record.status === "failed"
-                    ? "Sync failed"
-                    : "Sync complete"
+                record.status === 'running'
+                  ? 'Sync in progress'
+                  : record.status === 'failed'
+                    ? 'Sync failed'
+                    : 'Sync complete'
               }
               tone={
-                record.status === "failed"
-                  ? "danger"
-                  : record.status === "running"
-                    ? "info"
-                    : "success"
+                record.status === 'failed'
+                  ? 'danger'
+                  : record.status === 'running'
+                    ? 'info'
+                    : 'success'
               }
             >
               {record.message}
@@ -216,8 +211,8 @@ export function ModalSyncHistory({
             <DataTable
               rows={record.rows}
               columns={[
-                { id: "name", header: "Employee", cell: (r) => r.name },
-                { id: "change", header: "Change", cell: (r) => r.change },
+                { id: 'name', header: 'Employee', cell: (r) => r.name },
+                { id: 'change', header: 'Change', cell: (r) => r.change },
               ]}
               caption="Synchronization changes"
               getRowId={(r) => r.id}
@@ -231,6 +226,7 @@ export function ModalSyncHistory({
     </Modal>
   );
 }
+
 export interface EmployeeProfile {
   id: string;
   name: string;
@@ -245,6 +241,7 @@ export interface EmployeeProfile {
   pointsSpent: number;
   programs: string[];
 }
+
 export function ViewEmployee({
   employee,
   history = [],
@@ -288,14 +285,14 @@ export function ViewEmployee({
           <SettingsTable
             rows={[
               {
-                id: "received",
-                label: "Received",
+                id: 'received',
+                label: 'Received',
                 value: employee.pointsReceived,
               },
-              { id: "spent", label: "Spent", value: employee.pointsSpent },
+              { id: 'spent', label: 'Spent', value: employee.pointsSpent },
               {
-                id: "remaining",
-                label: "Remaining",
+                id: 'remaining',
+                label: 'Remaining',
                 value: employee.pointsReceived - employee.pointsSpent,
               },
             ]}
@@ -309,9 +306,7 @@ export function ViewEmployee({
             options={roles}
             disabled={integrated}
           />
-          <p className="mt-4 text-sm">
-            Programs: {employee.programs.join(", ") || "None"}
-          </p>
+          <p className="mt-4 text-sm">Programs: {employee.programs.join(', ') || 'None'}</p>
         </Card>
       </div>
       <Form
@@ -324,11 +319,11 @@ export function ViewEmployee({
           launchDate: employee.launchDate,
         }}
         fields={[
-          { name: "department", label: "Department" },
-          { name: "employeeId", label: "Employee ID" },
-          { name: "birthday", label: "Birthdate", type: "date" },
-          { name: "hireDate", label: "Hire date", type: "date" },
-          { name: "launchDate", label: "Launch date", type: "date" },
+          { name: 'department', label: 'Department' },
+          { name: 'employeeId', label: 'Employee ID' },
+          { name: 'birthday', label: 'Birthdate', type: 'date' },
+          { name: 'hireDate', label: 'Hire date', type: 'date' },
+          { name: 'launchDate', label: 'Launch date', type: 'date' },
         ]}
         onSubmit={onSave}
       />
@@ -337,13 +332,13 @@ export function ViewEmployee({
         rows={history}
         columns={[
           {
-            id: "date",
-            header: "Date",
+            id: 'date',
+            header: 'Date',
             sortValue: (r) => r.date,
             cell: (r) => r.date,
           },
-          { id: "description", header: "Activity", cell: (r) => r.description },
-          { id: "points", header: "Points", cell: (r) => r.points },
+          { id: 'description', header: 'Activity', cell: (r) => r.description },
+          { id: 'points', header: 'Points', cell: (r) => r.points },
         ]}
         getRowId={(r) => r.id}
         getRowLabel={(r) => r.description}
@@ -351,6 +346,7 @@ export function ViewEmployee({
     </div>
   );
 }
+
 export function ViewProgram({
   name,
   autoEnroll,
@@ -386,53 +382,53 @@ export function ViewProgram({
         title="Program details"
         defaultValues={{ name, ...defaultValues }}
         fields={[
-          { name: "name", label: "Program name", required: true },
+          { name: 'name', label: 'Program name', required: true },
           {
-            name: "type",
-            label: "Program type",
-            type: "select",
+            name: 'type',
+            label: 'Program type',
+            type: 'select',
             options: [
-              { value: "launch", label: "Launch" },
-              { value: "event", label: "Event" },
-              { value: "recurring", label: "Recurring" },
+              { value: 'launch', label: 'Launch' },
+              { value: 'event', label: 'Event' },
+              { value: 'recurring', label: 'Recurring' },
             ],
           },
           {
-            name: "event",
-            label: "Event",
-            type: "select",
+            name: 'event',
+            label: 'Event',
+            type: 'select',
             options: [
-              { value: "birthday", label: "Birthday" },
-              { value: "anniversary", label: "Work anniversary" },
+              { value: 'birthday', label: 'Birthday' },
+              { value: 'anniversary', label: 'Work anniversary' },
             ],
-            when: (v) => v.type === "event",
+            when: (v) => v.type === 'event',
           },
           {
-            name: "day",
-            label: "Recurring day",
-            type: "number",
+            name: 'day',
+            label: 'Recurring day',
+            type: 'number',
             min: 1,
             max: 28,
-            when: (v) => v.type === "recurring",
+            when: (v) => v.type === 'recurring',
           },
           {
-            name: "amount",
-            label: "Points per employee",
-            type: "number",
+            name: 'amount',
+            label: 'Points per employee',
+            type: 'number',
             min: 1,
             required: true,
           },
-          { name: "startDate", label: "Start date", type: "date" },
+          { name: 'startDate', label: 'Start date', type: 'date' },
           {
-            name: "endDate",
-            label: "End date",
-            type: "date",
+            name: 'endDate',
+            label: 'End date',
+            type: 'date',
             validate: (v, values) =>
               v && String(v) < String(values.startDate)
-                ? "End date must follow start date."
+                ? 'End date must follow start date.'
                 : undefined,
           },
-          { name: "message", label: "Distribution message", type: "textarea" },
+          { name: 'message', label: 'Distribution message', type: 'textarea' },
         ]}
         onSubmit={onSave}
       />
@@ -441,12 +437,12 @@ export function ViewProgram({
         rows={employees}
         columns={[
           {
-            id: "name",
-            header: "Employee",
+            id: 'name',
+            header: 'Employee',
             cell: (r) => r.name,
             sortValue: (r) => r.name,
           },
-          { id: "points", header: "Points", cell: (r) => r.points },
+          { id: 'points', header: 'Points', cell: (r) => r.points },
         ]}
         getRowId={(r) => r.id}
         getRowLabel={(r) => r.name}
