@@ -1,15 +1,19 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { SwitchField } from "../components/fields";
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { SwitchField } from '../components/fields';
+
 const meta = {
-  title: "Forms/Switch",
+  title: 'Forms/Switch',
   component: SwitchField,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof SwitchField>;
+
 export default meta;
+
 export const Default: StoryObj<typeof SwitchField> = {
   render: () => {
     const [checked, setChecked] = useState(true);
+
     return (
       <div className="max-w-md">
         <SwitchField
@@ -22,6 +26,7 @@ export const Default: StoryObj<typeof SwitchField> = {
     );
   },
 };
+
 export const Disabled: StoryObj<typeof SwitchField> = {
-  args: { label: "Auto-save changes", disabled: true, checked: true },
+  args: { label: 'Auto-save changes', disabled: true, checked: true },
 };

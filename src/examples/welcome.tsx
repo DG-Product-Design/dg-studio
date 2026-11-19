@@ -1,18 +1,11 @@
-import { useState } from "react";
-import {
-  ArrowUpRight,
-  Images,
-  MessageSquare,
-  Layers,
-  Move,
-  RotateCcw,
-} from "lucide-react";
-import { GlowBorder, GlowGroup } from "../components/glow-border";
-import { TotalOdometer } from "../components/motion";
-import { ImageFade } from "../components/image-fade";
-import { CartAnimation } from "../components/cart-animation";
-import { Button } from "../components/ui/button";
-import { assets } from "./assets";
+import { useState } from 'react';
+import { ArrowUpRight, Images, MessageSquare, Layers, Move, RotateCcw } from 'lucide-react';
+import { GlowBorder, GlowGroup } from '../components/glow-border';
+import { TotalOdometer } from '../components/motion';
+import { ImageFade } from '../components/image-fade';
+import { CartAnimation } from '../components/cart-animation';
+import { Button } from '../components/ui/button';
+import { assets } from './assets';
 
 const ascii = `
 ██████╗     ██████╗
@@ -24,18 +17,15 @@ const ascii = `
 `.trim();
 
 export function Welcome() {
-  const [image, setImage] = useState(0),
-    [total, setTotal] = useState(1240),
-    [replay, setReplay] = useState(0);
+  const [image, setImage] = useState(0);
+  const [total, setTotal] = useState(1240);
+  const [replay, setReplay] = useState(0);
+
   return (
     <main className="mx-auto max-w-6xl">
       <header className="mb-5 flex flex-wrap items-center justify-between gap-2">
-        <span className="text-lg font-semibold tracking-tight">
-          D.G / Studio UI
-        </span>
-        <span className="text-xs text-muted-foreground">
-          A working collection, by David George
-        </span>
+        <span className="text-lg font-semibold tracking-tight">D.G / Studio UI</span>
+        <span className="text-xs text-muted-foreground">A working collection, by David George</span>
       </header>
       <div className="relative isolate overflow-hidden rounded-2xl">
         <img
@@ -65,17 +55,16 @@ export function Welcome() {
           </h1>
           <div className="self-end">
             <p className="text-base leading-relaxed text-muted-foreground">
-              Welcome! This is a collection of recreated components that I've
-              built over my career (the ones I can remember at least). Usually,
-              when working on a project, I am 110% focused on the project at
-              hand. This presents a challenge as I usually only think of
+              Welcome! This is a collection of recreated components that I've built over my career
+              (the ones I can remember at least). Usually, when working on a project, I am 110%
+              focused on the project at hand. This presents a challenge as I usually only think of
               updating my portfolio when it's time to look for a new project.
             </p>
           </div>
         </div>
         <p className="font-semibold text-muted-foreground w-full max-w-lg mx-auto text-pretty text-center">
-          Take a look around! Move your mouse across the borders below. Try the
-          Storybook controls. Choose a palette in the toolbar.
+          Take a look around! Move your mouse across the borders below. Try the Storybook controls.
+          Choose a palette in the toolbar.
         </p>
       </div>
       <GlowGroup className="grid gap-5 md:grid-cols-3" spread={100}>
@@ -84,8 +73,8 @@ export function Welcome() {
             <div className="mb-5">
               <h2 className="font-semibold">Image reveal</h2>
               <p className="mt-1 text-xs text-muted-foreground">
-                Prevent CLS with a soft load transition, preserving aspect
-                ratio, and blurring the background on containment.
+                Prevent CLS with a soft load transition, preserving aspect ratio, and blurring the
+                background on containment.
               </p>
             </div>
             <ImageFade
@@ -167,27 +156,27 @@ export function Welcome() {
       >
         {[
           {
-            title: "Image library",
-            detail: "Browse, filter, and look closer",
-            id: "media-photo-library--default",
+            title: 'Image library',
+            detail: 'Browse, filter, and look closer',
+            id: 'media-photo-library--default',
             Icon: Images,
           },
           {
-            title: "Creative studio",
-            detail: "A conversation that makes things",
-            id: "examples-creative-studio--default",
+            title: 'Creative studio',
+            detail: 'A conversation that makes things',
+            id: 'examples-creative-studio--default',
             Icon: MessageSquare,
           },
           {
-            title: "Overlays",
-            detail: "Details without losing your place",
-            id: "overlays-details-panel--default",
+            title: 'Overlays',
+            detail: 'Details without losing your place',
+            id: 'overlays-details-panel--default',
             Icon: Layers,
           },
           {
-            title: "Motion",
-            detail: "A little movement, with purpose",
-            id: "motion-total-odometer--interactive",
+            title: 'Motion',
+            detail: 'A little movement, with purpose',
+            id: 'motion-total-odometer--interactive',
             Icon: Move,
           },
         ].map(({ title, detail, id, Icon }) => (

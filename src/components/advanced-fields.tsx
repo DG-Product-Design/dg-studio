@@ -1,8 +1,9 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from "react";
-import { Slider } from "radix-ui";
-import { Check } from "lucide-react";
-import { TextField, type SelectOption } from "./fields";
-import { cn } from "../lib/utils";
+import { useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { Slider } from 'radix-ui';
+import { Check } from 'lucide-react';
+import { TextField, type SelectOption } from './fields';
+import { cn } from '../lib/utils';
+
 export interface SearchSelectProps {
   label: string;
   value: SelectOption | SelectOption[] | null;
@@ -15,6 +16,7 @@ export interface SearchSelectProps {
   onCreate?: (query: string) => SelectOption | Promise<SelectOption>;
   placeholder?: string;
 }
+
 export function SearchSelect({
   label,
   value,
@@ -25,32 +27,33 @@ export function SearchSelect({
   disabled = false,
   renderOption,
   onCreate,
-  placeholder = "Search options…",
+  placeholder = 'Search options…',
 }: SearchSelectProps) {
-  const id = useId(),
-    root = useRef<HTMLDivElement>(null),
-    input = useRef<HTMLInputElement>(null);
-  const [query, setQuery] = useState(""),
-    [open, setOpen] = useState(false),
-    [active, setActive] = useState(-1),
-    [remote, setRemote] = useState<SelectOption[]>([]),
-    [busy, setBusy] = useState(false),
-    [error, setError] = useState("");
+  const id = useId();
+  const root = useRef<HTMLDivElement>(null);
+  const input = useRef<HTMLInputElement>(null);
+
+  const [query, setQuery] = useState('');
+  const [open, setOpen] = useState(false);
+  const [active, setActive] = useState(-1);
+  const [remote, setRemote] = useState<SelectOption[]>([]);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+
   const request = useRef(0);
   const mounted = useRef(true);
   const selected = Array.isArray(value) ? value : value ? [value] : [];
   const filtered = loadOptions
     ? remote
     : options.filter((o) =>
-        `${o.label} ${o.description ?? ""}`
-          .toLowerCase()
-          .includes(query.toLowerCase()),
+        `${o.label} ${o.description ?? ''}`.toLowerCase().includes(query.toLowerCase()),
       );
-  const enabled = filtered
-    .map((o, i) => (o.disabled ? -1 : i))
-    .filter((i) => i >= 0);
+
+  const enabled = filtered.map((o, i) => (o.disabled ? -1 : i)).filter((i) => i >= 0);
+
   useEffect(() => {
     mounted.current = true;
+
     return () => {
       mounted.current = false;
     };
@@ -61,7 +64,7 @@ export function SearchSelect({
     const revision = ++request.current;
     setBusy(true);
     setRemote([]);
-    setError("");
+    setError('');
     const timer = setTimeout(() => {
       void loadOptions(query, controller.signal)
         .then((data) => {
@@ -72,19 +75,19 @@ export function SearchSelect({
         })
         .catch((e) => {
           if (!controller.signal.aborted)
-            setError(
-              e instanceof Error ? e.message : "Unable to load options.",
-            );
+            setError(e instanceof Error ? e.message : 'Unable to load options.');
         })
         .finally(() => {
           if (!controller.signal.aborted) setBusy(false);
         });
     }, 200);
+
     return () => {
       clearTimeout(timer);
       controller.abort();
     };
   }, [query, loadOptions, open]);
+
   function choose(option: SelectOption) {
     if (option.disabled) return;
     onValueChange(
@@ -94,26 +97,27 @@ export function SearchSelect({
           : [...selected, option]
         : option,
     );
-    setQuery("");
+    setQuery('');
     setActive(-1);
     if (!multiple) setOpen(false);
     input.current?.focus();
   }
+
   async function create() {
     if (!onCreate || !query.trim() || busy) return;
     setBusy(true);
     setRemote([]);
-    setError("");
+    setError('');
     try {
       const option = await onCreate(query.trim());
       if (mounted.current) choose(option);
     } catch (e) {
-      if (mounted.current)
-        setError(e instanceof Error ? e.message : "Unable to create option.");
+      if (mounted.current) setError(e instanceof Error ? e.message : 'Unable to create option.');
     } finally {
       if (mounted.current) setBusy(false);
     }
   }
+
   return (
     <div
       ref={root}
@@ -130,19 +134,13 @@ export function SearchSelect({
         label={label}
         value={query}
         disabled={disabled}
-        placeholder={
-          selected.length
-            ? selected.map((o) => o.label).join(", ")
-            : placeholder
-        }
+        placeholder={selected.length ? selected.map((o) => o.label).join(', ') : placeholder}
         role="combobox"
         aria-autocomplete="list"
         aria-expanded={open}
         aria-controls={open ? `${id}-list` : undefined}
         aria-activedescendant={
-          open && active >= 0 && filtered[active]
-            ? `${id}-${active}`
-            : undefined
+          open && active >= 0 && filtered[active] ? `${id}-${active}` : undefined
         }
         error={error || undefined}
         onFocus={() => setOpen(true)}
@@ -152,31 +150,27 @@ export function SearchSelect({
           setOpen(true);
         }}
         onKeyDown={(e) => {
-          if (e.key === "Escape") {
+          if (e.key === 'Escape') {
             setOpen(false);
             setActive(-1);
-          } else if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.key)) {
-            if ((e.key === "Home" || e.key === "End") && !open) return;
+          } else if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
+            if ((e.key === 'Home' || e.key === 'End') && !open) return;
             e.preventDefault();
             setOpen(true);
             const position = enabled.indexOf(active);
             const next =
-              e.key === "Home"
+              e.key === 'Home'
                 ? 0
-                : e.key === "End"
+                : e.key === 'End'
                   ? enabled.length - 1
-                  : e.key === "ArrowDown"
+                  : e.key === 'ArrowDown'
                     ? (position + 1) % enabled.length
                     : position <= 0
                       ? enabled.length - 1
                       : position - 1;
+
             setActive(enabled[next] ?? -1);
-          } else if (
-            e.key === "Enter" &&
-            open &&
-            active >= 0 &&
-            filtered[active]
-          ) {
+          } else if (e.key === 'Enter' && open && active >= 0 && filtered[active]) {
             e.preventDefault();
             choose(filtered[active]);
           }
@@ -192,11 +186,7 @@ export function SearchSelect({
                 aria-label={`Remove ${o.label}`}
                 className="rounded-full border bg-secondary px-3 py-1 text-xs text-secondary-foreground"
                 onClick={() =>
-                  onValueChange(
-                    multiple
-                      ? selected.filter((s) => s.value !== o.value)
-                      : null,
-                  )
+                  onValueChange(multiple ? selected.filter((s) => s.value !== o.value) : null)
                 }
               >
                 {o.label} ×
@@ -224,9 +214,9 @@ export function SearchSelect({
                 onMouseDown={(e) => e.preventDefault()}
                 onClick={() => choose(o)}
                 className={cn(
-                  "flex cursor-pointer items-center justify-between gap-3 rounded px-3 py-2 text-sm",
-                  i === active && "bg-accent",
-                  o.disabled && "cursor-not-allowed opacity-40",
+                  'flex cursor-pointer items-center justify-between gap-3 rounded px-3 py-2 text-sm',
+                  i === active && 'bg-accent',
+                  o.disabled && 'cursor-not-allowed opacity-40',
                 )}
               >
                 {renderOption ? (
@@ -235,9 +225,7 @@ export function SearchSelect({
                   <span>
                     {o.label}
                     {o.description && (
-                      <small className="block text-muted-foreground">
-                        {o.description}
-                      </small>
+                      <small className="block text-muted-foreground">{o.description}</small>
                     )}
                   </span>
                 )}
@@ -259,9 +247,7 @@ export function SearchSelect({
           )}
           {onCreate &&
             query.trim() &&
-            !filtered.some(
-              (o) => o.label.toLowerCase() === query.trim().toLowerCase(),
-            ) && (
+            !filtered.some((o) => o.label.toLowerCase() === query.trim().toLowerCase()) && (
               <button
                 type="button"
                 disabled={busy}
@@ -276,6 +262,7 @@ export function SearchSelect({
     </div>
   );
 }
+
 export function RangeSlider({
   label,
   value,
@@ -296,6 +283,7 @@ export function RangeSlider({
   formatValue?: (value: number) => string;
 }) {
   const id = useId();
+
   return (
     <div className="space-y-4">
       <div className="flex justify-between gap-4">
@@ -319,7 +307,7 @@ export function RangeSlider({
         <Slider.Track className="relative h-2 grow rounded-full bg-muted">
           <Slider.Range className="absolute h-full rounded-full bg-primary" />
         </Slider.Track>
-        {["Minimum", "Maximum"].map((name, i) => (
+        {['Minimum', 'Maximum'].map((name, i) => (
           <Slider.Thumb
             key={name}
             aria-label={`${label} ${name}`}

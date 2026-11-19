@@ -1,14 +1,10 @@
-import {
-  useCallback,
-  useState,
-  type CSSProperties,
-  type ImgHTMLAttributes,
-} from "react";
-import { ImageOff } from "lucide-react";
-import { cn } from "../lib/utils";
+import { useCallback, useState, type CSSProperties, type ImgHTMLAttributes } from 'react';
+import { ImageOff } from 'lucide-react';
+import { cn } from '../lib/utils';
+
 export interface ImageFadeProps extends Omit<
   ImgHTMLAttributes<HTMLImageElement>,
-  "width" | "height" | "src" | "alt"
+  'width' | 'height' | 'src' | 'alt'
 > {
   src: string;
   alt: string;
@@ -16,10 +12,11 @@ export interface ImageFadeProps extends Omit<
   height: number;
   imageClassName?: string;
   /** Container ratio; defaults to width / height. Accepts a number or CSS ratio. */
-  aspectRatio?: CSSProperties["aspectRatio"];
+  aspectRatio?: CSSProperties['aspectRatio'];
   /** Fit the complete image and fill unused space with a blurred copy. */
   blurBg?: boolean;
 }
+
 /** Reserves space, handles cached images, and resets loading state for each source. */
 export function ImageFade({
   src,
@@ -36,29 +33,27 @@ export function ImageFade({
 }: ImageFadeProps) {
   const [state, setState] = useState<{
     src: string;
-    status: "loaded" | "error";
+    status: 'loaded' | 'error';
   }>();
-  const status = state?.src === src ? state.status : "loading";
+
+  const status = state?.src === src ? state.status : 'loading';
   const ref = useCallback(
     (node: HTMLImageElement | null) => {
-      if (node?.complete && node.naturalWidth > 0)
-        setState({ src, status: "loaded" });
+      if (node?.complete && node.naturalWidth > 0) setState({ src, status: 'loaded' });
     },
     [src],
   );
+
   return (
     <div
-      className={cn("relative overflow-hidden rounded-lg bg-muted", className)}
+      className={cn('relative overflow-hidden rounded-lg bg-muted', className)}
       style={{ aspectRatio: aspectRatio ?? `${width}/${height}` }}
       data-image-state={status}
     >
-      {status === "loading" && (
-        <div
-          aria-hidden
-          className="absolute inset-0 motion-safe:animate-pulse bg-muted"
-        />
+      {status === 'loading' && (
+        <div aria-hidden className="absolute inset-0 motion-safe:animate-pulse bg-muted" />
       )}
-      {status === "error" && (
+      {status === 'error' && (
         <div
           role="img"
           aria-label={`${alt}. Image unavailable.`}
@@ -68,7 +63,7 @@ export function ImageFade({
           <span>Image unavailable</span>
         </div>
       )}
-      {blurBg && status !== "error" && (
+      {blurBg && status !== 'error' && (
         <img
           key={`background-${src}`}
           src={src}
@@ -83,8 +78,8 @@ export function ImageFade({
           draggable={false}
           data-image-background
           className={cn(
-            "pointer-events-none absolute inset-0 size-full scale-110 object-cover blur-xl motion-safe:transition-opacity motion-safe:duration-500",
-            status === "loaded" ? "opacity-100" : "opacity-0",
+            'pointer-events-none absolute inset-0 size-full scale-110 object-cover blur-xl motion-safe:transition-opacity motion-safe:duration-500',
+            status === 'loaded' ? 'opacity-100' : 'opacity-0',
           )}
         />
       )}
@@ -97,19 +92,19 @@ export function ImageFade({
         width={width}
         height={height}
         onLoad={(e) => {
-          setState({ src, status: "loaded" });
+          setState({ src, status: 'loaded' });
           onLoad?.(e);
         }}
         onError={(e) => {
-          setState({ src, status: "error" });
+          setState({ src, status: 'error' });
           onError?.(e);
         }}
         className={cn(
-          "absolute inset-0 size-full object-cover motion-safe:transition-opacity motion-safe:duration-500",
-          status === "loaded" ? "opacity-100" : "opacity-0",
-          status === "error" && "hidden",
+          'absolute inset-0 size-full object-cover motion-safe:transition-opacity motion-safe:duration-500',
+          status === 'loaded' ? 'opacity-100' : 'opacity-0',
+          status === 'error' && 'hidden',
           imageClassName,
-          blurBg && "object-contain",
+          blurBg && 'object-contain',
         )}
       />
     </div>

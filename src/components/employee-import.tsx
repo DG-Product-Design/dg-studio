@@ -1,11 +1,12 @@
-import { useRef, useState } from "react";
-import { Form } from "./recipe-form";
-import { Tabs } from "./navigation";
-import { Banner } from "./feedback";
-import { DataTable } from "./data-table";
-import { ActionButton } from "./action-button";
-import { Button } from "./ui/button";
-import { Modal, type ModalProps } from "./overlays";
+import { useRef, useState } from 'react';
+import { Form } from './recipe-form';
+import { Tabs } from './navigation';
+import { Banner } from './feedback';
+import { DataTable } from './data-table';
+import { ActionButton } from './action-button';
+import { Button } from './ui/button';
+import { Modal, type ModalProps } from './overlays';
+
 export interface EmployeeRecord {
   firstName: string;
   lastName: string;
@@ -13,24 +14,28 @@ export interface EmployeeRecord {
   department?: string;
   employeeId?: string;
 }
+
 export interface ImportIssue {
   row: number;
   message: string;
 }
+
 export interface EmployeeImportResult {
   records: EmployeeRecord[];
   errors: ImportIssue[];
   warnings: string[];
 }
+
 /** RFC-style quoted fields, escaped quotes, CRLF and embedded newlines. */
 export function parseEmployeeCsv(text: string): EmployeeImportResult {
   const rows: string[][] = [];
-  let row: string[] = [],
-    field = "",
-    quoted = false,
-    closed = false;
+  let row: string[] = [];
+  let field = '';
+  let quoted = false;
+  let closed = false;
+
   const errors: ImportIssue[] = [];
-  text = text.replace(/^\uFEFF/, "");
+  text = text.replace(/^\uFEFF/, '');
   for (let i = 0; i < text.length; i++) {
     const char = text[i];
     if (quoted) {
@@ -45,72 +50,79 @@ export function parseEmployeeCsv(text: string): EmployeeImportResult {
       } else field += char;
       continue;
     }
+
     if (char === '"' && !field && !closed) {
       quoted = true;
       continue;
     }
-    if (char === "," || char === "\n" || char === "\r") {
+
+    if (char === ',' || char === '\n' || char === '\r') {
       row.push(field.trim());
-      field = "";
+      field = '';
       closed = false;
-      if (char !== ",") {
+      if (char !== ',') {
         if (row.some(Boolean)) rows.push(row);
         row = [];
-        if (char === "\r" && text[i + 1] === "\n") i++;
+        if (char === '\r' && text[i + 1] === '\n') i++;
       }
+
       continue;
     }
+
     if (closed && !/\s/.test(char))
       errors.push({
         row: rows.length + 1,
-        message: "Unexpected text after a quoted field.",
+        message: 'Unexpected text after a quoted field.',
       });
     field += char;
   }
+
   if (quoted)
     errors.push({
       row: rows.length + 1,
-      message: "A quoted field is not closed.",
+      message: 'A quoted field is not closed.',
     });
   row.push(field.trim());
   if (row.some(Boolean)) rows.push(row);
   const headers = rows.shift() ?? [];
-  const required = ["firstName", "lastName", "email"];
-  const allowed = [...required, "department", "employeeId"];
+  const required = ['firstName', 'lastName', 'email'];
+  const allowed = [...required, 'department', 'employeeId'];
   for (const h of required)
-    if (!headers.includes(h))
-      errors.push({ row: 1, message: `Missing column: ${h}` });
+    if (!headers.includes(h)) errors.push({ row: 1, message: `Missing column: ${h}` });
   if (new Set(headers).size !== headers.length)
-    errors.push({ row: 1, message: "Column names must be unique." });
+    errors.push({ row: 1, message: 'Column names must be unique.' });
   const warnings = headers
-      .filter((h) => !allowed.includes(h))
-      .map((h) => `Column “${h}” will be ignored.`),
-    seen = new Set<string>();
+    .filter((h) => !allowed.includes(h))
+    .map((h) => `Column “${h}” will be ignored.`);
+
+  const seen = new Set<string>();
+
   const records = rows.map((values, index) => {
-    const record = Object.fromEntries(
-      headers.map((h, i) => [h, values[i] ?? ""]),
-    );
+    const record = Object.fromEntries(headers.map((h, i) => [h, values[i] ?? '']));
+
     if (values.length !== headers.length)
       errors.push({
         row: index + 2,
-        message: "Column count does not match the header.",
+        message: 'Column count does not match the header.',
       });
     for (const h of required)
-      if (!record[h])
-        errors.push({ row: index + 2, message: `${h} is required.` });
+      if (!record[h]) errors.push({ row: index + 2, message: `${h} is required.` });
     if (record.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(record.email))
-      errors.push({ row: index + 2, message: "Email address is invalid." });
+      errors.push({ row: index + 2, message: 'Email address is invalid.' });
     if (seen.has(record.email?.toLowerCase()))
-      errors.push({ row: index + 2, message: "Duplicate email address." });
+      errors.push({ row: index + 2, message: 'Duplicate email address.' });
     seen.add(record.email?.toLowerCase());
+
     return Object.fromEntries(
-      allowed.map((h) => [h, record[h] ?? ""]),
+      allowed.map((h) => [h, record[h] ?? '']),
     ) as unknown as EmployeeRecord;
   });
-  if (!records.length)
-    errors.push({ row: 2, message: "Add at least one employee row." });
+
+  if (!records.length) errors.push({ row: 2, message: 'Add at least one employee row.' });
+
   return { records, errors, warnings };
 }
+
 export function ImportReview({
   result,
   busy = false,
@@ -124,9 +136,7 @@ export function ImportReview({
 }) {
   return (
     <div className="space-y-4">
-      <h3 className="text-lg font-semibold">
-        Review {result.records.length} employees
-      </h3>
+      <h3 className="text-lg font-semibold">Review {result.records.length} employees</h3>
       {result.errors.length > 0 && (
         <Banner title={`${result.errors.length} import errors`} tone="danger">
           <ul>
@@ -148,12 +158,12 @@ export function ImportReview({
         caption="Employee import preview"
         columns={[
           {
-            id: "name",
-            header: "Name",
+            id: 'name',
+            header: 'Name',
             cell: (r) => `${r.firstName} ${r.lastName}`,
           },
-          { id: "email", header: "Email", cell: (r) => r.email },
-          { id: "department", header: "Department", cell: (r) => r.department },
+          { id: 'email', header: 'Email', cell: (r) => r.email },
+          { id: 'department', header: 'Department', cell: (r) => r.department },
         ]}
         pageSize={5}
       />
@@ -172,45 +182,52 @@ export function ImportReview({
     </div>
   );
 }
+
 export function EmployeeImport({
   onSubmit,
 }: {
   onSubmit: (records: EmployeeRecord[]) => void | Promise<void>;
 }) {
-  const [result, setResult] = useState<EmployeeImportResult>(),
-    [error, setError] = useState(""),
-    [busy, setBusy] = useState(false),
-    [complete, setComplete] = useState(false);
+  const [result, setResult] = useState<EmployeeImportResult>();
+  const [error, setError] = useState('');
+  const [busy, setBusy] = useState(false);
+  const [complete, setComplete] = useState(false);
+
   const revision = useRef(0);
+
   async function read(file?: File) {
     if (!file) return;
     const current = ++revision.current;
-    setError("");
+    setError('');
     setComplete(false);
     if (file.size > 2_000_000) {
-      setError("Choose a CSV smaller than 2 MB.");
+      setError('Choose a CSV smaller than 2 MB.');
+
       return;
     }
+
     try {
       const text = await file.text();
       if (current === revision.current) setResult(parseEmployeeCsv(text));
     } catch {
-      setError("The file could not be read. Choose another CSV.");
+      setError('The file could not be read. Choose another CSV.');
     }
   }
+
   async function submit() {
     if (busy || !result || result.errors.length) return;
     setBusy(true);
-    setError("");
+    setError('');
     try {
       await onSubmit(result.records);
       setComplete(true);
     } catch (e) {
-      setError(e instanceof Error ? e.message : "Import failed. Try again.");
+      setError(e instanceof Error ? e.message : 'Import failed. Try again.');
     } finally {
       setBusy(false);
     }
   }
+
   return (
     <div className="space-y-4">
       {error && (
@@ -230,15 +247,14 @@ export function EmployeeImport({
           onBack={() => {
             revision.current++;
             setResult(undefined);
-            setError("");
+            setError('');
           }}
         />
       ) : (
         <label className="block space-y-3 rounded-xl border border-dashed p-5">
           <span className="block font-semibold">Choose employee CSV</span>
           <span className="block text-sm text-muted-foreground">
-            Columns: firstName, lastName, email. Optional: department,
-            employeeId.
+            Columns: firstName, lastName, email. Optional: department, employeeId.
           </span>
           <input
             type="file"
@@ -251,12 +267,14 @@ export function EmployeeImport({
     </div>
   );
 }
+
 export function FormAddEmployee({
   onSubmit,
 }: {
   onSubmit: (records: EmployeeRecord[]) => void | Promise<void>;
 }) {
-  const [mode, setMode] = useState("one");
+  const [mode, setMode] = useState('one');
+
   return (
     <Tabs
       label="Add employees"
@@ -264,19 +282,19 @@ export function FormAddEmployee({
       onValueChange={setMode}
       items={[
         {
-          value: "one",
-          label: "One employee",
+          value: 'one',
+          label: 'One employee',
           content: (
             <Form
               title="Add employee"
               submitLabel="Add employee"
               fields={[
-                { name: "firstName", label: "First name", required: true },
-                { name: "lastName", label: "Last name", required: true },
+                { name: 'firstName', label: 'First name', required: true },
+                { name: 'lastName', label: 'Last name', required: true },
                 {
-                  name: "email",
-                  label: "Email address",
-                  type: "email",
+                  name: 'email',
+                  label: 'Email address',
+                  type: 'email',
                   required: true,
                 },
               ]}
@@ -293,22 +311,22 @@ export function FormAddEmployee({
           ),
         },
         {
-          value: "csv",
-          label: "Import CSV",
+          value: 'csv',
+          label: 'Import CSV',
           content: <EmployeeImport onSubmit={onSubmit} />,
         },
       ]}
     />
   );
 }
+
 export function ModalImportReview({
   result,
   onConfirm,
   onBack,
   busy,
   ...props
-}: Omit<ModalProps, "children" | "title" | "description"> &
-  Parameters<typeof ImportReview>[0]) {
+}: Omit<ModalProps, 'children' | 'title' | 'description'> & Parameters<typeof ImportReview>[0]) {
   return (
     <Modal
       {...props}

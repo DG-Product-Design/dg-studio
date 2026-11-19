@@ -1,23 +1,22 @@
-import { useState } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Check } from "lucide-react";
-import { Modal } from "../components/overlays";
-import {
-  ModalHeroImage,
-  ModalIconTextGroup,
-} from "../components/marketplace-content";
-import { Button } from "../components/ui/button";
-import { assets } from "../examples/assets";
-import storyExamples1 from "./modal-recipes.stories.tsx?examples";
+import { useState } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Check } from 'lucide-react';
+import { Modal } from '../components/overlays';
+import { ModalHeroImage, ModalIconTextGroup } from '../components/marketplace-content';
+import { Button } from '../components/ui/button';
+import { assets } from '../examples/assets';
+import storyExamples1 from './modal-recipes.stories.tsx?examples';
+
 function Example({ hero = false }: { hero?: boolean }) {
   const [open, setOpen] = useState(false);
+
   return (
     <>
       <Button onClick={() => setOpen(true)}>Open modal recipe</Button>
       <Modal
         open={open}
         onOpenChange={setOpen}
-        title={hero ? "Explore the collection" : "Collection prepared"}
+        title={hero ? 'Explore the collection' : 'Collection prepared'}
         description="Reusable marketplace modal content."
         trigger={undefined}
       >
@@ -26,9 +25,7 @@ function Example({ hero = false }: { hero?: boolean }) {
             src={assets[0].src}
             alt={assets[0].alt}
             title="Find your next idea"
-            action={
-              <Button onClick={() => setOpen(false)}>Start browsing</Button>
-            }
+            action={<Button onClick={() => setOpen(false)}>Start browsing</Button>}
           >
             Explore images from your studio.
           </ModalHeroImage>
@@ -41,24 +38,28 @@ function Example({ hero = false }: { hero?: boolean }) {
     </>
   );
 }
+
 const meta = {
-  title: "Overlays/Modal recipes",
+  title: 'Overlays/Modal recipes',
   component: Example,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Example>;
+
 export default meta;
+
 export const HeroImage: StoryObj<typeof meta> = {
   parameters: {
     docs: {
-      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+      source: { code: storyExamples1.Example, language: 'tsx', type: 'code' },
     },
   },
   args: { hero: true },
 };
+
 export const IconText: StoryObj<typeof meta> = {
   parameters: {
     docs: {
-      source: { code: storyExamples1.Example, language: "tsx", type: "code" },
+      source: { code: storyExamples1.Example, language: 'tsx', type: 'code' },
     },
   },
 };

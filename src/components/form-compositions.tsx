@@ -1,13 +1,9 @@
-import { useState, type ReactNode } from "react";
-import { Form, type FormValues, type RecipeField } from "./recipe-form";
-import {
-  Address,
-  emptyAddress,
-  CreditCardInput,
-  type AddressValue,
-} from "./specialized-fields";
-import { Button } from "./ui/button";
-import { TextField, SelectField, CheckboxField } from "./fields";
+import { useState, type ReactNode } from 'react';
+import { Form, type FormValues, type RecipeField } from './recipe-form';
+import { Address, emptyAddress, CreditCardInput, type AddressValue } from './specialized-fields';
+import { Button } from './ui/button';
+import { TextField, SelectField, CheckboxField } from './fields';
+
 export function FormUpdateAddress({
   defaultValue = emptyAddress,
   onSubmit,
@@ -18,14 +14,15 @@ export function FormUpdateAddress({
   onCancel?: () => void;
 }) {
   const [value, setValue] = useState(defaultValue);
+
   return (
     <Form
       title="Update address"
       fields={[]}
       onCancel={onCancel}
       validate={(): Record<string, string> =>
-        Object.values({ ...value, street2: "optional" }).some((v) => !v.trim())
-          ? { address: "Complete the required address fields." }
+        Object.values({ ...value, street2: 'optional' }).some((v) => !v.trim())
+          ? { address: 'Complete the required address fields.' }
           : {}
       }
       onSubmit={() => onSubmit(value)}
@@ -34,6 +31,7 @@ export function FormUpdateAddress({
     </Form>
   );
 }
+
 export function CardInformation({
   secureFields,
   complete,
@@ -59,19 +57,19 @@ export function CardInformation({
       submitLabel="Add card"
       onCancel={onCancel}
       fields={[
-        { name: "nickname", label: "Card nickname" },
+        { name: 'nickname', label: 'Card nickname' },
         {
-          name: "makeDefault",
-          label: "Make this my default payment method",
-          type: "checkbox",
+          name: 'makeDefault',
+          label: 'Make this my default payment method',
+          type: 'checkbox',
         },
       ]}
       onSubmit={async (values) => {
-        if (!complete) throw new Error("Complete the secure payment fields.");
+        if (!complete) throw new Error('Complete the secure payment fields.');
         const paymentMethodId = await onCreatePaymentMethod();
         await onSubmit({
           paymentMethodId,
-          nickname: String(values.nickname ?? ""),
+          nickname: String(values.nickname ?? ''),
           makeDefault: !!values.makeDefault,
         });
       }}
@@ -82,20 +80,24 @@ export function CardInformation({
     </Form>
   );
 }
+
 export const FormAddCardInformation = CardInformation;
+
 export interface AdditionalQuestion {
   id: string;
   label: string;
-  type: "text" | "date" | "select";
+  type: 'text' | 'date' | 'select';
   required?: boolean;
   options?: { value: string; label: string }[];
   sharedKey?: string;
 }
+
 export interface QuestionGroup {
   id: string;
   title: string;
   questions: AdditionalQuestion[];
 }
+
 export function FormAdditionalInformation({
   groups,
   onSubmit,
@@ -105,21 +107,19 @@ export function FormAdditionalInformation({
 }) {
   const [values, setValues] = useState<FormValues>({});
   const [sync, setSync] = useState(false);
-  function change(
-    group: QuestionGroup,
-    question: AdditionalQuestion,
-    value: string,
-  ) {
+
+  function change(group: QuestionGroup, question: AdditionalQuestion, value: string) {
     setValues((current) => {
       const next = { ...current, [`${group.id}.${question.id}`]: value };
       if (sync && question.sharedKey)
         for (const other of groups)
           for (const q of other.questions)
-            if (q.sharedKey === question.sharedKey)
-              next[`${other.id}.${q.id}`] = value;
+            if (q.sharedKey === question.sharedKey) next[`${other.id}.${q.id}`] = value;
+
       return next;
     });
   }
+
   return (
     <Form
       title="Additional information"
@@ -129,14 +129,8 @@ export function FormAdditionalInformation({
         Object.fromEntries(
           groups.flatMap((g) =>
             g.questions
-              .filter(
-                (q) =>
-                  q.required && !String(values[`${g.id}.${q.id}`] ?? "").trim(),
-              )
-              .map((q) => [
-                `${g.id}.${q.id}`,
-                `${g.title}: ${q.label} is required.`,
-              ]),
+              .filter((q) => q.required && !String(values[`${g.id}.${q.id}`] ?? '').trim())
+              .map((q) => [`${g.id}.${q.id}`, `${g.title}: ${q.label} is required.`]),
           ),
         )
       }
@@ -159,6 +153,7 @@ export function FormAdditionalInformation({
                 for (const q of g.questions)
                   if (q.sharedKey && shared.has(q.sharedKey))
                     next[`${g.id}.${q.id}`] = shared.get(q.sharedKey)!;
+
               return next;
             });
         }}
@@ -167,11 +162,11 @@ export function FormAdditionalInformation({
         <fieldset key={g.id} className="space-y-4 rounded-lg border p-4">
           <legend className="px-2 font-semibold">{g.title}</legend>
           {g.questions.map((q) =>
-            q.type === "select" ? (
+            q.type === 'select' ? (
               <SelectField
                 key={q.id}
                 label={q.label}
-                value={String(values[`${g.id}.${q.id}`] ?? "")}
+                value={String(values[`${g.id}.${q.id}`] ?? '')}
                 onValueChange={(v) => change(g, q, v)}
                 options={q.options ?? []}
               />
@@ -179,9 +174,9 @@ export function FormAdditionalInformation({
               <TextField
                 key={q.id}
                 label={q.label}
-                type={q.type === "date" ? "date" : "text"}
+                type={q.type === 'date' ? 'date' : 'text'}
                 required={q.required}
-                value={String(values[`${g.id}.${q.id}`] ?? "")}
+                value={String(values[`${g.id}.${q.id}`] ?? '')}
                 onChange={(e) => change(g, q, e.target.value)}
               />
             ),
@@ -191,6 +186,7 @@ export function FormAdditionalInformation({
     </Form>
   );
 }
+
 export function FormCheckoutUserInfo({
   onSubmit,
   defaultValues = {},
@@ -205,10 +201,11 @@ export function FormCheckoutUserInfo({
 }) {
   const [address, setAddress] = useState(emptyAddress);
   const fields: RecipeField[] = [
-    { name: "firstName", label: "First name", required: true },
-    { name: "lastName", label: "Last name", required: true },
-    { name: "email", label: "Email address", type: "email", required: true },
+    { name: 'firstName', label: 'First name', required: true },
+    { name: 'lastName', label: 'Last name', required: true },
+    { name: 'email', label: 'Email address', type: 'email', required: true },
   ];
+
   return (
     <Form
       title="Checkout information"
@@ -216,10 +213,8 @@ export function FormCheckoutUserInfo({
       defaultValues={defaultValues}
       submitLabel="Continue"
       validate={(): Record<string, string> =>
-        !address.street.trim() ||
-        !address.city.trim() ||
-        !address.postalCode.trim()
-          ? { address: "Complete the shipping address." }
+        !address.street.trim() || !address.city.trim() || !address.postalCode.trim()
+          ? { address: 'Complete the shipping address.' }
           : {}
       }
       onSubmit={(values) =>
@@ -235,6 +230,7 @@ export function FormCheckoutUserInfo({
     </Form>
   );
 }
+
 export function ReviewConfirmation({
   title,
   items,
@@ -264,7 +260,7 @@ export function ReviewConfirmation({
           Back
         </Button>
         <Button disabled={busy} onClick={onConfirm}>
-          {busy ? "Confirming…" : "Confirm"}
+          {busy ? 'Confirming…' : 'Confirm'}
         </Button>
       </div>
     </section>

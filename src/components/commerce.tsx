@@ -1,13 +1,14 @@
-import { useState, type ReactNode } from "react";
-import { ShoppingBag, CheckCircle2, Trash2 } from "lucide-react";
-import { Button } from "./ui/button";
-import { ActionButton } from "./action-button";
-import { TextField, SelectField } from "./fields";
-import { Banner } from "./feedback";
-import { FormWizard, type WizardStep } from "./form-wizard";
-import { Address, emptyAddress, type AddressValue } from "./specialized-fields";
-import { PaymentSelect, type AccountOption } from "./account-components";
-import { ImageFade } from "./image-fade";
+import { useState, type ReactNode } from 'react';
+import { ShoppingBag, CheckCircle2, Trash2 } from 'lucide-react';
+import { Button } from './ui/button';
+import { ActionButton } from './action-button';
+import { TextField, SelectField } from './fields';
+import { Banner } from './feedback';
+import { FormWizard, type WizardStep } from './form-wizard';
+import { Address, emptyAddress, type AddressValue } from './specialized-fields';
+import { PaymentSelect, type AccountOption } from './account-components';
+import { ImageFade } from './image-fade';
+
 export interface CartLine {
   id: string;
   title: string;
@@ -21,6 +22,7 @@ export interface CartLine {
   frequencies?: { value: string; label: string }[];
   maxQuantity?: number;
 }
+
 export function CartItem({
   item,
   onChange,
@@ -53,14 +55,10 @@ export function CartItem({
             {new Intl.NumberFormat().format(item.points * item.quantity)} points
           </p>
           {!!item.rebate && (
-            <p className="text-xs text-primary">
-              {item.rebate * item.quantity} points back
-            </p>
+            <p className="text-xs text-primary">{item.rebate * item.quantity} points back</p>
           )}
           {item.available === false && (
-            <p className="text-sm text-destructive">
-              Unavailable — excluded from checkout
-            </p>
+            <p className="text-sm text-destructive">Unavailable — excluded from checkout</p>
           )}
         </div>
         {!readOnly && (
@@ -94,11 +92,7 @@ export function CartItem({
             className="w-28"
             onChange={(e) => {
               const n = e.target.valueAsNumber;
-              if (
-                Number.isInteger(n) &&
-                n >= 1 &&
-                n <= (item.maxQuantity ?? 99)
-              )
+              if (Number.isInteger(n) && n >= 1 && n <= (item.maxQuantity ?? 99))
                 onChange({ ...item, quantity: n });
             }}
           />
@@ -122,6 +116,7 @@ export function CartItem({
     </article>
   );
 }
+
 export function CartSummary({
   items,
   feePoints = 0,
@@ -134,23 +129,19 @@ export function CartSummary({
   children?: ReactNode;
 }) {
   const available = items.filter((i) => i.available !== false);
-  const subtotal = available.reduce((sum, i) => sum + i.points * i.quantity, 0),
-    rebate = available.reduce(
-      (sum, i) => sum + (i.rebate ?? 0) * i.quantity,
-      0,
-    ),
-    total = subtotal + feePoints;
+  const subtotal = available.reduce((sum, i) => sum + i.points * i.quantity, 0);
+  const rebate = available.reduce((sum, i) => sum + (i.rebate ?? 0) * i.quantity, 0);
+
+  const total = subtotal + feePoints;
+
   return (
-    <section
-      className="space-y-4 rounded-xl border bg-card p-5"
-      aria-label="Order summary"
-    >
+    <section className="space-y-4 rounded-xl border bg-card p-5" aria-label="Order summary">
       <h3 className="font-semibold">Order summary</h3>
       <dl className="space-y-3 text-sm">
         {[
-          ["Subtotal", subtotal],
-          ["Fees", feePoints],
-          ["Total", total],
+          ['Subtotal', subtotal],
+          ['Fees', feePoints],
+          ['Total', total],
         ].map(([label, value]) => (
           <div key={label} className="flex justify-between gap-4">
             <dt>{label}</dt>
@@ -162,22 +153,19 @@ export function CartSummary({
       </dl>
       {pointsPerUnit > 0 && (
         <p className="text-sm text-muted-foreground">
-          {new Intl.NumberFormat("en-US", {
-            style: "currency",
-            currency: "USD",
-          }).format(total / pointsPerUnit)}{" "}
+          {new Intl.NumberFormat('en-US', {
+            style: 'currency',
+            currency: 'USD',
+          }).format(total / pointsPerUnit)}{' '}
           equivalent
         </p>
       )}
-      {rebate > 0 && (
-        <p className="text-sm text-primary">
-          {rebate} points back on this order
-        </p>
-      )}
+      {rebate > 0 && <p className="text-sm text-primary">{rebate} points back on this order</p>}
       {children}
     </section>
   );
 }
+
 export function CartFooter({
   onCheckout,
   onContinueShopping,
@@ -195,8 +183,7 @@ export function CartFooter({
     <footer className="space-y-4 border-t pt-5">
       {remainingPoints !== undefined && (
         <p className="text-sm">
-          Remaining balance: {new Intl.NumberFormat().format(remainingPoints)}{" "}
-          points
+          Remaining balance: {new Intl.NumberFormat().format(remainingPoints)} points
         </p>
       )}
       <div className="flex flex-wrap justify-end gap-3">
@@ -210,18 +197,18 @@ export function CartFooter({
     </footer>
   );
 }
+
 export function EmptyCart({ onBack }: { onBack: () => void }) {
   return (
     <section className="grid place-items-center gap-4 rounded-xl border border-dashed p-10 text-center">
       <ShoppingBag aria-hidden className="size-10 text-primary" />
       <h2 className="text-xl font-semibold">Your cart is empty</h2>
-      <p className="text-sm text-muted-foreground">
-        Choose something for your next project.
-      </p>
+      <p className="text-sm text-muted-foreground">Choose something for your next project.</p>
       <Button onClick={onBack}>Back to shopping</Button>
     </section>
   );
 }
+
 export function Cart({
   items,
   onItemsChange,
@@ -241,6 +228,7 @@ export function Cart({
 }) {
   if (!items.length) return <EmptyCart onBack={onContinueShopping} />;
   const available = items.filter((i) => i.available !== false);
+
   return (
     <section className="space-y-5">
       <h2 className="text-2xl font-semibold">
@@ -277,24 +265,20 @@ export function Cart({
     </section>
   );
 }
+
 export function CheckoutSummary(props: Parameters<typeof CartSummary>[0]) {
   return (
     <div className="space-y-4">
       {props.items
         .filter((i) => i.available !== false)
         .map((item) => (
-          <CartItem
-            key={item.id}
-            item={item}
-            readOnly
-            onChange={() => {}}
-            onRemove={() => {}}
-          />
+          <CartItem key={item.id} item={item} readOnly onChange={() => {}} onRemove={() => {}} />
         ))}
       <CartSummary {...props} />
     </div>
   );
 }
+
 export interface CheckoutDetails {
   firstName: string;
   lastName: string;
@@ -302,6 +286,7 @@ export interface CheckoutDetails {
   address: AddressValue;
   paymentId: string;
 }
+
 export function CheckoutConfirmation({
   details,
   payment,
@@ -329,15 +314,13 @@ export function CheckoutConfirmation({
           <dd>
             {details.address.street}
             <br />
-            {details.address.city}, {details.address.region}{" "}
-            {details.address.postalCode}
+            {details.address.city}, {details.address.region} {details.address.postalCode}
           </dd>
         </div>
         <div>
           <dt className="text-muted-foreground">Payment</dt>
           <dd>
-            {payment?.name ?? "Choose payment"}{" "}
-            {payment?.lastFour && `•••• ${payment.lastFour}`}
+            {payment?.name ?? 'Choose payment'} {payment?.lastFour && `•••• ${payment.lastFour}`}
           </dd>
         </div>
       </dl>
@@ -350,13 +333,8 @@ export function CheckoutConfirmation({
     </div>
   );
 }
-export function CheckoutSuccess({
-  orderId,
-  onClose,
-}: {
-  orderId: string;
-  onClose: () => void;
-}) {
+
+export function CheckoutSuccess({ orderId, onClose }: { orderId: string; onClose: () => void }) {
   return (
     <section className="space-y-5 rounded-xl border bg-card p-8 text-center">
       <CheckCircle2 aria-hidden className="mx-auto size-12 text-success" />
@@ -366,6 +344,7 @@ export function CheckoutSuccess({
     </section>
   );
 }
+
 export function Checkout({
   items,
   paymentMethods,
@@ -375,43 +354,41 @@ export function Checkout({
 }: {
   items: CartLine[];
   paymentMethods: AccountOption[];
-  onSubmit: (
-    value: CheckoutDetails,
-    items: CartLine[],
-  ) => Promise<{ orderId: string }>;
+  onSubmit: (value: CheckoutDetails, items: CartLine[]) => Promise<{ orderId: string }>;
   onClose: () => void;
   additionalSteps?: WizardStep[];
 }) {
   const [details, setDetails] = useState<CheckoutDetails>({
-      firstName: "",
-      lastName: "",
-      email: "",
-      address: emptyAddress,
-      paymentId:
-        paymentMethods.find((p) => p.isDefault && !p.disabled)?.id ??
-        paymentMethods.find((p) => !p.disabled)?.id ??
-        "",
-    }),
-    [error, setError] = useState(""),
-    [order, setOrder] = useState("");
+    firstName: '',
+    lastName: '',
+    email: '',
+    address: emptyAddress,
+    paymentId:
+      paymentMethods.find((p) => p.isDefault && !p.disabled)?.id ??
+      paymentMethods.find((p) => !p.disabled)?.id ??
+      '',
+  });
+
+  const [error, setError] = useState('');
+  const [order, setOrder] = useState('');
+
   const available = items.filter((i) => i.available !== false);
   if (order) return <CheckoutSuccess orderId={order} onClose={onClose} />;
   if (!available.length) return <EmptyCart onBack={onClose} />;
+
   return (
     <FormWizard
       finishLabel="Place order"
       onComplete={async () => {
-        if (
-          !paymentMethods.some((p) => p.id === details.paymentId && !p.disabled)
-        )
-          throw new Error("Choose an available payment method.");
+        if (!paymentMethods.some((p) => p.id === details.paymentId && !p.disabled))
+          throw new Error('Choose an available payment method.');
         const result = await onSubmit(details, available);
         setOrder(result.orderId);
       }}
       steps={[
         {
-          id: "contact",
-          label: "Contact and shipping",
+          id: 'contact',
+          label: 'Contact and shipping',
           validate: () => {
             const valid =
               !!details.firstName.trim() &&
@@ -421,48 +398,44 @@ export function Checkout({
               !!details.address.city.trim() &&
               !!details.address.region.trim() &&
               !!details.address.postalCode.trim();
-            setError(
-              valid ? "" : "Complete your contact and shipping information.",
-            );
+
+            setError(valid ? '' : 'Complete your contact and shipping information.');
+
             return valid;
           },
           content: (
             <>
               {error && <Banner title={error} tone="danger" />}
-              {(["firstName", "lastName", "email"] as const).map((key) => (
+              {(['firstName', 'lastName', 'email'] as const).map((key) => (
                 <TextField
                   key={key}
                   label={
-                    key === "firstName"
-                      ? "First name"
-                      : key === "lastName"
-                        ? "Last name"
-                        : "Email address"
+                    key === 'firstName'
+                      ? 'First name'
+                      : key === 'lastName'
+                        ? 'Last name'
+                        : 'Email address'
                   }
-                  type={key === "email" ? "email" : "text"}
+                  type={key === 'email' ? 'email' : 'text'}
                   value={details[key]}
-                  onChange={(e) =>
-                    setDetails((d) => ({ ...d, [key]: e.target.value }))
-                  }
+                  onChange={(e) => setDetails((d) => ({ ...d, [key]: e.target.value }))}
                 />
               ))}
               <Address
                 value={details.address}
-                onValueChange={(address) =>
-                  setDetails((d) => ({ ...d, address }))
-                }
+                onValueChange={(address) => setDetails((d) => ({ ...d, address }))}
               />
             </>
           ),
         },
         {
-          id: "payment",
-          label: "Payment",
+          id: 'payment',
+          label: 'Payment',
           validate: () => {
-            const valid = paymentMethods.some(
-              (p) => p.id === details.paymentId && !p.disabled,
-            );
-            setError(valid ? "" : "Choose an available payment method.");
+            const valid = paymentMethods.some((p) => p.id === details.paymentId && !p.disabled);
+
+            setError(valid ? '' : 'Choose an available payment method.');
+
             return valid;
           },
           content: (
@@ -471,17 +444,15 @@ export function Checkout({
               <PaymentSelect
                 accounts={paymentMethods}
                 value={details.paymentId}
-                onValueChange={(paymentId) =>
-                  setDetails((d) => ({ ...d, paymentId }))
-                }
+                onValueChange={(paymentId) => setDetails((d) => ({ ...d, paymentId }))}
               />
             </>
           ),
         },
         ...additionalSteps,
         {
-          id: "review",
-          label: "Review order",
+          id: 'review',
+          label: 'Review order',
           content: (
             <CheckoutConfirmation
               details={details}

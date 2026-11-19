@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FormWizard } from "../components/form-wizard";
+import { useState } from 'react';
+import { FormWizard } from '../components/form-wizard';
 import {
   TextField,
   SelectField,
@@ -7,20 +7,21 @@ import {
   RadioCards,
   RangeField,
   SwitchField,
-} from "../components/fields";
-import { Banner } from "../components/feedback";
-import { TagList } from "../components/content";
-import { Button } from "../components/ui/button";
+} from '../components/fields';
+import { Banner } from '../components/feedback';
+import { TagList } from '../components/content';
+import { Button } from '../components/ui/button';
 
 export function CollectionSettings() {
-  const [name, setName] = useState("");
-  const [error, setError] = useState("");
-  const [collection, setCollection] = useState("campaign");
-  const [tags, setTags] = useState<string[]>(["outdoors"]);
-  const [format, setFormat] = useState("webp");
+  const [name, setName] = useState('');
+  const [error, setError] = useState('');
+  const [collection, setCollection] = useState('campaign');
+  const [tags, setTags] = useState<string[]>(['outdoors']);
+  const [format, setFormat] = useState('webp');
   const [quality, setQuality] = useState(85);
   const [notify, setNotify] = useState(true);
   const [saved, setSaved] = useState(false);
+
   return (
     <main className="mx-auto max-w-2xl space-y-7">
       <header>
@@ -39,8 +40,8 @@ export function CollectionSettings() {
             </Button>
           }
         >
-          {name} is ready as {format.toUpperCase()} at {quality}% quality. This
-          preview keeps changes in memory.
+          {name} is ready as {format.toUpperCase()} at {quality}% quality. This preview keeps
+          changes in memory.
         </Banner>
       ) : (
         <FormWizard
@@ -51,16 +52,17 @@ export function CollectionSettings() {
           }}
           steps={[
             {
-              id: "details",
-              label: "Collection details",
+              id: 'details',
+              label: 'Collection details',
               validate: () => {
                 if (name.trim().length < 3) {
-                  setError(
-                    "Use at least 3 characters for the collection name.",
-                  );
+                  setError('Use at least 3 characters for the collection name.');
+
                   return false;
                 }
-                setError("");
+
+                setError('');
+
                 return true;
               },
               content: (
@@ -71,7 +73,7 @@ export function CollectionSettings() {
                     value={name}
                     onChange={(e) => {
                       setName(e.target.value);
-                      if (error) setError("");
+                      if (error) setError('');
                     }}
                     hint="A clear name makes this collection easier to find."
                     error={error}
@@ -85,19 +87,19 @@ export function CollectionSettings() {
                     onValueChange={setCollection}
                     options={[
                       {
-                        value: "campaign",
-                        label: "Campaign",
-                        description: "Related creative for one launch.",
+                        value: 'campaign',
+                        label: 'Campaign',
+                        description: 'Related creative for one launch.',
                       },
                       {
-                        value: "moodboard",
-                        label: "Moodboard",
-                        description: "References and visual directions.",
+                        value: 'moodboard',
+                        label: 'Moodboard',
+                        description: 'References and visual directions.',
                       },
                       {
-                        value: "archive",
-                        label: "Archive",
-                        description: "Completed work for later use.",
+                        value: 'archive',
+                        label: 'Archive',
+                        description: 'Completed work for later use.',
                       },
                     ]}
                   />
@@ -107,17 +109,17 @@ export function CollectionSettings() {
                     value={tags}
                     onValueChange={setTags}
                     options={[
-                      { value: "outdoors", label: "Outdoors" },
-                      { value: "summer", label: "Summer" },
-                      { value: "social", label: "Social" },
+                      { value: 'outdoors', label: 'Outdoors' },
+                      { value: 'summer', label: 'Summer' },
+                      { value: 'social', label: 'Social' },
                     ]}
                   />
                 </>
               ),
             },
             {
-              id: "delivery",
-              label: "Delivery settings",
+              id: 'delivery',
+              label: 'Delivery settings',
               content: (
                 <>
                   <RadioCards
@@ -127,14 +129,14 @@ export function CollectionSettings() {
                     onValueChange={setFormat}
                     options={[
                       {
-                        value: "webp",
-                        label: "WebP",
-                        description: "Smaller files for web delivery.",
+                        value: 'webp',
+                        label: 'WebP',
+                        description: 'Smaller files for web delivery.',
                       },
                       {
-                        value: "png",
-                        label: "PNG",
-                        description: "Lossless files with transparency.",
+                        value: 'png',
+                        label: 'PNG',
+                        description: 'Lossless files with transparency.',
                       },
                     ]}
                   />
@@ -157,8 +159,8 @@ export function CollectionSettings() {
               ),
             },
             {
-              id: "review",
-              label: "Review collection",
+              id: 'review',
+              label: 'Review collection',
               content: (
                 <>
                   <dl className="grid grid-cols-2 gap-4 text-sm">
@@ -171,12 +173,12 @@ export function CollectionSettings() {
                     <dt className="text-muted-foreground">Quality</dt>
                     <dd>{quality}%</dd>
                     <dt className="text-muted-foreground">Notification</dt>
-                    <dd>{notify ? "On" : "Off"}</dd>
+                    <dd>{notify ? 'On' : 'Off'}</dd>
                   </dl>
                   <TagList tags={tags} />
                   <p className="text-xs text-muted-foreground">
-                    This local example demonstrates the form flow; it does not
-                    upload or export files.
+                    This local example demonstrates the form flow; it does not upload or export
+                    files.
                   </p>
                 </>
               ),

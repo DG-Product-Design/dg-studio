@@ -1,11 +1,14 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Skeleton } from "../components/feedback";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Skeleton } from '../components/feedback';
+
 const meta = {
-  title: "Feedback/Skeleton",
+  title: 'Feedback/Skeleton',
   component: Skeleton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof Skeleton>;
+
 export default meta;
+
 export const ImageCard: StoryObj<typeof Skeleton> = {
   render: () => (
     <div

@@ -1,15 +1,9 @@
-import {
-  useEffect,
-  useRef,
-  type CSSProperties,
-  type HTMLAttributes,
-  type RefObject,
-} from "react";
-import { cn } from "../lib/utils";
+import { useEffect, useRef, type CSSProperties, type HTMLAttributes, type RefObject } from 'react';
+import { cn } from '../lib/utils';
 
 export interface GlowOptions {
   /** Auto follows the input device; orbit previews the touch animation on any device. */
-  mode?: "auto" | "orbit";
+  mode?: 'auto' | 'orbit';
   proximity?: number;
   spread?: number;
   blur?: number;
@@ -20,37 +14,35 @@ export interface GlowOptions {
 /** Pointer-angle/proximity behavior adapted from marketplace glowStyleHelpers. */
 export function useGlowStyles(
   ref: RefObject<HTMLElement | null>,
-  {
-    proximity = 80,
-    spread = 90,
-    disabled = false,
-    mode = "auto",
-  }: GlowOptions = {},
+  { proximity = 80, spread = 90, disabled = false, mode = 'auto' }: GlowOptions = {},
 ) {
   useEffect(() => {
     const root = ref.current;
-    if (!root || disabled || mode === "orbit") return;
-    const reduced = matchMedia("(prefers-reduced-motion: reduce)"),
-      coarse = matchMedia("(hover: none)");
+    if (!root || disabled || mode === 'orbit') return;
+    const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+    const coarse = matchMedia('(hover: none)');
+
     let frame = 0;
     let pointer: { x: number; y: number } | null = null;
-    const elements = () =>
-      Array.from(root.querySelectorAll<HTMLElement>("[data-glow-border]"));
+    const elements = () => Array.from(root.querySelectorAll<HTMLElement>('[data-glow-border]'));
+
     // Keep the last angle while opacity fades back to idle.
     function deactivate() {
       cancelAnimationFrame(frame);
       frame = 0;
       pointer = null;
       for (const el of elements()) {
-        el.style.removeProperty("--dg-glow-opacity");
+        el.style.removeProperty('--dg-glow-opacity');
       }
     }
+
     function reset() {
       deactivate();
       for (const el of elements()) {
-        el.style.removeProperty("--dg-glow-angle");
+        el.style.removeProperty('--dg-glow-angle');
       }
     }
+
     function update() {
       frame = 0;
       if (!pointer || reduced.matches || coarse.matches) return;
@@ -61,49 +53,44 @@ export function useGlowStyles(
           pointer.x <= b.right + proximity &&
           pointer.y >= b.top - proximity &&
           pointer.y <= b.bottom + proximity;
-        el.style.setProperty(
-          "--dg-glow-opacity",
-          near ? "1" : "var(--dg-glow-idle)",
-        );
+
+        el.style.setProperty('--dg-glow-opacity', near ? '1' : 'var(--dg-glow-idle)');
         if (near) {
           const angle =
-            (Math.atan2(
-              pointer.y - (b.top + b.height / 2),
-              pointer.x - (b.left + b.width / 2),
-            ) *
+            (Math.atan2(pointer.y - (b.top + b.height / 2), pointer.x - (b.left + b.width / 2)) *
               180) /
               Math.PI +
             90 -
             spread / 2;
-          el.style.setProperty("--dg-glow-angle", `${angle}deg`);
+
+          el.style.setProperty('--dg-glow-angle', `${angle}deg`);
         }
       }
     }
 
     function move(event: PointerEvent) {
-      if (event.pointerType === "touch" || reduced.matches || coarse.matches)
-        return;
+      if (event.pointerType === 'touch' || reduced.matches || coarse.matches) return;
       pointer = { x: event.clientX, y: event.clientY };
       if (!frame) frame = requestAnimationFrame(update);
     }
 
-    root.addEventListener("pointermove", move, { passive: true });
-    root.addEventListener("pointerleave", deactivate);
-    reduced.addEventListener("change", reset);
-    coarse.addEventListener("change", reset);
+    root.addEventListener('pointermove', move, { passive: true });
+    root.addEventListener('pointerleave', deactivate);
+    reduced.addEventListener('change', reset);
+    coarse.addEventListener('change', reset);
 
     return () => {
       reset();
-      root.removeEventListener("pointermove", move);
-      root.removeEventListener("pointerleave", deactivate);
-      reduced.removeEventListener("change", reset);
-      coarse.removeEventListener("change", reset);
+      root.removeEventListener('pointermove', move);
+      root.removeEventListener('pointerleave', deactivate);
+      reduced.removeEventListener('change', reset);
+      coarse.removeEventListener('change', reset);
     };
   }, [ref, proximity, spread, disabled, mode]);
 }
 
 export function GlowGroup({
-  mode = "auto",
+  mode = 'auto',
   proximity = 80,
   spread = 90,
   blur = 10,
@@ -115,18 +102,19 @@ export function GlowGroup({
 }: HTMLAttributes<HTMLDivElement> & GlowOptions) {
   const ref = useRef<HTMLDivElement>(null);
   useGlowStyles(ref, { proximity, spread, disabled, mode });
+
   return (
     <div
       {...props}
       ref={ref}
       data-glow-disabled={disabled || undefined}
       data-glow-mode={mode}
-      className={cn("dg-glow-group", className)}
+      className={cn('dg-glow-group', className)}
       style={
         {
-          "--dg-glow-spread": `${spread}deg`,
-          "--dg-glow-blur": `${blur}px`,
-          "--dg-glow-idle": idleOpacity,
+          '--dg-glow-spread': `${spread}deg`,
+          '--dg-glow-blur': `${blur}px`,
+          '--dg-glow-idle': idleOpacity,
           ...style,
         } as CSSProperties
       }
@@ -146,11 +134,11 @@ export function GlowBorder({
     <div
       {...props}
       data-glow-border
-      className={cn("dg-glow-border", className)}
+      className={cn('dg-glow-border', className)}
       style={
         {
-          "--dg-glow-radius": `${radius}px`,
-          "--dg-glow-width": `${borderWidth}px`,
+          '--dg-glow-radius': `${radius}px`,
+          '--dg-glow-width': `${borderWidth}px`,
           ...style,
         } as CSSProperties
       }

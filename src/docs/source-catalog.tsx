@@ -1,39 +1,34 @@
-import { useState } from "react";
-import catalog from "./marketplace-catalog.json";
-import { TextField, SelectField } from "../components/fields";
-import { Badge } from "../components/ui/badge";
+import { useState } from 'react';
+import catalog from './marketplace-catalog.json';
+import { TextField, SelectField } from '../components/fields';
+import { Badge } from '../components/ui/badge';
+
 export function SourceCatalog() {
-  const [query, setQuery] = useState("");
-  const [status, setStatus] = useState("All");
-  const [category, setCategory] = useState("All");
+  const [query, setQuery] = useState('');
+  const [status, setStatus] = useState('All');
+  const [category, setCategory] = useState('All');
   const filtered = catalog.filter(
     (item) =>
-      (status === "All" || item.status === status) &&
-      (category === "All" || item.category === category) &&
+      (status === 'All' || item.status === status) &&
+      (category === 'All' || item.category === category) &&
       `${item.name} ${item.target}`.toLowerCase().includes(query.toLowerCase()),
   );
+
   return (
     <main className="mx-auto max-w-6xl space-y-7">
       <header>
-        <h1 className="text-3xl font-semibold">
-          Your marketplace component system
-        </h1>
+        <h1 className="text-3xl font-semibold">Your marketplace component system</h1>
         <p className="mt-3 max-w-3xl leading-relaxed text-muted-foreground">
-          {catalog.length} source entries covering component adaptations and the
-          shared border-glow utility. The third-party icon collection is
-          excluded. Adapted means the reusable concept is implemented here; it
-          does not imply identical props or backend integration. Each entry
+          {catalog.length} source entries covering component adaptations and the shared border-glow
+          utility. The third-party icon collection is excluded. Adapted means the reusable concept
+          is implemented here; it does not imply identical props or backend integration. Each entry
           names its replacement and describes the adaptation.
         </p>
       </header>
       <div className="flex flex-wrap gap-3">
-        {["Adapted", "Partial", "Planned"].map((value) => (
-          <Badge
-            key={value}
-            variant={value === "Adapted" ? "secondary" : "outline"}
-          >
-            {catalog.filter((item) => item.status === value).length}{" "}
-            {value.toLowerCase()}
+        {['Adapted', 'Partial', 'Planned'].map((value) => (
+          <Badge key={value} variant={value === 'Adapted' ? 'secondary' : 'outline'}>
+            {catalog.filter((item) => item.status === value).length} {value.toLowerCase()}
           </Badge>
         ))}
       </div>
@@ -48,7 +43,7 @@ export function SourceCatalog() {
           label="Status"
           value={status}
           onValueChange={setStatus}
-          options={["All", "Adapted", "Partial", "Planned"].map((value) => ({
+          options={['All', 'Adapted', 'Partial', 'Planned'].map((value) => ({
             value,
             label: value,
           }))}
@@ -57,10 +52,10 @@ export function SourceCatalog() {
           label="Category"
           value={category}
           onValueChange={setCategory}
-          options={[
-            "All",
-            ...new Set(catalog.map((item) => item.category)),
-          ].map((value) => ({ value, label: value }))}
+          options={['All', ...new Set(catalog.map((item) => item.category))].map((value) => ({
+            value,
+            label: value,
+          }))}
         />
       </div>
       <p role="status" className="text-sm text-muted-foreground">
@@ -68,21 +63,14 @@ export function SourceCatalog() {
       </p>
       <div className="grid gap-4 md:grid-cols-2">
         {filtered.map((item) => (
-          <article
-            key={item.name}
-            className="min-w-0 rounded-xl border bg-card p-5"
-          >
+          <article key={item.name} className="min-w-0 rounded-xl border bg-card p-5">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="font-semibold">{item.name}</h2>
-              <Badge
-                variant={item.status === "Adapted" ? "secondary" : "outline"}
-              >
+              <Badge variant={item.status === 'Adapted' ? 'secondary' : 'outline'}>
                 {item.status}
               </Badge>
             </div>
-            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-              {item.note}
-            </p>
+            <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{item.note}</p>
             {item.story && (
               <a
                 target="_top"

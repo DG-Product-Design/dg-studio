@@ -1,24 +1,26 @@
-import { useId, type ReactElement, type ReactNode } from "react";
+import { useId, type ReactElement, type ReactNode } from 'react';
 import {
   Tabs as TabsPrimitive,
   Tooltip as TooltipPrimitive,
   Popover as PopoverPrimitive,
-} from "radix-ui";
-import { Check, ChevronLeft, ChevronRight, X } from "lucide-react";
-import { Button } from "./ui/button";
-import { useTheme } from "./theme";
-import { cn } from "../lib/utils";
+} from 'radix-ui';
+import { Check, ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { Button } from './ui/button';
+import { useTheme } from './theme';
+import { cn } from '../lib/utils';
+
 export interface TabItem {
   value: string;
   label: string;
   content: ReactNode;
   disabled?: boolean;
 }
+
 export function Tabs({
   items,
   value,
   onValueChange,
-  label = "Views",
+  label = 'Views',
 }: {
   items: TabItem[];
   value: string;
@@ -27,10 +29,7 @@ export function Tabs({
 }) {
   return (
     <TabsPrimitive.Root value={value} onValueChange={onValueChange}>
-      <TabsPrimitive.List
-        aria-label={label}
-        className="flex flex-wrap gap-1 border-b pb-2"
-      >
+      <TabsPrimitive.List aria-label={label} className="flex flex-wrap gap-1 border-b pb-2">
         {items.map((item) => (
           <TabsPrimitive.Trigger
             key={item.value}
@@ -43,22 +42,19 @@ export function Tabs({
         ))}
       </TabsPrimitive.List>
       {items.map((item) => (
-        <TabsPrimitive.Content
-          key={item.value}
-          value={item.value}
-          className="pt-5"
-        >
+        <TabsPrimitive.Content key={item.value} value={item.value} className="pt-5">
           {item.content}
         </TabsPrimitive.Content>
       ))}
     </TabsPrimitive.Root>
   );
 }
+
 export function Pagination({
   page,
   pageCount,
   onPageChange,
-  label = "Pagination",
+  label = 'Pagination',
 }: {
   page: number;
   pageCount: number;
@@ -70,11 +66,9 @@ export function Pagination({
   const pages = [...new Set([1, current - 1, current, current + 1, count])]
     .filter((p) => p >= 1 && p <= count)
     .sort((a, b) => a - b);
+
   return (
-    <nav
-      aria-label={label}
-      className="flex flex-wrap items-center justify-between gap-3"
-    >
+    <nav aria-label={label} className="flex flex-wrap items-center justify-between gap-3">
       <p className="text-sm text-muted-foreground">
         Page {current} of {count}
       </p>
@@ -96,10 +90,10 @@ export function Pagination({
               </span>
             )}
             <Button
-              variant={p === current ? "default" : "ghost"}
+              variant={p === current ? 'default' : 'ghost'}
               size="icon"
               aria-label={`Page ${p}`}
-              aria-current={p === current ? "page" : undefined}
+              aria-current={p === current ? 'page' : undefined}
               onClick={() => onPageChange(p)}
             >
               {p}
@@ -119,14 +113,10 @@ export function Pagination({
     </nav>
   );
 }
-export function Tooltip({
-  children,
-  content,
-}: {
-  children: ReactElement;
-  content: string;
-}) {
+
+export function Tooltip({ children, content }: { children: ReactElement; content: string }) {
   const theme = useTheme();
+
   return (
     <TooltipPrimitive.Provider delayDuration={250}>
       <TooltipPrimitive.Root>
@@ -145,6 +135,7 @@ export function Tooltip({
     </TooltipPrimitive.Provider>
   );
 }
+
 export function Popover({
   trigger,
   title,
@@ -156,6 +147,7 @@ export function Popover({
 }) {
   const theme = useTheme();
   const id = useId();
+
   return (
     <PopoverPrimitive.Root>
       <PopoverPrimitive.Trigger asChild>{trigger}</PopoverPrimitive.Trigger>
@@ -185,6 +177,7 @@ export function Popover({
     </PopoverPrimitive.Root>
   );
 }
+
 export function Stepper({
   steps,
   currentStep,
@@ -199,20 +192,17 @@ export function Stepper({
       {steps.map((step, i) => (
         <li
           key={step.id}
-          aria-current={i === currentStep ? "step" : undefined}
+          aria-current={i === currentStep ? 'step' : undefined}
           className={cn(
-            "flex items-center gap-2 text-sm",
-            i === currentStep
-              ? "font-semibold text-foreground"
-              : "text-muted-foreground",
+            'flex items-center gap-2 text-sm',
+            i === currentStep ? 'font-semibold text-foreground' : 'text-muted-foreground',
           )}
         >
           <span
             aria-hidden
             className={cn(
-              "grid size-7 place-items-center rounded-full border",
-              i <= currentStep &&
-                "border-primary bg-primary text-primary-foreground",
+              'grid size-7 place-items-center rounded-full border',
+              i <= currentStep && 'border-primary bg-primary text-primary-foreground',
             )}
           >
             {i < currentStep ? <Check className="size-4" /> : i + 1}

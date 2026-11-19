@@ -1,10 +1,10 @@
-@import "tailwindcss";
-@import "./recipes.css";
+@import 'tailwindcss';
+@import './recipes.css';
 @source "./**/*.{ts,tsx}";
 
 /* Semantic values also work on nested ThemeProviders and portal roots. */
 :root,
-[data-theme="miami-85"] {
+[data-theme='miami-85'] {
   --background: #171329;
   --foreground: #fff4fc;
   --card: #241d39;
@@ -29,7 +29,7 @@
   --radius: 0.75rem;
   color-scheme: dark;
 }
-[data-theme="matrix"] {
+[data-theme='matrix'] {
   --success: #9de4bd;
   --warning: #f6d38a;
   --background: #060e09;
@@ -53,7 +53,7 @@
   --ring: #75f99b;
   color-scheme: dark;
 }
-[data-theme="calm"] {
+[data-theme='calm'] {
   --background: #f4f7f7;
   --foreground: #203637;
   --card: #ffffff;
@@ -77,7 +77,7 @@
   --warning: #805800;
   color-scheme: light;
 }
-[data-theme="blue-hour"] {
+[data-theme='blue-hour'] {
   --success: #9de4bd;
   --warning: #f6d38a;
   --background: #101a30;
@@ -127,8 +127,8 @@
   --radius-md: calc(var(--radius) - 2px);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) + 4px);
-  --font-sans: "Avenir Next", "Segoe UI", sans-serif;
-  --font-mono: "SFMono-Regular", Consolas, monospace;
+  --font-sans: 'Avenir Next', 'Segoe UI', sans-serif;
+  --font-mono: 'SFMono-Regular', Consolas, monospace;
 }
 @layer base {
   * {
@@ -184,10 +184,10 @@
   line-height: 1.15em;
   text-align: center;
 }
-.dg-panel[data-state="open"] {
+.dg-panel[data-state='open'] {
   animation: dg-slide 240ms cubic-bezier(0.16, 1, 0.3, 1);
 }
-.dg-modal[data-state="open"] {
+.dg-modal[data-state='open'] {
   animation: dg-appear 180ms ease-out;
 }
 .dg-loader > span {
@@ -200,15 +200,10 @@
   animation-delay: -800ms;
 }
 .dg-artwork-busy::after {
-  content: "";
+  content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(
-    100deg,
-    transparent 20%,
-    #ffffff40 50%,
-    transparent 80%
-  );
+  background: linear-gradient(100deg, transparent 20%, #ffffff40 50%, transparent 80%);
   animation: dg-shimmer 1.4s linear infinite;
 }
 @keyframes dg-slide {
@@ -261,8 +256,8 @@
   --dg-offset: var(--dg-offset-mobile, 0);
   flex: 0 0
     calc(
-      (100% + var(--dg-grid-gap, 16px)) * var(--dg-span) /
-        var(--dg-columns, 12) - var(--dg-grid-gap, 16px)
+      (100% + var(--dg-grid-gap, 16px)) * var(--dg-span) / var(--dg-columns, 12) -
+        var(--dg-grid-gap, 16px)
     );
   margin-inline-start: calc(
     (100% + var(--dg-grid-gap, 16px)) * var(--dg-offset) / var(--dg-columns, 12)
@@ -324,8 +319,7 @@
 }
 @keyframes dg-loader-rotate-in {
   from {
-    transform: perspective(150px) rotateY(360deg)
-      scale(var(--dg-loader-start-scale, 0.2));
+    transform: perspective(150px) rotateY(360deg) scale(var(--dg-loader-start-scale, 0.2));
   }
   to {
     transform: perspective(150px) rotateY(0deg) scale(1);
@@ -340,8 +334,8 @@
   animation-timing-function: ease-out, cubic-bezier(0.87, 0, 0.13, 1);
 }
 .dg-loader-mask {
-  animation: dg-loader-grow var(--dg-loader-scale-duration, 1000ms)
-    cubic-bezier(0.16, 1, 0.3, 1) 1s both;
+  animation: dg-loader-grow var(--dg-loader-scale-duration, 1000ms) cubic-bezier(0.16, 1, 0.3, 1) 1s
+    both;
   backface-visibility: hidden;
   fill: white;
   transform-origin: center center;
@@ -369,7 +363,7 @@
 }
 
 @property --dg-glow-angle {
-  syntax: "<angle>";
+  syntax: '<angle>';
   inherits: true;
   initial-value: 230deg;
 }
@@ -395,7 +389,7 @@
 }
 .dg-glow-border::after,
 .dg-glow-halo::before {
-  content: "";
+  content: '';
   position: absolute;
   pointer-events: none;
   inset: -1px;
@@ -456,11 +450,11 @@
 }
 /* The explicit orbit mode uses the same motion as a touch device. */
 @media (prefers-reduced-motion: no-preference) {
-  .dg-glow-group[data-glow-mode="orbit"] .dg-glow-border {
+  .dg-glow-group[data-glow-mode='orbit'] .dg-glow-border {
     animation: dg-glow-orbit 15s linear infinite;
     --dg-glow-opacity: 0.85;
   }
-  .dg-glow-group[data-glow-mode="orbit"] .dg-glow-border:nth-child(2n) {
+  .dg-glow-group[data-glow-mode='orbit'] .dg-glow-border:nth-child(2n) {
     animation-delay: -5s;
   }
 }
@@ -475,12 +469,7 @@
     display: none;
   }
   .dg-glow-border::after {
-    background: linear-gradient(
-      125deg,
-      var(--primary),
-      var(--secondary),
-      var(--primary)
-    );
+    background: linear-gradient(125deg, var(--primary), var(--secondary), var(--primary));
     opacity: 0.75;
     transition: none;
   }

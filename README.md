@@ -9,7 +9,7 @@ A React component library for photo collections, Ai tools, creative tools, and c
 
 ## Start
 
-Use Node 22.12 or newer. A `.nvmrc` selects the installed Node 22.15 release.
+Use Node 22.13 or newer. A `.nvmrc` selects the installed Node 22.15 release.
 
 ```sh
 nvm use
@@ -18,6 +18,28 @@ npm run storybook
 ```
 
 Storybook opens at http://localhost:6006. Start at **Welcome / Start Here** and use the **Theme** toolbar to switch between Miami 85, Matrix, Calm, and Blue Hour. The selection applies to stories, documentation previews, and portaled overlays.
+
+## Formatting
+
+Run `npm run format` to apply ESLint fixes and Prettier, or `npm run format:check` to check without changing files. CI runs the same check.
+
+Prettier handles two-space indentation, single-quoted JavaScript strings, semicolons, trailing commas, and a 100-column target. ESLint adds Airbnb-style separation after imports, around functions and type declarations, after blocks, and before returns, plus one variable declaration per statement. The repository's VS Code settings enable formatting and ESLint fixes on save with the recommended extensions installed.
+
+## Story source panels
+
+Stories that use an internal demo should expose that demo's implementation through `parameters.docs.source`. For shared files, import the source catalog with `?examples` and select the demo:
+
+```tsx
+import examples from '../examples/marketplace-planned.tsx?examples';
+
+parameters: {
+  docs: {
+    source: { code: examples.HeroDemo, language: 'tsx', type: 'code' },
+  },
+}
+```
+
+The Vite source plugin extracts the function, its local dependencies, and its used imports at build time. Code panels stay current without including unrelated demos or interaction tests. Dedicated demo files can also use Vite's `?raw` import.
 
 ## Published Storybook
 
@@ -36,8 +58,8 @@ npm install ../dg-studio-ui
 Build this library first with `npm run build`, then import the compiled components and stylesheet:
 
 ```tsx
-import { ImageFade, ThemeProvider } from "@dg/studio-ui";
-import "@dg/studio-ui/styles.css";
+import { ImageFade, ThemeProvider } from '@dg/studio-ui';
+import '@dg/studio-ui/styles.css';
 
 export function Preview() {
   return (
@@ -103,12 +125,12 @@ The animation components honor reduced motion. Stories exercise selection, gatin
 The 16 named presets from the marketplace utility are exported from `src/lib/motion-variants.ts`. `createStaggerVariants` accepts entry spacing, lead-in, exit spacing, and direction in seconds. Use matching state names on parents and children; children should inherit the parent’s animation state:
 
 ```tsx
-import { motion } from "motion/react";
-import { listMotionVariants, listItemMotionVariants } from "@dg/studio-ui";
+import { motion } from 'motion/react';
+import { listMotionVariants, listItemMotionVariants } from '@dg/studio-ui';
 
 <motion.ul
   initial="closed"
-  animate={open ? "open" : "closed"}
+  animate={open ? 'open' : 'closed'}
   variants={listMotionVariants}
   inert={!open}
   aria-hidden={!open}
@@ -169,7 +191,7 @@ The imported icon collection is excluded from this library. D.G’s original roc
 **Welcome** showcases GlowBorder around image switching, the rolling total, and a replayable original illustration. The glow follows pointer proximity/angle; touch devices use a slow orbit and reduced-motion users see a static colored border. Keyboard focus remains independently visible. Small Storybook previews now size to their contents with a 160px minimum rather than a full viewport.
 
 ```tsx
-import { GlowGroup, GlowBorder, Button } from "@dg/studio-ui";
+import { GlowGroup, GlowBorder, Button } from '@dg/studio-ui';
 
 <GlowGroup className="grid gap-5 sm:grid-cols-2" proximity={80} spread={100}>
   <GlowBorder>

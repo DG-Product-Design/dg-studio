@@ -1,16 +1,19 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { Welcome } from "../examples/welcome";
-import storyExamples1 from "../examples/welcome.tsx?examples";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { Welcome } from '../examples/welcome';
+import storyExamples1 from '../examples/welcome.tsx?examples';
+
 const meta = {
-  title: "Welcome",
+  title: 'Welcome',
   component: Welcome,
   parameters: { controls: { disable: true } },
 } satisfies Meta<typeof Welcome>;
+
 export default meta;
+
 export const StartHere: StoryObj<typeof meta> = {
   parameters: {
     docs: {
-      source: { code: storyExamples1.Welcome, language: "tsx", type: "code" },
+      source: { code: storyExamples1.Welcome, language: 'tsx', type: 'code' },
     },
   },
 };

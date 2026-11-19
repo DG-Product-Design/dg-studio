@@ -1,17 +1,18 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { expect, within } from "storybook/test";
-import { HolyAlbatrossDemo } from "../../examples/layout-recipes/holy-albatross-demo";
-import demoSource from "../../examples/layout-recipes/holy-albatross-demo.tsx?raw";
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { expect, within } from 'storybook/test';
+import { HolyAlbatrossDemo } from '../../examples/layout-recipes/holy-albatross-demo';
+import demoSource from '../../examples/layout-recipes/holy-albatross-demo.tsx?raw';
+
 const meta = {
-  title: "Layout recipes/Holy albatross",
+  title: 'Layout recipes/Holy albatross',
   component: HolyAlbatrossDemo,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
   parameters: {
     docs: {
       source: {
         code: demoSource,
-        language: "tsx",
-        type: "code",
+        language: 'tsx',
+        type: 'code',
       },
       description: {
         component: `A layout that responds to its own available width, without media queries. This demo uses a 40rem container breakpoint: widen it to place the collection and preview on one row, or narrow it to stack them.
@@ -55,46 +56,43 @@ The multiplier makes the change abrupt rather than a gradual resize. The contain
     },
   },
 } satisfies Meta<typeof HolyAlbatrossDemo>;
+
 export default meta;
+
 export const CollectionAndPreview: StoryObj<typeof meta> = {
   play: async ({ canvas, userEvent }) => {
-    await userEvent.click(
-      canvas.getByRole("button", { name: /Get outside Campaigns/ }),
-    );
+    await userEvent.click(canvas.getByRole('button', { name: /Get outside Campaigns/ }));
     await expect(
-      within(
-        canvas.getByRole("complementary", { name: "Selected artwork" }),
-      ).getByRole("heading"),
-    ).toHaveTextContent("Get outside");
-    await userEvent.click(canvas.getByRole("button", { name: "Narrow" }));
-    const main = canvas
-      .getByRole("region", { name: "Artworks" })
-      .getBoundingClientRect();
+      within(canvas.getByRole('complementary', { name: 'Selected artwork' })).getByRole('heading'),
+    ).toHaveTextContent('Get outside');
+    await userEvent.click(canvas.getByRole('button', { name: 'Narrow' }));
+    const main = canvas.getByRole('region', { name: 'Artworks' }).getBoundingClientRect();
+
     const aside = canvas
-      .getByRole("complementary", { name: "Selected artwork" })
+      .getByRole('complementary', { name: 'Selected artwork' })
       .getBoundingClientRect();
+
     await expect(aside.top).toBeGreaterThan(main.bottom);
-    await userEvent.click(canvas.getByRole("button", { name: "Wide" }));
+    await userEvent.click(canvas.getByRole('button', { name: 'Wide' }));
     // Match the available space in the embedded Docs canvas.
-    const demo = canvas.getByRole("main");
+    const demo = canvas.getByRole('main');
     const originalMaxWidth = demo.style.maxWidth;
-    demo.style.maxWidth = "900px";
+    demo.style.maxWidth = '900px';
     try {
-      const collection = canvas
-        .getByRole("region", { name: "Artworks" })
-        .getBoundingClientRect();
+      const collection = canvas.getByRole('region', { name: 'Artworks' }).getBoundingClientRect();
+
       const preview = canvas
-        .getByRole("complementary", { name: "Selected artwork" })
+        .getByRole('complementary', { name: 'Selected artwork' })
         .getBoundingClientRect();
-      const layout = canvas
-        .getByRole("region", { name: "Artworks" })
-        .closest(".dg-albatross")!;
-      const breakpoint =
-        40 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+
+      const layout = canvas.getByRole('region', { name: 'Artworks' }).closest('.dg-albatross')!;
+
+      const breakpoint = 40 * parseFloat(getComputedStyle(document.documentElement).fontSize);
+
       if (layout.clientWidth > breakpoint) {
         await expect(
           Math.abs(preview.top - collection.top),
-          "Wide panels should share one row inside the Docs canvas",
+          'Wide panels should share one row inside the Docs canvas',
         ).toBeLessThan(1);
         await expect(preview.left).toBeGreaterThan(collection.right);
       } else {

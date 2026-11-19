@@ -1,29 +1,35 @@
-import { useState, useEffect, useRef } from "react";
-import type { Meta, StoryObj } from "@storybook/react-vite";
-import { ActionButton } from "../components/action-button";
-import { Download } from "lucide-react";
+import { useState, useEffect, useRef } from 'react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
+import { ActionButton } from '../components/action-button';
+import { Download } from 'lucide-react';
+
 const meta = {
-  title: "Forms/Action button",
+  title: 'Forms/Action button',
   component: ActionButton,
-  tags: ["autodocs"],
+  tags: ['autodocs'],
 } satisfies Meta<typeof ActionButton>;
+
 export default meta;
+
 export const Default: StoryObj<typeof ActionButton> = {
-  args: { children: "Export images", leadingIcon: <Download /> },
+  args: { children: 'Export images', leadingIcon: <Download /> },
 };
+
 export const Loading: StoryObj<typeof ActionButton> = {
   args: {
-    children: "Export images",
+    children: 'Export images',
     loading: true,
-    loadingLabel: "Exporting images",
+    loadingLabel: 'Exporting images',
   },
 };
+
 export const Interactive: StoryObj<typeof ActionButton> = {
   render: () => {
     const [loading, setLoading] = useState(false);
-    const [status, setStatus] = useState("");
+    const [status, setStatus] = useState('');
     const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
     useEffect(() => () => clearTimeout(timer.current), []);
+
     return (
       <div className="space-y-3">
         <ActionButton
@@ -32,10 +38,10 @@ export const Interactive: StoryObj<typeof ActionButton> = {
           leadingIcon={<Download />}
           onClick={() => {
             setLoading(true);
-            setStatus("");
+            setStatus('');
             timer.current = setTimeout(() => {
               setLoading(false);
-              setStatus("Export preview complete.");
+              setStatus('Export preview complete.');
             }, 900);
           }}
         >

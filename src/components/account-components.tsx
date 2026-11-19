@@ -1,54 +1,52 @@
-import { type ReactNode } from "react";
-import { Card, MetricTile } from "./content";
-import { CreditCard } from "lucide-react";
-import { Coin } from "./coin";
-import { Button } from "./ui/button";
-import { ActionButton } from "./action-button";
-import { NestedMenu, type MenuItem } from "./menus";
-import { SwitchField, RadioCards } from "./fields";
-import { Banner } from "./feedback";
+import { type ReactNode } from 'react';
+import { Card, MetricTile } from './content';
+import { CreditCard } from 'lucide-react';
+import { Coin } from './coin';
+import { Button } from './ui/button';
+import { ActionButton } from './action-button';
+import { NestedMenu, type MenuItem } from './menus';
+import { SwitchField, RadioCards } from './fields';
+import { Banner } from './feedback';
+
 export interface AccountOption {
   id: string;
   name: string;
-  type: "points" | "card" | "invoice";
+  type: 'points' | 'card' | 'invoice';
   balance?: number;
   lastFour?: string;
   brand?: string;
   disabled?: boolean;
   isDefault?: boolean;
 }
+
 export function AccountCard({ account }: { account: AccountOption }) {
   return (
     <div className="flex items-center gap-4 rounded-xl border bg-card p-5">
-      {account.type === "card" ? (
-        <CreditCard
-          aria-hidden
-          className="size-10 shrink-0 text-muted-foreground"
-        />
+      {account.type === 'card' ? (
+        <CreditCard aria-hidden className="size-10 shrink-0 text-muted-foreground" />
       ) : (
         <Coin size={40} />
       )}
       <div>
         <h3 className="font-semibold">{account.name}</h3>
         <p className="mt-1 text-sm text-muted-foreground">
-          {account.type === "points"
+          {account.type === 'points'
             ? `${new Intl.NumberFormat().format(account.balance ?? 0)} points`
-            : account.type === "card"
-              ? `•••• ${account.lastFour ?? "—"}`
-              : "Invoice account"}
+            : account.type === 'card'
+              ? `•••• ${account.lastFour ?? '—'}`
+              : 'Invoice account'}
         </p>
-        {account.isDefault && (
-          <span className="text-xs text-primary">Default</span>
-        )}
+        {account.isDefault && <span className="text-xs text-primary">Default</span>}
       </div>
     </div>
   );
 }
+
 export function AccountSelect({
   accounts,
   value,
   onValueChange,
-  label = "Account",
+  label = 'Account',
 }: {
   accounts: AccountOption[];
   value: string;
@@ -64,23 +62,24 @@ export function AccountSelect({
         value: a.id,
         label: a.name,
         description:
-          a.type === "card"
-            ? `Card ending ${a.lastFour ?? "—"}`
-            : a.type === "points"
+          a.type === 'card'
+            ? `Card ending ${a.lastFour ?? '—'}`
+            : a.type === 'points'
               ? `${new Intl.NumberFormat().format(a.balance ?? 0)} points`
-              : "Pay by invoice",
+              : 'Pay by invoice',
         disabled: a.disabled,
       }))}
     />
   );
 }
+
 export function PaymentSelect({
   onAddPayment,
   ...props
 }: Parameters<typeof AccountSelect>[0] & { onAddPayment?: () => void }) {
   return (
     <div className="space-y-4">
-      <AccountSelect {...props} label={props.label ?? "Payment method"} />
+      <AccountSelect {...props} label={props.label ?? 'Payment method'} />
       {onAddPayment && (
         <Button type="button" variant="outline" onClick={onAddPayment}>
           Add payment method
@@ -89,6 +88,7 @@ export function PaymentSelect({
     </div>
   );
 }
+
 export function PaymentAccountCard({
   account,
   menu = [],
@@ -112,21 +112,21 @@ export function PaymentAccountCard({
     </div>
   );
 }
+
 export interface SettingRow {
   id: string;
   label: string;
   value: ReactNode;
   action?: { label: string; onClick: () => void; disabled?: boolean };
 }
+
 export function SettingsTable({ rows }: { rows: SettingRow[] }) {
   return (
     <dl className="divide-y">
       {rows.map((row) => (
         <div key={row.id} className="flex flex-wrap items-center gap-4 py-4">
           <dt className="w-40 text-sm font-medium">{row.label}</dt>
-          <dd className="min-w-0 flex-1 break-words text-sm text-muted-foreground">
-            {row.value}
-          </dd>
+          <dd className="min-w-0 flex-1 break-words text-sm text-muted-foreground">{row.value}</dd>
           {row.action && (
             <dd>
               <Button
@@ -146,6 +146,7 @@ export function SettingsTable({ rows }: { rows: SettingRow[] }) {
     </dl>
   );
 }
+
 export function AccountInformation({
   company,
   linkedAccounts,
@@ -165,18 +166,18 @@ export function AccountInformation({
     <Card title="Account information">
       <SettingsTable
         rows={[
-          { id: "company", label: "Company", value: company },
+          { id: 'company', label: 'Company', value: company },
           {
-            id: "linked",
-            label: "Linked accounts",
-            value: linkedAccounts.join(", ") || "None",
-            action: { label: "Edit", onClick: onEditLinkedAccounts },
+            id: 'linked',
+            label: 'Linked accounts',
+            value: linkedAccounts.join(', ') || 'None',
+            action: { label: 'Edit', onClick: onEditLinkedAccounts },
           },
           {
-            id: "password",
-            label: "Password",
-            value: "••••••••",
-            action: { label: "Change", onClick: onChangePassword },
+            id: 'password',
+            label: 'Password',
+            value: '••••••••',
+            action: { label: 'Change', onClick: onChangePassword },
           },
         ]}
       />
@@ -188,6 +189,7 @@ export function AccountInformation({
     </Card>
   );
 }
+
 export function SMSCard({
   phone,
   optedIn,
@@ -209,7 +211,7 @@ export function SMSCard({
         <p className="text-sm text-muted-foreground">
           {optedIn
             ? `Notifications enabled for ${phone}.`
-            : "Receive updates about your account by text."}
+            : 'Receive updates about your account by text.'}
         </p>
         {error && (
           <Banner title="Notification preference wasn’t saved" tone="danger">
@@ -217,14 +219,13 @@ export function SMSCard({
           </Banner>
         )}
         <ActionButton loading={busy} onClick={optedIn ? onOptOut : onOptIn}>
-          {optedIn
-            ? "Turn off text notifications"
-            : "Enable text notifications"}
+          {optedIn ? 'Turn off text notifications' : 'Enable text notifications'}
         </ActionButton>
       </div>
     </Card>
   );
 }
+
 export function ProfileBilling({
   account,
   payments,
@@ -253,6 +254,7 @@ export function ProfileBilling({
     </div>
   );
 }
+
 export function AdminMetricsBar({
   engaged,
   total,
@@ -263,42 +265,31 @@ export function AdminMetricsBar({
   utilized?: number;
 }) {
   const percent = (count: number) =>
-    total > 0
-      ? `${Math.round((count / total) * 100)}% of ${total}`
-      : "No eligible people yet";
+    total > 0 ? `${Math.round((count / total) * 100)}% of ${total}` : 'No eligible people yet';
+
   return (
     <div className="grid gap-4 sm:grid-cols-2">
-      <MetricTile
-        label="Engaged"
-        value={engaged}
-        description={percent(engaged)}
-      />
+      <MetricTile label="Engaged" value={engaged} description={percent(engaged)} />
       {utilized !== undefined && (
-        <MetricTile
-          label="Utilization"
-          value={utilized}
-          description={percent(utilized)}
-        />
+        <MetricTile label="Utilization" value={utilized} description={percent(utilized)} />
       )}
     </div>
   );
 }
+
 export interface Integration {
   id: string;
   name: string;
   description: string;
-  status: "connected" | "disconnected" | "syncing" | "error";
+  status: 'connected' | 'disconnected' | 'syncing' | 'error';
   message?: string;
   onConnect: () => void;
   onDisconnect: () => void;
   onSync: () => void;
   onHistory?: () => void;
 }
-export function AdminIntegrations({
-  integrations,
-}: {
-  integrations: Integration[];
-}) {
+
+export function AdminIntegrations({ integrations }: { integrations: Integration[] }) {
   return (
     <div className="space-y-4">
       {integrations.length ? (
@@ -306,34 +297,28 @@ export function AdminIntegrations({
           <Card key={i.id} title={i.name} description={i.description}>
             <div className="space-y-4">
               <p role="status" className="text-sm">
-                {i.status === "syncing"
-                  ? "Syncing…"
-                  : i.status === "connected"
-                    ? "Connected"
-                    : i.status === "error"
-                      ? "Connection needs attention"
-                      : "Not connected"}
+                {i.status === 'syncing'
+                  ? 'Syncing…'
+                  : i.status === 'connected'
+                    ? 'Connected'
+                    : i.status === 'error'
+                      ? 'Connection needs attention'
+                      : 'Not connected'}
               </p>
               {i.message && (
-                <Banner
-                  title={i.message}
-                  tone={i.status === "error" ? "danger" : "info"}
-                />
+                <Banner title={i.message} tone={i.status === 'error' ? 'danger' : 'info'} />
               )}
               <div className="flex flex-wrap gap-2">
-                {i.status === "disconnected" ? (
+                {i.status === 'disconnected' ? (
                   <Button onClick={i.onConnect}>Connect {i.name}</Button>
                 ) : (
                   <>
-                    <ActionButton
-                      loading={i.status === "syncing"}
-                      onClick={i.onSync}
-                    >
+                    <ActionButton loading={i.status === 'syncing'} onClick={i.onSync}>
                       Sync {i.name}
                     </ActionButton>
                     <Button
                       variant="outline"
-                      disabled={i.status === "syncing"}
+                      disabled={i.status === 'syncing'}
                       onClick={i.onDisconnect}
                     >
                       Disconnect

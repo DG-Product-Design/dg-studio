@@ -1,7 +1,7 @@
-import { useEffect } from "react";
-import type { Preview } from "@storybook/react-vite";
-import { ThemeProvider, themes, type Theme } from "../src/components/theme";
-import "../src/styles.css";
+import { useEffect } from 'react';
+import type { Preview } from '@storybook/react-vite';
+import { ThemeProvider, themes, type Theme } from '../src/components/theme';
+import '../src/styles.css';
 
 function StoryTheme({
   theme,
@@ -14,6 +14,7 @@ function StoryTheme({
 }) {
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
+
     return () => {
       delete document.documentElement.dataset.theme;
     };
@@ -22,10 +23,12 @@ function StoryTheme({
     if (!canvasBackground) return;
     const previous = document.body.style.backgroundColor;
     document.body.style.backgroundColor = canvasBackground;
+
     return () => {
       document.body.style.backgroundColor = previous;
     };
   }, [canvasBackground]);
+
   return (
     <ThemeProvider
       theme={theme}
@@ -36,19 +39,20 @@ function StoryTheme({
     </ThemeProvider>
   );
 }
+
 const preview: Preview = {
   globalTypes: {
     theme: {
-      description: "Studio palette",
+      description: 'Studio palette',
       toolbar: {
-        title: "Theme",
-        icon: "paintbrush",
+        title: 'Theme',
+        icon: 'paintbrush',
         dynamicTitle: true,
         items: themes.map((t) => ({ value: t.value, title: t.label })),
       },
     },
   },
-  initialGlobals: { theme: "miami-85" },
+  initialGlobals: { theme: 'miami-85' },
   decorators: [
     (Story, context) => (
       <StoryTheme
@@ -60,30 +64,31 @@ const preview: Preview = {
     ),
   ],
   parameters: {
-    layout: "fullscreen",
+    layout: 'fullscreen',
     controls: { expanded: true },
-    a11y: { test: "error" },
+    a11y: { test: 'error' },
     options: {
       storySort: {
         order: [
-          "Welcome",
-          "Foundations",
-          "Layout",
-          "Layout recipes",
-          "AI",
-          "Motion",
-          "Media",
-          "Forms",
-          "Content",
-          "Commerce",
-          "Navigation",
-          "Feedback",
-          "Overlays",
-          "Examples",
-          "Source catalog",
+          'Welcome',
+          'Foundations',
+          'Layout',
+          'Layout recipes',
+          'AI',
+          'Motion',
+          'Media',
+          'Forms',
+          'Content',
+          'Commerce',
+          'Navigation',
+          'Feedback',
+          'Overlays',
+          'Examples',
+          'Source catalog',
         ],
       },
     },
   },
 };
+
 export default preview;

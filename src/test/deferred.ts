@@ -5,5 +5,6 @@ export function deferred<T = void>() {
     resolve = yes;
     reject = no;
   });
+
   return { promise, resolve, reject };
 }
